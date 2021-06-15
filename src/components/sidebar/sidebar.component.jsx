@@ -1,12 +1,19 @@
-const Sidebar = () => (
-    <>
-        <div className="nk-sidebar nk-sidebar-fat nk-sidebar-fixed" data-content="sidebarMenu">
+import { useSelector } from "react-redux";
+import { useHistory } from "react-router";
+
+const Sidebar = () => {
+    const history = useHistory();
+    const user = useSelector(state => state.auth.user);
+
+    return (
+        <>
+        <div id="sidebarContainer" className="nk-sidebar nk-sidebar-fat nk-sidebar-fixed" data-content="sidebarMenu">
             <div className="nk-sidebar-element nk-sidebar-head">
                 <div className="nk-sidebar-brand">
                     <a href="html/crypto/index.html" className="logo-link nk-sidebar-logo">
-                        <img className="logo-light logo-img" src="./images/logo.png" srcset="./images/logo2x.png 2x" alt="logo" />
-                        <img className="logo-dark logo-img" src="./images/logo-dark.png" srcset="./images/logo-dark2x.png 2x" alt="logo-dark" />
-                        <span className="nio-version">Crypto</span>
+                        <img className="logo-light logo-img" src="./assets/logos/brandmark_blue@4x.png" srcSet="./images/logo2x.png 2x" alt="logo" />
+                        <img className="logo-dark logo-img" src="./assets/logos/brandmark_blue@4x.png" srcSet="./images/logo-dark2x.png 2x" alt="logo-dark" />
+                        {/* <span className="nio-version">Crypto</span> */}
                     </a>
                 </div>
                 <div className="nk-menu-trigger mr-n2">
@@ -20,7 +27,7 @@ const Sidebar = () => (
                             <div className="user-account-info between-center">
                                 <div className="user-account-main">
                                     <h6 className="overline-title-alt">Available Balance</h6>
-                                    <div className="user-balance">$2,414,095 <small className="currency currency-btc">USD</small></div>
+                                    <div className="user-balance">${new Intl.NumberFormat().format(user.amount_in_stock)} <small className="currency currency-btc">USD</small></div>
                                     <div className="user-balance-alt">18,934.84 <span className="currency currency-btc">BTC</span></div>
                                 </div>
                                 <a href="#" className="btn btn-white btn-icon btn-light"><em className="icon ni ni-line-chart"></em></a>
@@ -56,11 +63,11 @@ const Sidebar = () => (
                                 <div className="user-card-wrap">
                                     <div className="user-card">
                                         <div className="user-avatar">
-                                            <span>AB</span>
+                                            <span>{user.fullname.split(' ').map(u => u[0])}</span>
                                         </div>
                                         <div className="user-info">
-                                            <span className="lead-text">Abu Bin Ishtiyak</span>
-                                            <span className="sub-text">info@softnio.com</span>
+                                            <span className="lead-text">{user.fullname}</span>
+                                            <span className="sub-text">{user.email}</span>
                                         </div>
                                         <div className="user-action">
                                             <em className="icon ni ni-chevron-down"></em>
@@ -212,6 +219,6 @@ const Sidebar = () => (
             </div>
         </div>
     </>
-);
+)};
 
 export default Sidebar

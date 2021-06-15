@@ -1,11 +1,7 @@
 <?php
-require_once 'helpers/paybear/PayBear.php';
-require_once 'helpers/randomgenerator.php';
-require_once 'configs/blockchain.php';
 require_once 'helpers/utility.php';
 
 class dashboard extends controller{
-	private $paybear;
 	public function __construct(){
 		parent::__construct();
 

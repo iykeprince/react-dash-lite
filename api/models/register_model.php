@@ -23,7 +23,6 @@ class register_model extends model{
 			$referal_user_id = $referal_info['id'];//get the referal user id
 			//validate referal code
 			if($this->validateReferalCode($referal_code) <= 0){
-				http_response_code(400);
 				$response['code'] = "invalid_referal_code";
 				$response['message'] = "The referal code entered is invalid";
 				return $response;
@@ -31,7 +30,6 @@ class register_model extends model{
 			//check if this user already exists
 			$count = $this->db->getRowCounts("SELECT email FROM $this->table WHERE email = '$email'");
 			if($count > 0){
-				http_response_code(400);
 				$response['code'] = "user_exists";
 				$response['message'] = "User with the email already exist";
 				return $response;
@@ -156,11 +154,10 @@ class register_model extends model{
         
         		// $mail->send();
 				/**REMOVE COMMENT */
-				http_response_code(200);
 				$payload = [
 					"data" => [
-						"user_id" => $user['id'],
-						"user_role" => $user['role'],
+						"user_id" => $last_insert_user_id,
+						"user_role" => "user",
 						"user_login" => true,
 					],
 					"iss" => "localhost",
@@ -170,6 +167,7 @@ class register_model extends model{
 				$token = Utility::encodeJWT($payload);
 				$response['isLoggedIn'] = true;
 				$response['token'] = $token;
+				$response['message'] = "Account creation was successful";
 				return $response;
 			}
 			

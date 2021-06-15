@@ -10,6 +10,14 @@ class dashboard_model extends model{
 		// $payLoad = Utility::getPayLoad();
 		$this->id = Utility::getPayLoad()->data->user_id;
 	} 
+
+	public function userInfo(){
+		$id = $this->id;
+		$data = $this->db->getItem("SELECT * FROM `tbl_users` WHERE id = {$id} ");
+	
+		return $data ;
+	}
+
 	public function auto_manual_mode(){
 		//false indicates manual mode
 		$flag = $this->stmt_handler("SELECT auto_manual_flag FROM tbl_preference");
@@ -65,18 +73,7 @@ class dashboard_model extends model{
 			return $ex->getMessage();
 		}
 	}
-	public function userInfo(){
-		$id = $this->id;
-		
-		try{
-			$data = $this->db->getItem("SELECT * FROM `tbl_users` WHERE id = {$id} ");
-		
-			return $data ;
-		}catch(PDOException $ex){
-			return $ex->getMessage();
-		}
-	}
-
+	
 	public function createSyncAccounts($data){
 		$id = $this->id;
 		$stockTradeEmail = $data['stockTradeEmail'];

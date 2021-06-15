@@ -82,40 +82,17 @@ const AuthLayout = ({children}) => {
                                 <div className="slider-item">
                                     <div className="nk-feature nk-feature-center">
                                         <div className="nk-feature-img">
-                                            <img className="round" src="./images/slides/promo-a.png" srcset="./images/slides/promo-a2x.png 2x" alt="" />
+                                            <img className="round" src="./assets/logos/favicon_blue@4x.png" tabIndex="./images/slides/promo-a2x.png 2x" alt="" />
                                         </div>
                                         <div className="nk-feature-content py-4 p-sm-5">
-                                            <h4>Dashlite</h4>
-                                            <p>You can start to create your products easily with its user-friendly design & most completed responsive layout.</p>
+                                            <h1>Bitfetter</h1>
                                         </div>
                                     </div>
                                 </div>
-                                <div className="slider-item">
-                                    <div className="nk-feature nk-feature-center">
-                                        <div className="nk-feature-img">
-                                            <img className="round" src="./images/slides/promo-b.png" srcset="./images/slides/promo-b2x.png 2x" alt="" />
-                                        </div>
-                                        <div className="nk-feature-content py-4 p-sm-5">
-                                            <h4>Dashlite</h4>
-                                            <p>You can start to create your products easily with its user-friendly design & most completed responsive layout.</p>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div className="slider-item">
-                                    <div className="nk-feature nk-feature-center">
-                                        <div className="nk-feature-img">
-                                            <img className="round" src="./images/slides/promo-c.png" srcset="./images/slides/promo-c2x.png 2x" alt="" />
-                                        </div>
-                                        <div className="nk-feature-content py-4 p-sm-5">
-                                            <h4>Dashlite</h4>
-                                            <p>You can start to create your products easily with its user-friendly design & most completed responsive layout.</p>
-                                        </div>
-                                    </div>
-                                </div>
+                                
                             </Slider>
                         </div>
-                        <div className="slider-dots"></div>
-                        <div className="slider-arrows"></div>
+
                     </div>
                 </div>
             </div>

@@ -1,5 +1,6 @@
 import { useEffect } from "react";
 import { Bar } from "react-chartjs-2";
+import { useSelector } from "react-redux";
 
 const barOptions = {
     legend: {
@@ -35,6 +36,8 @@ const barOptions = {
 };
 
 const ReferalBox = () =>{ 
+    const user = useSelector(state => state.auth.user);
+
     var chart_data = [];
     useEffect(() => {
         for (var i = 0; i < 16; i++) {
@@ -71,7 +74,7 @@ const ReferalBox = () =>{
                     <div className="form-icon">
                         <em className="icon ni ni-link-alt"></em>
                     </div>
-                    <input type="text" className="form-control copy-text" id="refUrl" value="https://bitfetter.io/?ref=4945KD48" />
+                    <input type="text" className="form-control copy-text" id="refUrl" value={`https://bitfetter.io/${user.referal_link}`} readOnly />
                 </div>
             </div>
         </div>
@@ -86,7 +89,7 @@ const ReferalBox = () =>{
                         <div className="sub-text">Total Joined</div>
                     </div>
                     <div className="nk-refwg-sub">
-                        <div className="title">548.49</div>
+                        <div className="title">{new Intl.NumberFormat().format(user.referal_bonus)}</div>
                         <div className="sub-text">Referral Earn</div>
                     </div>
                 </div>
