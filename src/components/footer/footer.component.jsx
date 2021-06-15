@@ -1,14 +1,14 @@
 const Footer = () => (
-    <div class="nk-footer nk-footer-fluid">
-        <div class="container-fluid">
-            <div class="nk-footer-wrap">
-                <div class="nk-footer-copyright"> &copy; 2021 BitFetter. 
+    <div className="nk-footer nk-footer-fluid">
+        <div className="container-fluid">
+            <div className="nk-footer-wrap">
+                <div className="nk-footer-copyright"> &copy; 2021 BitFetter. 
                 </div>
-                <div class="nk-footer-links">
-                    <ul class="nav nav-sm">
-                        <li class="nav-item"><a class="nav-link" href="#">Terms</a></li>
-                        <li class="nav-item"><a class="nav-link" href="#">Privacy</a></li>
-                        <li class="nav-item"><a class="nav-link" href="#">Help</a></li>
+                <div className="nk-footer-links">
+                    <ul className="nav nav-sm">
+                        <li className="nav-item"><a className="nav-link" href="#">Terms</a></li>
+                        <li className="nav-item"><a className="nav-link" href="#">Privacy</a></li>
+                        <li className="nav-item"><a className="nav-link" href="#">Help</a></li>
                     </ul>
                 </div>
             </div>

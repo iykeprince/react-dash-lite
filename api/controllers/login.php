@@ -21,22 +21,12 @@ class Login extends controller{
     }
     
     public function changePassword(){
-        $data['email'] = $email = $this->escape_value($_POST['email']);
-        $data['new_password'] = $this->escape_value($_POST['new_password']);
-        $data['confirm_password'] = $this->escape_value($_POST['confirm_password']);
+        $input = json_decode(file_get_contents('php://input'));
+        $data['code'] = $email = $this->escape_value($input->code); //code is gotten from query param
+        $data['password'] = $this->escape_value($input->password);
     
-        if($data['new_password'] != $data['confirm_password'] ){
-            header('location: '.URL.'change_password?password-reset=lim');
-        }else if(strlen($data['new_password']) < 6){
-            header('location: '.URL.'change_password?email='.$email.'&password-reset=mmh');
-        }else{
-            $response = $this->model->changePassword($data);
-            if($response == 200){
-                header('location: '.URL.'change_password?email='.$email.'&password-reset=chg');
-            }else{
-                header('location: '.URL.'change_password?email='.$email.'&password-reset=inv');
-            }
-        }
+        $response = $this->model->changePassword($data);
+        echo json_encode($response);
     }
    
     public function login(){
@@ -49,8 +39,9 @@ class Login extends controller{
     }
 
     public function reset_password(){
-        $data = array();
-        $data['email'] = $this->escape_value($_POST['reset_email']);
-        $this->view->forgot_password_msg = $this->model->reset_password($data);
+        $input = json_decode(file_get_contents('php://input'));
+        $data['email'] = $this->escape_value($input->email);
+        $response = $this->model->recover_password($data);
+        echo json_encode($response);
     }
 }

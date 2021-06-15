@@ -1,5 +1,4 @@
 <?php
-require_once "helpers/randomgenerator.php";
 require_once 'helpers/utility.php';
 
 class register extends controller{
@@ -14,7 +13,7 @@ class register extends controller{
     public function create_user(){
         $form = json_decode(file_get_contents('php://input'));
         $data = array();
-        $data['my_referal_code'] = RandomGenerator::getToken();
+        $data['my_referal_code'] = Utility::getToken();
         $data['referal_code'] = $this->escape_value($form->referal_code);
         if($data['referal_code'] == ''){
             $data['referal_code'] = "CB3Q41";
@@ -25,7 +24,7 @@ class register extends controller{
         
         $response = $this->model->createUser($data) ;
         
-    	echo Utility::convertToJSON($res);
+    	echo Utility::convertToJSON($response);
     }
 
     public function activate($code){

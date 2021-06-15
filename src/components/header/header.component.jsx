@@ -1,150 +1,172 @@
-const Header = () => (
-    <div class="nk-header nk-header-fluid nk-header-fixed is-light">
-        <div class="container-fluid">
-            <div class="nk-header-wrap">
-                <div class="nk-menu-trigger d-xl-none ml-n1">
-                    <a href="#" class="nk-nav-toggle nk-quick-nav-icon" data-target="sidebarMenu"><em class="icon ni ni-menu"></em></a>
-                </div>
-                <div class="nk-header-brand d-xl-none">
-                    <a href="html/crypto/index.html" class="logo-link">
-                        <img class="logo-light logo-img" src="./images/logo.png" srcset="./images/logo2x.png 2x" alt="logo" />
-                        <img class="logo-dark logo-img" src="./images/logo-dark.png" srcset="./images/logo-dark2x.png 2x" alt="logo-dark" />
-                        <span class="nio-version">Crypto</span>
-                    </a>
-                </div>
-                <div class="nk-header-news d-none d-xl-block">
-                    <div class="nk-news-list">
-                        <a class="nk-news-item" href="#">
-                            <div class="nk-news-icon">
-                                <em class="icon ni ni-card-view"></em>
-                            </div>
+import { useSelector } from 'react-redux';
+import { useHistory } from 'react-router-dom'
+import useAuth from '../../hooks/auth.hook';
 
+const Header = () => {
+    const history = useHistory();
+    const user = useSelector(state => state.auth.user);
+    const auth = useAuth;
+
+    const navToggler = () => {
+        // document.querySelector('#sidebarContainer').className = "";
+        // document.querySelector('#sidebarContainer').className = ""
+    }
+
+    const handleSignOut = () => {
+        auth.signOut(() => {
+            window.location.href = "/login"
+        });
+    }
+
+    return  (
+        <div className="nk-header nk-header-fluid nk-header-fixed is-light">
+            <div className="container-fluid">
+                <div className="nk-header-wrap">
+                    <div className="nk-menu-trigger d-xl-none ml-n1">
+                        <a href="#" onClick={navToggler} className="nk-nav-toggle nk-quick-nav-icon" data-target="sidebarMenu"><em className="icon ni ni-menu"></em></a>
+                    </div>
+                    <div className="nk-header-brand d-xl-none">
+                        <a href="html/crypto/index.html" className="logo-link">
+                            <img className="logo-light logo-img" src="./assets/logos/brandmark_black@4x.png" srcSet="./images/logo2x.png 2x" alt="logo" />
+                            <img className="logo-dark logo-img" src="./assets/logos/brandmark_blue@4x.png" srcSet="./images/logo-dark2x.png 2x" alt="logo-dark" />
+                            {/* <span className="nio-version">Crypto</span> */}
                         </a>
                     </div>
-                </div>
-                <div class="nk-header-tools">
-                    <ul class="nk-quick-nav">
-                        <li class="dropdown user-dropdown">
-                            <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-                                <div class="user-toggle">
-                                    <div class="user-avatar sm">
-                                        <em class="icon ni ni-user-alt"></em>
-                                    </div>
-                                    <div class="user-info d-none d-md-block">
-                                        <div class="user-status user-status-unverified">Unverified</div>
-                                        <div class="user-name dropdown-indicator">Abu Bin Ishityak</div>
-                                    </div>
+                    <div className="nk-header-news d-none d-xl-block">
+                        <div className="nk-news-list">
+                            <a className="nk-news-item" href="#">
+                                <div className="nk-news-icon">
+                                    <em className="icon ni ni-card-view"></em>
                                 </div>
+
                             </a>
-                            <div class="dropdown-menu dropdown-menu-md dropdown-menu-right dropdown-menu-s1">
-                                <div class="dropdown-inner user-card-wrap bg-lighter d-none d-md-block">
-                                    <div class="user-card">
-                                        <div class="user-avatar">
-                                            <span>AB</span>
+                        </div>
+                    </div>
+                    <div className="nk-header-tools">
+                        <ul className="nk-quick-nav">
+                            <li className="dropdown user-dropdown">
+                                <a href="#" className="dropdown-toggle" data-toggle="dropdown">
+                                    <div className="user-toggle">
+                                        <div className="user-avatar sm">
+                                            <em className="icon ni ni-user-alt"></em>
                                         </div>
-                                        <div class="user-info">
-                                            <span class="lead-text">Abu Bin Ishtiyak</span>
-                                            <span class="sub-text">info@softnio.com</span>
+                                        <div className="user-info d-none d-md-block">
+                                            {user.verified === "1"
+                                                ? (<div className="user-status user-status-verified">Verified</div>)
+                                                : (<div className="user-status user-status-unverified">Unverified</div>)}
+                                            <div className="user-name dropdown-indicator">{user.fullname}</div>
                                         </div>
                                     </div>
-                                </div>
-                                <div class="dropdown-inner user-account-info">
-                                    <h6 class="overline-title-alt">BitFetter Account</h6>
-                                    <div class="user-balance">$12,395,769 <small class="currency currency-btc">USD</small></div>
-                                    <div class="user-balance-sub"><span>34.4939 <span class="currency currency-btc">BTC</span></span></div>
-                                    <a href="#" class="link"><span>Withdraw Funds</span> <em class="icon ni ni-wallet-out"></em></a>
-                                </div>
-                                <div class="dropdown-inner">
-                                    <ul class="link-list">
-                                        <li><a href="profile.html"><em class="icon ni ni-user-alt"></em><span>View Profile</span></a></li>
-                                        <li><a href="profile-security.html"><em class="icon ni ni-setting-alt"></em><span>Account Setting</span></a></li>
-                                        <li><a href="profile-activity.html"><em class="icon ni ni-activity-alt"></em><span>Login Activity</span></a></li>
-                                    </ul>
-                                </div>
-                                <div class="dropdown-inner">
-                                    <ul class="link-list">
-                                        <li><a href="auth-login.html"><em class="icon ni ni-signout"></em><span>Sign out</span></a></li>
-                                    </ul>
-                                </div>
-                            </div>
-                        </li>
-                        <li class="dropdown notification-dropdown mr-n1">
-                            <a href="#" class="dropdown-toggle nk-quick-nav-icon" data-toggle="dropdown">
-                                <div class="icon-status icon-status-info"><em class="icon ni ni-bell"></em></div>
-                            </a>
-                            <div class="dropdown-menu dropdown-menu-xl dropdown-menu-right dropdown-menu-s1">
-                                <div class="dropdown-head">
-                                    <span class="sub-title nk-dropdown-title">Notifications</span>
-                                    <a href="#">Mark All as Read</a>
-                                </div>
-                                <div class="dropdown-body">
-                                    <div class="nk-notification">
-                                        <div class="nk-notification-item dropdown-inner">
-                                            <div class="nk-notification-icon">
-                                                <em class="icon icon-circle bg-warning-dim ni ni-curve-down-right"></em>
+                                </a>
+                                <div className="dropdown-menu dropdown-menu-md dropdown-menu-right dropdown-menu-s1">
+                                    <div className="dropdown-inner user-card-wrap bg-lighter d-none d-md-block">
+                                        <div className="user-card">
+                                            <div className="user-avatar">
+                                                <span>{user.fullname.split(' ').map(u => u[0])}</span>
                                             </div>
-                                            <div class="nk-notification-content">
-                                                <div class="nk-notification-text">You have requested to <span>Widthdrawl</span></div>
-                                                <div class="nk-notification-time">2 hrs ago</div>
-                                            </div>
-                                        </div>
-                                        <div class="nk-notification-item dropdown-inner">
-                                            <div class="nk-notification-icon">
-                                                <em class="icon icon-circle bg-success-dim ni ni-curve-down-left"></em>
-                                            </div>
-                                            <div class="nk-notification-content">
-                                                <div class="nk-notification-text">Your <span>Deposit Order</span> is placed</div>
-                                                <div class="nk-notification-time">2 hrs ago</div>
-                                            </div>
-                                        </div>
-                                        <div class="nk-notification-item dropdown-inner">
-                                            <div class="nk-notification-icon">
-                                                <em class="icon icon-circle bg-warning-dim ni ni-curve-down-right"></em>
-                                            </div>
-                                            <div class="nk-notification-content">
-                                                <div class="nk-notification-text">You have requested to <span>Widthdrawl</span></div>
-                                                <div class="nk-notification-time">2 hrs ago</div>
-                                            </div>
-                                        </div>
-                                        <div class="nk-notification-item dropdown-inner">
-                                            <div class="nk-notification-icon">
-                                                <em class="icon icon-circle bg-success-dim ni ni-curve-down-left"></em>
-                                            </div>
-                                            <div class="nk-notification-content">
-                                                <div class="nk-notification-text">Your <span>Deposit Order</span> is placed</div>
-                                                <div class="nk-notification-time">2 hrs ago</div>
-                                            </div>
-                                        </div>
-                                        <div class="nk-notification-item dropdown-inner">
-                                            <div class="nk-notification-icon">
-                                                <em class="icon icon-circle bg-warning-dim ni ni-curve-down-right"></em>
-                                            </div>
-                                            <div class="nk-notification-content">
-                                                <div class="nk-notification-text">You have requested to <span>Widthdrawl</span></div>
-                                                <div class="nk-notification-time">2 hrs ago</div>
-                                            </div>
-                                        </div>
-                                        <div class="nk-notification-item dropdown-inner">
-                                            <div class="nk-notification-icon">
-                                                <em class="icon icon-circle bg-success-dim ni ni-curve-down-left"></em>
-                                            </div>
-                                            <div class="nk-notification-content">
-                                                <div class="nk-notification-text">Your <span>Deposit Order</span> is placed</div>
-                                                <div class="nk-notification-time">2 hrs ago</div>
+                                            <div className="user-info">
+                                                <span className="lead-text">{user.fullname}</span>
+                                                <span className="sub-text">{user.email}</span>
                                             </div>
                                         </div>
                                     </div>
+                                    <div className="dropdown-inner user-account-info">
+                                        <h6 className="overline-title-alt">BitFetter Account</h6>
+                                        <div className="user-balance">${new Intl.NumberFormat().format(user.amount_in_stock)} <small className="currency currency-btc">USD</small></div>
+                                        <div className="user-balance-sub"><span>34.4939 <span className="currency currency-btc">BTC</span></span></div>
+                                        <a href="#" className="link"><span>Withdraw Funds</span> <em className="icon ni ni-wallet-out"></em></a>
+                                    </div>
+                                    <div className="dropdown-inner">
+                                        <ul className="link-list">
+                                            <li><a href="profile.html"><em className="icon ni ni-user-alt"></em><span>View Profile</span></a></li>
+                                            <li><a href="profile-security.html"><em className="icon ni ni-setting-alt"></em><span>Account Setting</span></a></li>
+                                            <li><a href="profile-activity.html"><em className="icon ni ni-activity-alt"></em><span>Login Activity</span></a></li>
+                                        </ul>
+                                    </div>
+                                    <div className="dropdown-inner">
+                                        <ul className="link-list">
+                                            <li><a onClick={handleSignOut}><em className="icon ni ni-signout"></em><span>Sign out</span></a></li>
+                                        </ul>
+                                    </div>
                                 </div>
-                                <div class="dropdown-foot center">
-                                    <a href="#">View All</a>
+                            </li>
+                            <li className="dropdown notification-dropdown mr-n1">
+                                <a href="#" className="dropdown-toggle nk-quick-nav-icon" data-toggle="dropdown">
+                                    <div className="icon-status icon-status-info"><em className="icon ni ni-bell"></em></div>
+                                </a>
+                                <div className="dropdown-menu dropdown-menu-xl dropdown-menu-right dropdown-menu-s1">
+                                    <div className="dropdown-head">
+                                        <span className="sub-title nk-dropdown-title">Notifications</span>
+                                        <a href="#">Mark All as Read</a>
+                                    </div>
+                                    <div className="dropdown-body">
+                                        <div className="nk-notification">
+                                            <div className="nk-notification-item dropdown-inner">
+                                                <div className="nk-notification-icon">
+                                                    <em className="icon icon-circle bg-warning-dim ni ni-curve-down-right"></em>
+                                                </div>
+                                                <div className="nk-notification-content">
+                                                    <div className="nk-notification-text">You have requested to <span>Widthdrawl</span></div>
+                                                    <div className="nk-notification-time">2 hrs ago</div>
+                                                </div>
+                                            </div>
+                                            <div className="nk-notification-item dropdown-inner">
+                                                <div className="nk-notification-icon">
+                                                    <em className="icon icon-circle bg-success-dim ni ni-curve-down-left"></em>
+                                                </div>
+                                                <div className="nk-notification-content">
+                                                    <div className="nk-notification-text">Your <span>Deposit Order</span> is placed</div>
+                                                    <div className="nk-notification-time">2 hrs ago</div>
+                                                </div>
+                                            </div>
+                                            <div className="nk-notification-item dropdown-inner">
+                                                <div className="nk-notification-icon">
+                                                    <em className="icon icon-circle bg-warning-dim ni ni-curve-down-right"></em>
+                                                </div>
+                                                <div className="nk-notification-content">
+                                                    <div className="nk-notification-text">You have requested to <span>Widthdrawl</span></div>
+                                                    <div className="nk-notification-time">2 hrs ago</div>
+                                                </div>
+                                            </div>
+                                            <div className="nk-notification-item dropdown-inner">
+                                                <div className="nk-notification-icon">
+                                                    <em className="icon icon-circle bg-success-dim ni ni-curve-down-left"></em>
+                                                </div>
+                                                <div className="nk-notification-content">
+                                                    <div className="nk-notification-text">Your <span>Deposit Order</span> is placed</div>
+                                                    <div className="nk-notification-time">2 hrs ago</div>
+                                                </div>
+                                            </div>
+                                            <div className="nk-notification-item dropdown-inner">
+                                                <div className="nk-notification-icon">
+                                                    <em className="icon icon-circle bg-warning-dim ni ni-curve-down-right"></em>
+                                                </div>
+                                                <div className="nk-notification-content">
+                                                    <div className="nk-notification-text">You have requested to <span>Widthdrawl</span></div>
+                                                    <div className="nk-notification-time">2 hrs ago</div>
+                                                </div>
+                                            </div>
+                                            <div className="nk-notification-item dropdown-inner">
+                                                <div className="nk-notification-icon">
+                                                    <em className="icon icon-circle bg-success-dim ni ni-curve-down-left"></em>
+                                                </div>
+                                                <div className="nk-notification-content">
+                                                    <div className="nk-notification-text">Your <span>Deposit Order</span> is placed</div>
+                                                    <div className="nk-notification-time">2 hrs ago</div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div className="dropdown-foot center">
+                                        <a href="#">View All</a>
+                                    </div>
                                 </div>
-                            </div>
-                        </li>
-                    </ul>
+                            </li>
+                        </ul>
+                    </div>
                 </div>
             </div>
         </div>
-    </div>
-)
-
+    )
+}
 export default Header
