@@ -6,8 +6,7 @@ const PrivateRoute = ({component: Component, ...rest}) => {
         <Route 
             {...rest} 
             render={({location, ...otherProps}) => {
-                console.log('location', location, 'otherprosp', otherProps)
-                console.log(localStorage.getItem('BITFETTER_AUTH_TOKEN'))
+                
                 if(localStorage.getItem('BITFETTER_AUTH_TOKEN')){
                     return <Component {...otherProps} />
                 }

@@ -6,12 +6,8 @@ import { resetChangePassword } from "../../redux/auth/auth.actions";
 
 import 'react-toastify/dist/ReactToastify.css';
 import { useEffect } from "react";
-import { Link, useLocation } from "react-router-dom";
-import { TabPane } from "react-bootstrap";
-
-const useQuery = () => {
-    return new URLSearchParams(useLocation().search);
-}
+import { Link } from "react-router-dom";
+import useQuery from "../../hooks/useQuery";
 
 const ResetPassword = () => {
     const query = useQuery();

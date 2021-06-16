@@ -10,7 +10,7 @@ class dashboard extends controller{
 		$userInfo = $this->model->userInfo();
 
 		$data = [
-			"amount_in_stock" => $userInfo['amount_in_stock']
+			"wallet_balance" => $userInfo['wallet_balance']
 		];
 
 		echo Utility::convertToJSON($data);
@@ -144,7 +144,6 @@ class dashboard extends controller{
 	}
 
 	
-
 	public function wallet($arg = false){
 		$this->view->link = 'transactions';
 		$this->view->userInfo = $this->model->userInfo(Session::get('user_id'));
