@@ -1,13 +1,21 @@
+import { useEffect } from "react"
 import { useSelector } from "react-redux"
 import DashboardLayout from "../../components/layout/dashboard/dashboard.component"
+import DepositPage from "../deposit/DepositPage"
 import BalanceFlowChart from "./components/BalanceFlowChart"
 import PlanListBox from "./components/PlanListBox"
 import RecentActivity from "./components/RecentActivity"
 import ReferalBox from "./components/ReferalBox"
 import SupportBox from "./components/SupportBox"
 
-const Dashboard = () => {
+const DashboardPage = () => {
     const user = useSelector(state => state.auth.user);
+
+  
+
+    // if( user && user.trading_wallet === "0"){
+    //     return <DepositPage />
+    // }
 
     return (
         <DashboardLayout>
@@ -179,4 +187,4 @@ const Dashboard = () => {
     )
 }
 
-export default Dashboard
+export default DashboardPage

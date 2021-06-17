@@ -15,7 +15,6 @@ const auth = {
     },
     profile: () => {
         const token = localStorage.getItem('BITFETTER_AUTH_TOKEN');
-        console.log('token from server', token)
         return axios.get(`/api/dashboard/getUser`, {headers: {'Authorization': `Bearer ${token}`}})
     }
 }

@@ -1,5 +1,6 @@
 import { useSelector } from "react-redux";
 import { useHistory } from "react-router";
+import { Link } from "react-router-dom";
 
 const Sidebar = () => {
     const history = useHistory();
@@ -53,7 +54,7 @@ const Sidebar = () => {
                             </ul>
                             <div className="user-account-actions">
                                 <ul className="g-3">
-                                    <li><a href="#" className="btn btn-lg btn-primary"><span>Deposit</span></a></li>
+                                    <li><Link to="/deposit" className="btn btn-lg btn-primary"><span>Deposit</span></Link></li>
                                     <li><a href="#" className="btn btn-lg btn-warning"><span>Withdraw</span></a></li>
                                 </ul>
                             </div>

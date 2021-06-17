@@ -5,7 +5,7 @@ import { toast, ToastContainer } from "react-toastify";
 import AuthLayout from "../../components/layout/auth/auth.component"
 import { requestLogin } from "../../redux/auth/auth.actions";
 
-import 'react-toastify/dist/ReactToastify.css';
+
 
 const Login = () => {
     const [email, setEmail] = useState("");
