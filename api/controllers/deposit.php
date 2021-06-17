@@ -8,7 +8,7 @@ class deposit extends controller{
     }
 
     public function updateWallet(){
-		$input = json_decode(file_get_contents('php://input'));
+		  $input = json_decode(file_get_contents('php://input'));
 		
         $data['currency'] = $this->escape_value($input->currency);
         $data['amountUSD'] = $this->escape_value($input->amountUSD);
@@ -19,4 +19,14 @@ class deposit extends controller{
         $response = $this->model->updateWallet($data);
         echo Utility::convertToJSON($response); 
 	}
+
+  public function confirmTransaction(){
+    $input = json_decode(file_get_contents('php://input'));
+		
+    $data['transaction_id'] = $this->escape_value($input->transactionId);
+
+    $response = $this->model->confirmTransaction($data);
+    echo Utility::convertToJSON($response); 
+  }
+  
 }

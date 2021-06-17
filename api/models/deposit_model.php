@@ -35,6 +35,16 @@ class deposit_model extends model{
         return $response;
     }
 
+    public function confirmTransaction($data){
+        $transactionHash = $data['transaction_id'];
+        $result = $this->db->getItem("SELECT * FROM tbl_transactions WHERE crypto_hash={$transactionHash}");
+
+        $response['status'] = 200;
+        $response['message'] = "Transaction confirmed";
+        $response['result'] = $result;
+        return $response;
+    }
+
     private function getUser(){
         return $this->db->getItem("SELECT * FROM tbl_users WHERE id={$this->id}");
     }

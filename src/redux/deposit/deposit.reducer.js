@@ -6,7 +6,8 @@ const initialState = {
     exchangeData: null,
     error: null,
     currentStage: 0,
-    message: null
+    message: null,
+    confirmTransaction: null
 }
 //number of bitcoins = 'value in USD' / 'exchange rate'
 const depositReducer = (state = initialState, action) => {
@@ -24,7 +25,7 @@ const depositReducer = (state = initialState, action) => {
             }
         case depositTypes.NAV3_CONFIRM_DEPOSIT:
             const { amountUSD, cryptoValue, currency } = action.payload;
-            const amountCrypto = amountUSD/cryptoValue;
+            const amountCrypto = amountUSD / cryptoValue;
 
             return {
                 ...state,
@@ -44,10 +45,12 @@ const depositReducer = (state = initialState, action) => {
             }
         case depositTypes.CURRENCY_EXCHANGE_REQUEST:
         case depositTypes.UPDATE_WALLET_REQUEST:
+        case depositTypes.CONFIRM_TRANSACTION_REQUEST:
             return {
                 ...state,
                 loading: true,
-                exchangeError: null,
+                error: null,
+                confirmTransaction: null,
             }
         case depositTypes.CURRENCY_EXCHANGE_SUCCESS:
             return {
@@ -59,10 +62,23 @@ const depositReducer = (state = initialState, action) => {
             return {
                 ...state,
                 loading: false,
-                message: action.payload
+                message: action.payload,
+                currentStage: 0,
+            }
+        case depositTypes.CONFIRM_TRANSACTION_SUCCESS:
+            return {
+                ...state,
+                confirmTransaction: action.payload
+            }
+        case depositTypes.RESET_CONFIRM_TRANSACTION:
+            return {
+                ...state,
+                confirmTransaction: null,
+                currentStage: 0,
             }
         case depositTypes.CURRENCY_EXCHANGE_FAILURE:
         case depositTypes.UPDATE_WALLET_FAILURE:
+        case depositTypes.CONFIRM_TRANSACTION_FAILURE:
             return {
                 ...state,
                 loading: false,

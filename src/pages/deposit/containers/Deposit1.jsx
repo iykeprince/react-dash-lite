@@ -15,7 +15,9 @@ const DepositContainer1 = () => {
 
     const handleSubmit = e => {
         e.preventDefault();
-        if (paymentMethod.length)
+        if (paymentMethod === 'paypal')
+            return alert('Paypal is currently unavailable')
+        if (paymentMethod === 'crypto-wallet')
             dispatch(nav2(paymentMethod))
         else
             window.alert('Select a payment method')

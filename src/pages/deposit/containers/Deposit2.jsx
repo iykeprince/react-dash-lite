@@ -11,7 +11,7 @@ const DepositContainer2 = () => {
     const error = useSelector(state => state.deposit.error)
     const paymentMethod = useSelector(state => state.deposit.postData.paymentMethod);
 
-    const [depositAmount, setDepositAmount] = useState(0.0);
+    const [depositAmount, setDepositAmount] = useState("");
     const [currency, setCurrency] = useState("btc");
 
     console.log('payment method', paymentMethod)
@@ -92,7 +92,8 @@ const DepositContainer2 = () => {
                                 name="deposit_amount"
                                 placeholder="0.00"
                                 onChange={handleChange}
-                                value={depositAmount}
+                                value={depositAmount} 
+                                required
                             />
                             <input
                                 type="hidden"

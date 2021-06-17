@@ -1,6 +1,5 @@
-import Switch from 'react-bootstrap/esm/Switch';
 import { useSelector } from 'react-redux';
-import { Route, useRouteMatch } from 'react-router';
+import { useRouteMatch } from 'react-router';
 import DashboardLayout from '../../components/layout/dashboard/dashboard.component'
 import DepositContainer1 from './containers/Deposit1'
 import DepositContainer2 from './containers/Deposit2';

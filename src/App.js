@@ -11,7 +11,8 @@ const Register = React.lazy(() => import('./pages/auth/Register'));
 const ResetPassword = React.lazy(() => import('./pages/auth/ResetPassword'));
 const ForgotPassword = React.lazy(() => import('./pages/auth/ForgotPassword'));
 const DashboardPage = React.lazy(() => import('./pages/dashboard/DashboardPage'));
-const DepositPage = React.lazy(() => import('./pages/deposit/DepositPage'))
+const DepositPage = React.lazy(() => import('./pages/deposit/DepositPage'));
+const DepositorSuccessPage = React.lazy(() => import('./pages/deposit/DepositorSuccessPage'));
 
 const token = localStorage.getItem('BITFETTER_AUTH_TOKEN');
 
@@ -29,6 +30,7 @@ const App = () => {
 
         <PrivateRoute exact path="/" component={DashboardPage}/>
         <PrivateRoute exact path="/deposit" component={DepositPage} />
+        <PrivateRoute path="/deposit/success" component={DepositorSuccessPage} />
       </Switch>
     </Suspense>
   </>

@@ -1,9 +1,10 @@
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux"
-import { Link } from "react-router-dom";
-import { nav1, nav3, updateWallet } from "../../../redux/deposit/deposit.actions";
+import { Link, useHistory } from "react-router-dom";
+import { confirmTransaction, nav1, nav3, resetConfirmTransaction, updateWallet } from "../../../redux/deposit/deposit.actions";
 import uuid from 'react-uuid'
 import { toast, ToastContainer } from "react-toastify";
+import { Modal } from "react-bootstrap";
 
 const DepositContainer4 = () => {
     const dispatch = useDispatch();
@@ -11,24 +12,40 @@ const DepositContainer4 = () => {
     const [hashValue, setHashValue] = useState(uuid());
     const message = useSelector(state => state.deposit.message);
 
-    useEffect(() => {
-        if(message){
-            toast.success(message)
-        }
-    }, [message])
+    const [show, setShow] = useState(false);
+    const [transactionId, setTransactionId] = useState(hashValue);
+    const confirm = useSelector(state => state.deposit.confirmTransaction);
+    const history = useHistory();
 
-    const handleChange= e=>{
+    useEffect(() => {
+        if (message) {
+            // toast.success(message)
+            setShow(true);
+        }
+        if(confirm){
+            history.push(`/deposit/success?hash=${hashValue}`);
+            dispatch(resetConfirmTransaction())
+        }
+    }, [message, confirm])
+
+    const handleChange = e => {
         setHashValue(e.target.value)
     }
 
     const handleClick = () => {
-        dispatch(updateWallet({...postData, hashValue}));
+        dispatch(updateWallet({ ...postData, hashValue }));
     }
-    
+
     const handleCancelOrder = () => {
         dispatch(nav1())
     }
-    
+
+    const handleConfirmTransaction = (e) => {
+        e.preventDefault();
+        console.log('Transaction id', transactionId)
+        dispatch(confirmTransaction(transactionId))
+    }
+
     return (<>
 
         <div className="page-dw wide-xs m-auto">
@@ -61,8 +78,8 @@ const DepositContainer4 = () => {
                                         </g>
                                     </g>
                                 </svg> */}
-                                <img 
-                                    src={`https://api.qrserver.com/v1/create-qr-code/?size=250x250&data=bitcoin:ksldfiosueorijepf?amount=4300`} 
+                                <img
+                                    src={`https://api.qrserver.com/v1/create-qr-code/?size=250x250&data=bitcoin:ksldfiosueorijepf?amount=4300`}
 
                                 />
                             </div>
@@ -88,32 +105,49 @@ const DepositContainer4 = () => {
                                 <a onClick={handleClick} href="#" className="btn btn-block btn-primary popup-open"><span>Paid Bitcoin</span></a>
                             </div>
                             <div className="nk-pps-action pt-2 text-center">
-                                <a href="https://investorm.xyz/transactions" className="link link-btn link-primary">Pay Later</a>
+                                <a href="#" className="link link-btn link-primary">Pay Later</a>
                             </div>
-                            <div id="crypto-paid" className="popup">
-                                <div className="popup-content">
-                                    <h6 className="mb-2">Confirm your payment</h6>
-                                    <p>If you already paid, please provide us your payment reference to speed up verification procces.</p>
-                                    <form className="form" action="https://investorm.xyz/crypto-wallet/deposit/reference" method="POST" id="crypto-pay-reference">
-                                        <div className="form-group">
-                                            <div className="form-label">Payment Reference <span className="text-danger">*</span></div>
-                                            <div className="form-control-wrap">
-                                                <input name="reference" type="text" className="form-control" value="" readOnly placeholder="Enter your reference id / hash" />
+
+                            <Modal
+                                size="lg"
+                                show={show}
+                                onHide={() => setShow(false)}
+                                aria-labelledby="example-modal-sizes-title-lg"
+                             
+                            >
+                                <Modal.Header closeButton>
+                                    <Modal.Title id="example-modal-sizes-title-lg">
+                                    </Modal.Title>
+                                </Modal.Header>
+                                <Modal.Body>
+                                    <div >
+                                        <div className="content">
+                                            {/* <h6 className="mb-2">Confirm your payment</h6> */}
+                                        <h6 className="mb-2">Confirm your payment</h6>
+                                        <p>If you already paid, please provide us your payment reference to speed up verification procces.</p>
+                                            <form className="form" id="crypto-pay-reference" onSubmit={handleConfirmTransaction}>
+                                                <div className="form-group">
+                                                    <div className="form-label">Payment Reference <span className="text-danger">*</span></div>
+                                                    <div className="form-control-wrap">
+                                                        <input name="reference" type="text" className="form-control" onChange={e => setTransactionId(e.target.value)} value={transactionId} placeholder="Enter your reference id / hash" />
+                                                    </div>
+                                                </div>
+                                                <ul className="btn-group justify-between align-center gx-4">
+                                                    <li><button type="submit" className="btn btn-primary btn-block">Confirm Payment</button></li>
+                                                    <li><a href="#" onClick={() => setShow(false)} className="link link-btn link-secondary popup-close">Close</a></li>
+                                                </ul>
+                                            </form>
+                                            <div className="alert-note is-plain mt-4">
+                                                <em className="icon ni ni-alert-circle"></em>
+                                                <p>Account will credited once we confirm that payment has been received.</p>
                                             </div>
                                         </div>
-                                        <ul className="btn-group justify-between align-center gx-4">
-                                            <li><button type="submit" className="btn btn-primary btn-block">Confirm Payment</button></li>
-                                            <li><a href="#" className="link link-btn link-secondary popup-close">Close</a></li>
-                                        </ul>
-                                        <input type="hidden" name="tnx" value="UEFQcFVrUlFuOXVNZEJlU01SM3lXQT09" readOnly />
-                                        <input type="hidden" name="_token" value="hXD6kruK0YWiacSccr0w8HxUVouDSe1uQX4E2NCy"readOnly  />                                        </form>
-                                    <div className="alert-note is-plain mt-4">
-                                        <em className="icon ni ni-alert-circle"></em>
-                                        <p>Account will credited once we confirm that payment has been received.</p>
+                                        {/* <div className="popup-overlay"></div> */}
                                     </div>
-                                </div>
-                                <div className="popup-overlay"></div>
-                            </div>
+                                </Modal.Body>
+                            </Modal>
+
+
                         </div>
                         <div className="card-inner bg-lighter">
                             <ul>

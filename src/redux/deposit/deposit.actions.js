@@ -51,3 +51,20 @@ export const updateWallet = obj => async dispatch => {
         })
     }
 }
+
+export const confirmTransaction = transactionId => async dispatch => {
+    dispatch({type: depositTypes.CONFIRM_TRANSACTION_REQUEST});
+    try{
+        const res = await deposit.confirmTransaction(transactionId);
+        dispatch({type: depositTypes.CONFIRM_TRANSACTION_SUCCESS, payload: res.data.message})
+    }catch(e){
+        dispatch({
+            type: depositTypes.CONFIRM_TRANSACTION_FAILURE,
+            payload: 'Error confirming transaction'
+        })
+    }
+}
+
+export const resetConfirmTransaction = () => ({
+    type: depositTypes.RESET_CONFIRM_TRANSACTION
+})
