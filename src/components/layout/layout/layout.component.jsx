@@ -1,11 +1,12 @@
 import { useEffect } from "react"
 import { useDispatch, useSelector } from "react-redux";
 import { getUser } from "../../../redux/auth/auth.actions";
+import { currencyExchange } from "../../../redux/util/util.actions";
 import Footer from "../../footer/footer.component";
 import Header from "../../header/header.component";
 import Sidebar from "../../sidebar/sidebar.component";
 
-const DashboardLayout = ({children}) => {
+const Layout = ({children}) => {
     const dispatch = useDispatch();
     const user = useSelector(state => state.auth.user);
     // const token = useSelector(state => state.auth.token) || localStorage.getItem('BITFETTER_AUTH_TOKEN');
@@ -16,6 +17,7 @@ const DashboardLayout = ({children}) => {
 
         
         dispatch(getUser())
+        dispatch(currencyExchange())
     }, []);
 
     return user === null ? (<span><h3>Loading</h3></span>) : (
@@ -37,4 +39,4 @@ const DashboardLayout = ({children}) => {
     )
 }
 
-export default DashboardLayout
+export default Layout

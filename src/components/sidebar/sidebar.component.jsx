@@ -1,3 +1,4 @@
+import { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 import { useHistory } from "react-router";
 import { Link } from "react-router-dom";
@@ -5,6 +6,9 @@ import { Link } from "react-router-dom";
 const Sidebar = () => {
     const history = useHistory();
     const user = useSelector(state => state.auth.user);
+    const exchangeData = useSelector(state => state.util.exchangeData);
+    const loadingExchange = useSelector(state => state.util.loading);
+    const [activeLink, setActiveLink] = useState("dashboard");
 
     return (
         <>
@@ -29,7 +33,10 @@ const Sidebar = () => {
                                 <div className="user-account-main">
                                     <h6 className="overline-title-alt">Available Balance</h6>
                                     <div className="user-balance">${new Intl.NumberFormat().format(user.amount_in_stock)} <small className="currency currency-btc">USD</small></div>
-                                    <div className="user-balance-alt">18,934.84 <span className="currency currency-btc">BTC</span></div>
+                                    <div className="user-balance-alt">{loadingExchange ? 'loading exchange' : exchangeData === null ? "--" : `${(user.amount_in_stock / exchangeData.price).toFixed(4)}`} 
+                                        <span className="currency currency-btc"> BTC</span>
+                                        <span className="text-info ml-2">{exchangeData && parseFloat(exchangeData.change).toFixed(1)}% <em className="icon ni ni-arrow-long-up"></em></span>    
+                                    </div>
                                 </div>
                                 <a href="#" className="btn btn-white btn-icon btn-light"><em className="icon ni ni-line-chart"></em></a>
                             </div>
@@ -55,7 +62,7 @@ const Sidebar = () => {
                             <div className="user-account-actions">
                                 <ul className="g-3">
                                     <li><Link to="/deposit" className="btn btn-lg btn-primary"><span>Deposit</span></Link></li>
-                                    <li><a href="#" className="btn btn-lg btn-warning"><span>Withdraw</span></a></li>
+                                    <li><Link to="/withdraw" className="btn btn-lg btn-warning"><span>Withdraw</span></Link></li>
                                 </ul>
                             </div>
                         </div>
@@ -124,47 +131,49 @@ const Sidebar = () => {
                                 <li className="nk-menu-heading">
                                     <h6 className="overline-title">Menu</h6>
                                 </li>
-                                <li className="nk-menu-item">
-                                    <a href="index.html" className="nk-menu-link">
+                                <li className={`nk-menu-item ${activeLink === 'dashboard' && 'active'}`} onClick={() => setActiveLink('dashboard')}>
+                                    <Link to="/" className="nk-menu-link">
                                         <span className="nk-menu-icon"><em className="icon ni ni-dashboard"></em></span>
                                         <span className="nk-menu-text">Dashboard</span>
-                                    </a>
+                                    </Link>
                                 </li>
-                                <li className="nk-menu-item">
-                                    <a href="accounts.html" className="nk-menu-link">
-                                        <span className="nk-menu-icon"><em className="icon ni ni-user-c"></em></span>
-                                        <span className="nk-menu-text">My Account</span>
-                                    </a>
-                                </li>
-                                <li className="nk-menu-item">
-                                    <a href="wallets.html" className="nk-menu-link">
-                                        <span className="nk-menu-icon"><em className="icon ni ni-wallet-alt"></em></span>
-                                        <span className="nk-menu-text">Wallets</span>
-                                    </a>
-                                </li>
-                                <li className="nk-menu-item">
-                                    <a href="buy-sell.html" className="nk-menu-link">
-                                        <span className="nk-menu-icon"><em className="icon ni ni-coins"></em></span>
-                                        <span className="nk-menu-text">Deposit/Withdraw</span>
-                                    </a>
-                                </li>
-                                <li className="nk-menu-item">
-                                    <a href="order-history.html" className="nk-menu-link">
+                                <li className={`nk-menu-item ${activeLink === 'transactions' && 'active'}`} onClick={() => setActiveLink('transactions')}>
+                                    <Link to="/transactions" className="nk-menu-link">
                                         <span className="nk-menu-icon"><em className="icon ni ni-repeat"></em></span>
                                         <span className="nk-menu-text">Transaction</span>
-                                    </a>
+                                    </Link>
                                 </li>
-                                <li className="nk-menu-item">
-                                    <a href="profile.html" className="nk-menu-link">
+                                <li className={`nk-menu-item ${activeLink === 'investment' && 'active'}`} onClick={() => setActiveLink('my-account')}>
+                                    <Link to="/accounts" className="nk-menu-link">
+                                        <span className="nk-menu-icon"><em className="icon ni ni-user-c"></em></span>
+                                        <span className="nk-menu-text">Investment</span>
+                                    </Link>
+                                </li>
+                                <li className={`nk-menu-item ${activeLink === 'plans' && 'active'}`} onClick={() => setActiveLink('plans')}>
+                                    <Link to="/wallets" className="nk-menu-link">
+                                        <span className="nk-menu-icon"><em className="icon ni ni-wallet-alt"></em></span>
+                                        <span className="nk-menu-text">Our Plans</span>
+                                    </Link>
+                                </li>
+                                                              
+                                <li className={`nk-menu-item ${activeLink === 'profile' && 'active'}`} onClick={() => setActiveLink('profile')}>
+                                    <Link to="/profile" className="nk-menu-link">
                                         <span className="nk-menu-icon"><em className="icon ni ni-account-setting"></em></span>
                                         <span className="nk-menu-text">My Profile</span>
-                                    </a>
+                                    </Link>
                                 </li>
-                                <li className="nk-menu-item">
-                                    <a href="kyc-application.html" className="nk-menu-link">
+                                <li className={`nk-menu-item ${activeLink === 'referrals' && 'active'}`} onClick={() => setActiveLink('referrals')}>
+                                    <Link to="/profile" className="nk-menu-link">
+                                        <span className="nk-menu-icon"><em className="icon ni ni-cloud"></em></span>
+                                        <span className="nk-menu-text">Referrals</span>
+                                    </Link>
+                                </li>
+                                
+                                <li className={`nk-menu-item ${activeLink === 'kyc-application' && 'active'}`} onClick={() => setActiveLink('kyc-application')}>
+                                    <Link to="/kyc-application" className="nk-menu-link">
                                         <span className="nk-menu-icon"><em className="icon ni ni-file-text"></em></span>
                                         <span className="nk-menu-text">KYC Application</span>
-                                    </a>
+                                    </Link>
                                 </li>
                             </ul>
                         </div>

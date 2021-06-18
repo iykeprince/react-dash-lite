@@ -3,8 +3,10 @@ import { Switch, Route, Redirect } from 'react-router-dom'
 
 import PrivateRoute from './utils/private.route';
 
-import 'react-toastify/dist/ReactToastify.css';
 import { useSelector } from 'react-redux';
+import './assets/css/investorm-app.css';
+import 'react-toastify/dist/ReactToastify.css';
+import Layout from './components/layout/layout/layout.component';
 
 const Login = React.lazy(() => import('./pages/auth/Login'));
 const Register = React.lazy(() => import('./pages/auth/Register'));
@@ -13,12 +15,17 @@ const ForgotPassword = React.lazy(() => import('./pages/auth/ForgotPassword'));
 const DashboardPage = React.lazy(() => import('./pages/dashboard/DashboardPage'));
 const DepositPage = React.lazy(() => import('./pages/deposit/DepositPage'));
 const DepositorSuccessPage = React.lazy(() => import('./pages/deposit/DepositorSuccessPage'));
+const WithdrawPage = React.lazy(() => import('./pages/withdraw/WithdrawPage'));
+const ProfilePage = React.lazy(() => import('./pages/profile/ProfilePage'));
+const TransactionPage = React.lazy(() => import('./pages/transaction/TransactionPage'))
+const WithdrawSuccessPage = React.lazy(() => import('./pages/withdraw/WithdrawSuccessPage'))
 
 const token = localStorage.getItem('BITFETTER_AUTH_TOKEN');
 
 const App = () => {
   const user = useSelector(state => state.auth.user);
   console.log('user from selector', user)
+
   return (
   <>
     <Suspense fallback={<h3 className="d-flex justify-content-center">loading...</h3>}>
@@ -28,9 +35,16 @@ const App = () => {
         <Route exact path="/forgotpassword" component={ForgotPassword} />
         <Route exact path="/resetpassword" component={ResetPassword} />
 
-        <PrivateRoute exact path="/" component={DashboardPage}/>
-        <PrivateRoute exact path="/deposit" component={DepositPage} />
-        <PrivateRoute path="/deposit/success" component={DepositorSuccessPage} />
+        <Layout>
+          <PrivateRoute exact path="/" component={DashboardPage} />
+          <PrivateRoute exact path="/deposit" component={DepositPage} />
+          <PrivateRoute path="/deposit/success" component={DepositorSuccessPage} />
+          <PrivateRoute exact path="/withdraw" component={WithdrawPage} />
+          <PrivateRoute path="/withdraw/success" component={WithdrawSuccessPage} />
+          <PrivateRoute path="/profile" component={ProfilePage} />
+          <PrivateRoute path="/transactions" component={TransactionPage} />
+        </Layout>
+        
       </Switch>
     </Suspense>
   </>
