@@ -1,14 +1,15 @@
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { toast, ToastContainer } from "react-toastify";
-import { currencyExchange, nav3, nav1 } from "../../../redux/deposit/deposit.actions";
+import { nav3, nav1 } from "../../../redux/deposit/deposit.actions";
+import { currencyExchange } from "../../../redux/util/util.actions";
 
 
 
 const DepositContainer2 = () => {
     const dispatch = useDispatch();
-    const exchangeData = useSelector(state => state.deposit.exchangeData);
-    const error = useSelector(state => state.deposit.error)
+    const exchangeData = useSelector(state => state.util.exchangeData);
+    const error = useSelector(state => state.util.error)
     const paymentMethod = useSelector(state => state.deposit.postData.paymentMethod);
 
     const [depositAmount, setDepositAmount] = useState("");
