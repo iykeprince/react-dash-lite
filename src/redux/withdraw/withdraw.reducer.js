@@ -45,6 +45,7 @@ const withdrawReducer = (state = initialState, action) => {
             return {
                 ...state,
                 loading: true,
+                message: null
             }
         case withdrawTypes.GET_WITHDRAW_ERROR:
             return {

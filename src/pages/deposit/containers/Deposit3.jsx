@@ -31,7 +31,7 @@ const DepositContainer3 = () => {
 
                 <li className="nk-olist-item is-grouped">
                     <div className="label lead-text">You will send</div>
-                    <div className="data"><span className="amount">{postData.amountCrypto} {postData.currency.toUpperCase()}</span></div>
+                    <div className="data"><span className="amount">{parseFloat(postData.amountCrypto).toFixed(4)} {postData.currency.toUpperCase()}</span></div>
                 </li>
                 {/* <li className="nk-olist-item small">
                     <div className="label">Equivalent to</div>
@@ -42,7 +42,7 @@ const DepositContainer3 = () => {
                 <li className="nk-olist-item small is-grouped">
                     <div className="label">Exchange rate</div>
                     <div className="data fw-normal text-soft">
-                        <span className="amount">1 USD = {postData.cryptoValue} {postData.currency.toUpperCase()}</span>
+                        <span className="amount">1 USD = {parseFloat(postData.cryptoValue).toFixed(2)} {postData.currency.toUpperCase()}</span>
                     </div>
                 </li>
 
@@ -60,13 +60,12 @@ const DepositContainer3 = () => {
         </div>
         <div className="nk-pps-field form-action text-center">
             <div className="nk-pps-action">
-                <a href="#" onClick={handleClick} className="btn btn-lg btn-block btn-primary" id="confirm-deposit" >
+                <button onClick={handleClick} className="btn btn-lg btn-block btn-primary" id="confirm-deposit" >
                     <span>Confirm &amp; Pay</span>
-                    {/* <span className="spinner-border spinner-border-sm hide" role="status" aria-hidden="true"></span> */}
-                </a>
+                </button>
             </div>
             <div className="nk-pps-action pt-3">
-                <a href="#" onClick={() => dispatch(nav2(postData.paymentMethod))} className="btn btn-outline-danger btn-trans">Cancel Order</a>
+                <button onClick={() => dispatch(nav2(postData.paymentMethod))} className="btn btn-outline-danger btn-trans">Cancel Order</button>
             </div>
         </div>
     </div>

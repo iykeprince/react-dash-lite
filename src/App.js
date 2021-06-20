@@ -3,10 +3,9 @@ import { Switch, Route, Redirect } from 'react-router-dom'
 
 import PrivateRoute from './utils/private.route';
 
-import { useSelector } from 'react-redux';
-import './assets/css/investorm-app.css';
-import 'react-toastify/dist/ReactToastify.css';
 import Layout from './components/layout/layout/layout.component';
+import Spinner from './components/spinner/spinner.component';
+import './App.css'
 
 const Login = React.lazy(() => import('./pages/auth/Login'));
 const Register = React.lazy(() => import('./pages/auth/Register'));
@@ -19,16 +18,14 @@ const WithdrawPage = React.lazy(() => import('./pages/withdraw/WithdrawPage'));
 const ProfilePage = React.lazy(() => import('./pages/profile/ProfilePage'));
 const TransactionPage = React.lazy(() => import('./pages/transaction/TransactionPage'))
 const WithdrawSuccessPage = React.lazy(() => import('./pages/withdraw/WithdrawSuccessPage'))
+const InvestmentPage = React.lazy(() => import('./pages/investment/InvestmentPage'))
+const PlanPage = React.lazy(() => import('./pages/plans/PlanPage'))
 
 const token = localStorage.getItem('BITFETTER_AUTH_TOKEN');
 
-const App = () => {
-  const user = useSelector(state => state.auth.user);
-  console.log('user from selector', user)
-
-  return (
+const App = () => (
   <>
-    <Suspense fallback={<h3 className="d-flex justify-content-center">loading...</h3>}>
+    <Suspense fallback={<Spinner />}>
       <Switch>
         <Route exact path="/register" component={Register} />
         <Route exact path="/login" render={(props) => token ? <Redirect to={`/`} /> : (<Login {...props} />)} />
@@ -43,11 +40,13 @@ const App = () => {
           <PrivateRoute path="/withdraw/success" component={WithdrawSuccessPage} />
           <PrivateRoute path="/profile" component={ProfilePage} />
           <PrivateRoute path="/transactions" component={TransactionPage} />
+          <PrivateRoute path="/investment" component={InvestmentPage} />
+          <PrivateRoute path="/plans" component={PlanPage} />
         </Layout>
-        
+
       </Switch>
     </Suspense>
   </>
-)}
+)
 
 export default App;

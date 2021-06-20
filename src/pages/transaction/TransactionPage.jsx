@@ -1,4 +1,13 @@
+import { useEffect } from "react"
+import { useSelector } from "react-redux"
+import { getTransactions } from "../../redux/transaction/transaction.actions"
+
 const TransactionPage = () => {
+    const transactions = useSelector(state => state.transaction.transactions);
+    
+    useEffect(() => {
+        getTransactions()
+    }, [])
     return (
             <div className="nk-content nk-content-fluid">
                 <div className="container-xl wide-lg">

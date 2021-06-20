@@ -3,6 +3,7 @@ import DepositContainer1 from '../containers/Deposit1'
 import DepositContainer2 from '../containers/Deposit2';
 import DepositContainer3 from '../containers/Deposit3';
 import DepositContainer4 from '../containers/Deposit4';
+import DepositContainer5 from '../containers/Deposit5';
 
 const DepositWrapper = () => {
     const currentStage = useSelector(state => state.deposit.currentStage)
@@ -17,6 +18,8 @@ const DepositWrapper = () => {
                 return <DepositContainer3 />
             case 3: 
                 return <DepositContainer4 />
+            case 4:
+                return <DepositContainer5 />
             default:
                 return <DepositContainer1 />
         }

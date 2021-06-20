@@ -144,13 +144,13 @@ const Sidebar = () => {
                                     </Link>
                                 </li>
                                 <li className={`nk-menu-item ${activeLink === 'investment' && 'active'}`} onClick={() => setActiveLink('my-account')}>
-                                    <Link to="/accounts" className="nk-menu-link">
+                                    <Link to="/investment" className="nk-menu-link">
                                         <span className="nk-menu-icon"><em className="icon ni ni-user-c"></em></span>
                                         <span className="nk-menu-text">Investment</span>
                                     </Link>
                                 </li>
                                 <li className={`nk-menu-item ${activeLink === 'plans' && 'active'}`} onClick={() => setActiveLink('plans')}>
-                                    <Link to="/wallets" className="nk-menu-link">
+                                    <Link to="/plans" className="nk-menu-link">
                                         <span className="nk-menu-icon"><em className="icon ni ni-wallet-alt"></em></span>
                                         <span className="nk-menu-text">Our Plans</span>
                                     </Link>

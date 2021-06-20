@@ -1,7 +1,8 @@
+import { DropdownButton, Dropdown } from "react-bootstrap";
 import { useSelector } from "react-redux";
 import AccountItem from "./AccountItem"
 
-const AccountList = () => {
+const AccountList = ({ setShowModal }) => {
     const accounts = useSelector(state => state.withdraw.accounts);
     return (<>
         <div className="nk-block-head">
@@ -14,29 +15,12 @@ const AccountList = () => {
                 </div>
                 <div className="nk-block-head-tools">
                     <div className="dropdown">
-                        <a href="#" className="btn btn-primary" data-toggle="dropdown">Add Account</a>
-                        <div className="dropdown-menu dropdown-menu-right">
-                            <ul className="link-list-opt no-bdr">
-                                <li>
-                                    <a href="#" className="wd-new-account" data-action="https://investorm.xyz/withdraw/account/paypal" data-modal="wdm-account">
-                                        <em className="icon ni ni-paypal-alt"></em>
-                                        <span>PayPal Account</span>
-                                    </a>
-                                </li>
-                                <li>
-                                    <a href="#" className="wd-new-account" data-action="https://investorm.xyz/withdraw/account/crypto-withdraw" data-modal="wdm-account">
-                                        <em className="icon ni ni-wallet-fill"></em>
-                                        <span>Crypto Wallet</span>
-                                    </a>
-                                </li>
-                                <li>
-                                    <a href="#" className="wd-new-account" data-action="https://investorm.xyz/withdraw/account/bank" data-modal="wdm-account">
-                                        <em className="icon ni ni-building-fill"></em>
-                                        <span>Bank Account</span>
-                                    </a>
-                                </li>
-                            </ul>
-                        </div>
+                    <DropdownButton id="dropdown-item-button" title="Add Account" variant="primary">
+                        <Dropdown.Item as="button"><em className="icon ni ni-paypal-alt"></em>
+                            <span>PayPal Account</span></Dropdown.Item>
+                        <Dropdown.Item as="button" onClick={() => setShowModal(true)}><em className="icon ni ni-wallet-fill"></em>
+                            <span>Crypto Wallet</span></Dropdown.Item>
+                    </DropdownButton>
                     </div>
                 </div>
             </div>

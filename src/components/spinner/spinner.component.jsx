@@ -1,5 +1,10 @@
-const Spinner = () => {
-    return <div className="p-4 d-flex justify-content-center"><h3>Loading. ...</h3></div>
-}
+import React from 'react';
 
-export default Spinner
+import { SpinnerContainer, SpinnerOverlay } from './spinner.styles';
+
+const Spinner = () => (
+    <SpinnerOverlay>
+        <SpinnerContainer />
+    </SpinnerOverlay>
+)
+export default Spinner;

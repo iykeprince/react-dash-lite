@@ -27,7 +27,8 @@ class deposit_model extends model{
             'payment_method' => strtoupper($paymentMethod),
             'crypto_value' => $amountCrypto,
             'crypto_currency' => $currency,
-            'crypto_hash' => $cryptoHash
+            'crypto_hash' => $cryptoHash,
+            'transaction_type' => 'DEPOSIT'
         ];
         $this->db->insert('tbl_transactions', $transactionData);
         $response['status'] = 200;
@@ -38,7 +39,7 @@ class deposit_model extends model{
     public function confirmTransaction($data){
         $transactionHash = $data['transaction_id'];
         $result = $this->db->getItem("SELECT * FROM tbl_transactions WHERE crypto_hash={$transactionHash}");
-
+        
         $response['status'] = 200;
         $response['message'] = "Transaction confirmed";
         $response['result'] = $result;
