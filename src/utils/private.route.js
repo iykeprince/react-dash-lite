@@ -1,13 +1,8 @@
-import { Redirect, Route } from "react-router";
+import { Route } from "react-router";
 
 const PrivateRoute = ({ component: Component, ...rest }) => {
     const token = localStorage.getItem('BITFETTER_AUTH_TOKEN');
-    console.log('token', token)
-    if (!token) {
-        console.log('no token of you')
-    } else {
-        console.log('check we have token')
-    }
+   
     return (
         <Route
             {...rest}
