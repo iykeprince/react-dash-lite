@@ -22,7 +22,7 @@ const AccountContainer = () => {
     }, [])
 
     useEffect(() => {
-        if (message) {
+        if (message !== null) {
             toast.success(message);
             onHideModal();
         }
@@ -38,7 +38,7 @@ const AccountContainer = () => {
             <div className="nk-block">
 
                 {accounts.length 
-                    ? <AccountList />
+                    ? <AccountList setShowModal={setShowModal} />
                     : <AccountEmpty setShowModal={setShowModal} />
                 }
 

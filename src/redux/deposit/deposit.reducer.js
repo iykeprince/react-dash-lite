@@ -7,7 +7,8 @@ const initialState = {
     error: null,
     currentStage: 0,
     message: null,
-    confirmTransaction: null
+    confirmTransaction: null,
+    confirmingTransaction: false,
 }
 //number of bitcoins = 'value in USD' / 'exchange rate'
 const depositReducer = (state = initialState, action) => {
@@ -43,6 +44,11 @@ const depositReducer = (state = initialState, action) => {
                 ...state,
                 currentStage: 3
             }
+        case depositTypes.NAV5_SUCCESS_PAGE:
+            return {
+                ...state,
+                currentStage: 4
+            }
         case depositTypes.CURRENCY_EXCHANGE_REQUEST:
         case depositTypes.UPDATE_WALLET_REQUEST:
         case depositTypes.CONFIRM_TRANSACTION_REQUEST:
@@ -51,6 +57,7 @@ const depositReducer = (state = initialState, action) => {
                 loading: true,
                 error: null,
                 confirmTransaction: null,
+                confirmingTransaction: true,
             }
         case depositTypes.CURRENCY_EXCHANGE_SUCCESS:
             return {
@@ -63,12 +70,13 @@ const depositReducer = (state = initialState, action) => {
                 ...state,
                 loading: false,
                 message: action.payload,
-                currentStage: 0,
             }
         case depositTypes.CONFIRM_TRANSACTION_SUCCESS:
             return {
                 ...state,
-                confirmTransaction: action.payload
+                loading: false,
+                confirmTransaction: action.payload,
+                confirmingTransaction: false,
             }
         case depositTypes.RESET_CONFIRM_TRANSACTION:
             return {
@@ -82,7 +90,8 @@ const depositReducer = (state = initialState, action) => {
             return {
                 ...state,
                 loading: false,
-                error: action.payload
+                error: action.payload,
+                confirmingTransaction: false
             }
         default:
             return state;

@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux"
 import { Link, useHistory } from "react-router-dom";
-import { confirmTransaction, nav1, nav3, resetConfirmTransaction, updateWallet } from "../../../redux/deposit/deposit.actions";
+import { confirmTransaction, nav1, nav3, nav5, resetConfirmTransaction, updateWallet } from "../../../redux/deposit/deposit.actions";
 import uuid from 'react-uuid'
 import { toast, ToastContainer } from "react-toastify";
 import { Modal } from "react-bootstrap";
@@ -15,16 +15,18 @@ const DepositContainer4 = () => {
     const [show, setShow] = useState(false);
     const [transactionId, setTransactionId] = useState(hashValue);
     const confirm = useSelector(state => state.deposit.confirmTransaction);
-    const history = useHistory();
+    const loading = useSelector(state => state.deposit.loading)
+    const confirmingTransaction = useSelector(state => state.deposit.confirmingTransaction)
 
     useEffect(() => {
         if (message) {
-            // toast.success(message)
+            toast.success(message)
             setShow(true);
         }
         if(confirm){
-            history.push(`/deposit/success?hash=${hashValue}`);
-            dispatch(resetConfirmTransaction())
+            // history.push(`/deposit/success?hash=${hashValue}`);
+            dispatch(nav5())
+            // dispatch(resetConfirmTransaction())
         }
     }, [message, confirm])
 
@@ -45,6 +47,8 @@ const DepositContainer4 = () => {
         console.log('Transaction id', transactionId)
         dispatch(confirmTransaction(transactionId))
     }
+
+    const imgURL = `https://chart.googleapis.com/chart?chs=200x200&cht=qr&chl=bitcoin:3283923728737973947?amount=${postData.amountUSD}&choe=UTF-8`;
 
     return (<>
 
@@ -78,10 +82,11 @@ const DepositContainer4 = () => {
                                         </g>
                                     </g>
                                 </svg> */}
-                                <img
-                                    src={`https://api.qrserver.com/v1/create-qr-code/?size=250x250&data=bitcoin:ksldfiosueorijepf?amount=4300`}
+                                {/* <img
+                                    src={`https://api.qrserver.com/v1/create-qr-code/?size=250x250&data=bitcoin:ksldfiosueorijepf?amount=${postData.amountBTC}`}
 
-                                />
+                                /> */}
+                                <img src={imgURL} />
                             </div>
                             <div className="pay-info text-center">
                                 <h5 className="title text-dark mb-0 clipboard-init" data-clipboard-text="0.109">
@@ -90,7 +95,7 @@ const DepositContainer4 = () => {
                                 <p className="text-soft">{postData.amountUSD} USD</p>
                             </div>
 
-                            <div className="form-group">
+                            {/* <div className="form-group">
                                 <div className="form-label overline-title-alt lg text-center">Bitcoin Address</div>
                                 <div className="form-control-wrap">
                                     <div className="form-clip clipboard-init nk-tooltip" data-clipboard-target="#wallet-address" title="" data-original-title="Copy" aria-describedby="tooltip50457">
@@ -99,14 +104,14 @@ const DepositContainer4 = () => {
                                     <div className="form-icon"><em className="icon ni ni-sign-btc-alt"></em></div>
                                     <input onChange={handleChange} type="text" className="form-control form-control-lg" id="wallet-address" value="bc1qxy2kgdygjrsqtzq2n0yrf2493p83kkfjhx0wlh" />
                                 </div>
-                            </div>
+                            </div> */}
 
                             <div className="nk-pps-action">
-                                <a onClick={handleClick} href="#" className="btn btn-block btn-primary popup-open"><span>Paid Bitcoin</span></a>
+                                <button onClick={handleClick} className="btn btn-block btn-primary popup-open"><span>Paid Bitcoin</span></button>
                             </div>
-                            <div className="nk-pps-action pt-2 text-center">
+                            {/* <div className="nk-pps-action pt-2 text-center">
                                 <a href="#" className="link link-btn link-primary">Pay Later</a>
-                            </div>
+                            </div> */}
 
                             <Modal
                                 size="lg"
@@ -133,8 +138,8 @@ const DepositContainer4 = () => {
                                                     </div>
                                                 </div>
                                                 <ul className="btn-group justify-between align-center gx-4">
-                                                    <li><button type="submit" className="btn btn-primary btn-block">Confirm Payment</button></li>
-                                                    <li><a href="#" onClick={() => setShow(false)} className="link link-btn link-secondary popup-close">Close</a></li>
+                                                    <li><button type="submit" className="btn btn-primary btn-block" >Confirm Payment</button></li>
+                                                    <li><button onClick={() => setShow(false)} className="link link-btn link-secondary popup-close">Close</button></li>
                                                 </ul>
                                             </form>
                                             <div className="alert-note is-plain mt-4">
@@ -165,7 +170,7 @@ const DepositContainer4 = () => {
                 </div>
                 <div className="nk-pps-action mt-n2">
                     <ul className="btn-group justify-between align-center gy-3">
-                        <li><Link to="#" onClick={handleCancelOrder} className="link link-danger">Cancel Order</Link></li>
+                        <li><button onClick={handleCancelOrder} className="link link-danger">Cancel Order</button></li>
                         <li><Link to="/" className="link link-primary"><span>Back to Dashboard</span> <em className="icon ni ni-arrow-long-right"></em></Link></li>
                     </ul>
                 </div>

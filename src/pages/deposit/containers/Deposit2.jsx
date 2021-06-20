@@ -15,17 +15,15 @@ const DepositContainer2 = () => {
     const [depositAmount, setDepositAmount] = useState("");
     const [currency, setCurrency] = useState("btc");
 
-    console.log('payment method', paymentMethod)
-
-    useEffect(() => {
-        if (currency) {
-            dispatch(currencyExchange(currency))
-        }
-
-    }, [currency])
+    useEffect(() => {console.log('currency change', currency)}, [currency])
 
     const handleChange = e => {
         setDepositAmount(e.target.value);
+    }
+
+    const handleCurrencyChange = (currency) => {
+        setCurrency(currency);
+        dispatch(currencyExchange(currency))
     }
 
     const handleSubmit = (e) => {
@@ -66,20 +64,20 @@ const DepositContainer2 = () => {
                         <div className="form-control-group">
                             <div className="form-dropdown">
                                 <div className="dropdown">
-                                    <a href="#"
+                                    <a href=""
                                         className="dropdown-indicator-caret currency"
                                         data-toggle="dropdown" data-offset="0,2"
                                         id="deposit-currency-name">{currency.toUpperCase()}</a>
                                     <div
                                         className="dropdown-menu dropdown-menu-right text-center dropdown-menu-xs">
                                         <ul className="link-list-plain li-col2x" id="currency-list">
-                                            <li onClick={() => setCurrency("btc")}><a className="switch-currency" href="#"
+                                            <li onClick={() => handleCurrencyChange("btc")}><a className="switch-currency"
                                                 data-switch="deposit"
                                                 data-currency="BTC" >BTC</a></li>
-                                            <li onClick={() => setCurrency("eth")}><a className="switch-currency" href="#"
+                                            <li onClick={() => handleCurrencyChange("eth")}><a className="switch-currency"
                                                 data-switch="deposit"
                                                 data-currency="ETH" >ETH</a></li>
-                                            <li onClick={() => setCurrency("usdt")}><a className="switch-currency" href="#"
+                                            <li onClick={() => handleCurrencyChange("usdt")}><a className="switch-currency"
                                                 data-switch="deposit"
                                                 data-currency="USDT">USDT</a></li>
                                         </ul>
@@ -120,13 +118,11 @@ const DepositContainer2 = () => {
                             <button type="submit" className="btn btn-lg btn-block btn-primary"
                                 id="proceed-btn">
                                 <span>Continue to Deposit</span>
-                                {/* <span className="spinner-border spinner-border-sm hide" role="status"
-                                    aria-hidden="true"></span> */}
                             </button>
                         </div>
                         <div className="nk-pps-action pt-3">
-                            <a href="#" onClick={() => dispatch(nav1())}
-                                className="btn btn-outline-secondary btn-trans">Back to previous</a>
+                            <button onClick={() => dispatch(nav1())}
+                                className="btn btn-outline-secondary btn-trans">Back to previous</button>
                         </div>
                     </div>
                 </form>

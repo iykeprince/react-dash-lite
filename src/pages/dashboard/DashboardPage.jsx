@@ -9,12 +9,17 @@ import RecentActivity from "./components/RecentActivity"
 import ReferalBox from "./components/ReferalBox"
 import SupportBox from "./components/SupportBox"
 
+/**
+ * 
+ * user.trading_wallet <= 0
+        ? <DepositWrapper />
+        :
+ */
+
 const DashboardPage = () => {
     const user = useSelector(state => state.auth.user);
 
-    return user.trading_wallet <= 0
-        ? <DepositWrapper />
-        : (
+    return  (
             <>
                 <div className="nk-content nk-content-fluid">
                     <div className="container-xl wide-lg">

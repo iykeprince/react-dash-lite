@@ -5,6 +5,7 @@ import { currencyExchange } from "../../../redux/util/util.actions";
 import Footer from "../../footer/footer.component";
 import Header from "../../header/header.component";
 import Sidebar from "../../sidebar/sidebar.component";
+import Spinner from "../../spinner/spinner.component";
 
 const Layout = ({children}) => {
     const dispatch = useDispatch();
@@ -18,9 +19,10 @@ const Layout = ({children}) => {
         
         dispatch(getUser())
         dispatch(currencyExchange())
+
     }, []);
 
-    return user === null ? (<span><h3>Loading</h3></span>) : (
+    return user === null ? (<Spinner />) : (
         <div className="nk-app-root">
             <div className="nk-main ">
                 {/* Sidebar */}

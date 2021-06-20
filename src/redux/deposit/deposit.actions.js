@@ -22,19 +22,9 @@ export const nav4 = () => ({
     type: depositTypes.NAV4_MAKE_DEPOSIT
 })
 
-// export const currencyExchange = (base) => async dispatch => {
-//     dispatch({ type: depositTypes.CURRENCY_EXCHANGE_REQUEST })
-//     try {
-//         const result = await axios.get(`https://api.cryptonator.com/api/ticker/${base}-usd`)
-//         console.log(result.data);
-//         dispatch({ type: depositTypes.CURRENCY_EXCHANGE_SUCCESS, payload: result.data })
-//     } catch (e) {
-//         dispatch({
-//             type: depositTypes.CURRENCY_EXCHANGE_FAILURE,
-//             payload: 'Error converting rate'
-//         })
-//     }
-// }
+export const nav5 = () => ({
+    type: depositTypes.NAV5_SUCCESS_PAGE
+})
 
 export const updateWallet = obj => async dispatch => {
     dispatch({type: depositTypes.UPDATE_WALLET_REQUEST});

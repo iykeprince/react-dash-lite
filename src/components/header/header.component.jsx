@@ -1,5 +1,5 @@
 import { useSelector } from 'react-redux';
-import { useHistory } from 'react-router-dom'
+import { Link, useHistory } from 'react-router-dom'
 import useAuth from '../../hooks/auth.hook';
 
 const Header = () => {
@@ -74,13 +74,13 @@ const Header = () => {
                                         <h6 className="overline-title-alt">BitFetter Account</h6>
                                         <div className="user-balance">${new Intl.NumberFormat().format(user.amount_in_stock)} <small className="currency currency-btc">USD</small></div>
                                         <div className="user-balance-sub"><span>34.4939 <span className="currency currency-btc">BTC</span></span></div>
-                                        <a href="#" className="link"><span>Withdraw Funds</span> <em className="icon ni ni-wallet-out"></em></a>
+                                        <Link to="/withdraw" className="link"><span>Withdraw Funds</span> <em className="icon ni ni-wallet-out"></em></Link>
                                     </div>
                                     <div className="dropdown-inner">
                                         <ul className="link-list">
-                                            <li><a href="profile.html"><em className="icon ni ni-user-alt"></em><span>View Profile</span></a></li>
-                                            <li><a href="profile-security.html"><em className="icon ni ni-setting-alt"></em><span>Account Setting</span></a></li>
-                                            <li><a href="profile-activity.html"><em className="icon ni ni-activity-alt"></em><span>Login Activity</span></a></li>
+                                            <li><Link to="/profile"><em className="icon ni ni-user-alt"></em><span>View Profile</span></Link></li>
+                                            <li><Link to="/profile/account"><em className="icon ni ni-setting-alt"></em><span>Account Setting</span></Link></li>
+                                            {/* <li><a href="profile-activity.html"><em className="icon ni ni-activity-alt"></em><span>Login Activity</span></a></li> */}
                                         </ul>
                                     </div>
                                     <div className="dropdown-inner">
@@ -110,42 +110,7 @@ const Header = () => {
                                                     <div className="nk-notification-time">2 hrs ago</div>
                                                 </div>
                                             </div>
-                                            <div className="nk-notification-item dropdown-inner">
-                                                <div className="nk-notification-icon">
-                                                    <em className="icon icon-circle bg-success-dim ni ni-curve-down-left"></em>
-                                                </div>
-                                                <div className="nk-notification-content">
-                                                    <div className="nk-notification-text">Your <span>Deposit Order</span> is placed</div>
-                                                    <div className="nk-notification-time">2 hrs ago</div>
-                                                </div>
-                                            </div>
-                                            <div className="nk-notification-item dropdown-inner">
-                                                <div className="nk-notification-icon">
-                                                    <em className="icon icon-circle bg-warning-dim ni ni-curve-down-right"></em>
-                                                </div>
-                                                <div className="nk-notification-content">
-                                                    <div className="nk-notification-text">You have requested to <span>Widthdrawl</span></div>
-                                                    <div className="nk-notification-time">2 hrs ago</div>
-                                                </div>
-                                            </div>
-                                            <div className="nk-notification-item dropdown-inner">
-                                                <div className="nk-notification-icon">
-                                                    <em className="icon icon-circle bg-success-dim ni ni-curve-down-left"></em>
-                                                </div>
-                                                <div className="nk-notification-content">
-                                                    <div className="nk-notification-text">Your <span>Deposit Order</span> is placed</div>
-                                                    <div className="nk-notification-time">2 hrs ago</div>
-                                                </div>
-                                            </div>
-                                            <div className="nk-notification-item dropdown-inner">
-                                                <div className="nk-notification-icon">
-                                                    <em className="icon icon-circle bg-warning-dim ni ni-curve-down-right"></em>
-                                                </div>
-                                                <div className="nk-notification-content">
-                                                    <div className="nk-notification-text">You have requested to <span>Widthdrawl</span></div>
-                                                    <div className="nk-notification-time">2 hrs ago</div>
-                                                </div>
-                                            </div>
+                                           
                                             <div className="nk-notification-item dropdown-inner">
                                                 <div className="nk-notification-icon">
                                                     <em className="icon icon-circle bg-success-dim ni ni-curve-down-left"></em>
