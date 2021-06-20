@@ -71,7 +71,7 @@ const Sidebar = () => {
                                 <div className="user-card-wrap">
                                     <div className="user-card">
                                         <div className="user-avatar">
-                                            <span>{user.fullname.split(' ').map(u => u[0])}</span>
+                                            <span>{user.fullname && user.fullname.split(' ').map(u => u[0])}</span>
                                         </div>
                                         <div className="user-info">
                                             <span className="lead-text">{user.fullname}</span>

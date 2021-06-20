@@ -85,7 +85,7 @@ const PlanContainer = () => {
                             <Slider {...settings}>
                                 {plans.map(plan => (<li key={plan.plan_id} className="plan-item">
                                  
-                                  <input type="radio" id="plan-iv-1" name="plan-iv" className="plan-control" checked />
+                                  <input type="radio" id="plan-iv-1" name="plan-iv" className="plan-control" checked={JSON.stringify(plan) === JSON.stringify(selectedPlan)} />
                                       
                                     <div className="plan-item-card">
                                         <div className="plan-item-head">

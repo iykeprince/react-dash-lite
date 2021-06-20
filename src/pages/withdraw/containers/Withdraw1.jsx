@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
+import { Link } from "react-router-dom";
 import { withdrawNav2 } from "../../../redux/withdraw/withdraw.actions";
 import formatAmount from "../../../utils/formatAmount";
 
@@ -64,14 +65,14 @@ const WithdrawContainer1 = () => {
                     </div>
                     <input type="hidden" value="main_wallet" name="wd_source" id="nk-pps-source-wdm" />
                     <div className="dropdown nk-pps-dropdown">
-                        <a href="#" className="dropdown-indicator is-single">
+                        <Link to="#" className="dropdown-indicator is-single">
                             <div className="nk-cm-item">
                                 <div className="nk-cm-text">
                                     <span className="label fw-bold">Main Account</span>
                                     <span className="desc">Available Balance ({new Intl.NumberFormat('en-US', {style: 'currency', currency: 'USD'}).format(user.amount_in_stock)} USD)</span>
                                 </div>
                             </div>
-                        </a>
+                        </Link>
                     </div>
                 </div>
                 <div className="nk-pps-field form-action text-center">

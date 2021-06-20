@@ -1,6 +1,7 @@
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux"
 import { useHistory } from "react-router";
+import { Link } from "react-router-dom";
 import { toast, ToastContainer } from "react-toastify";
 import { requestWithdrawFund, resetWithdraw, withdrawNav2 } from "../../../redux/withdraw/withdraw.actions"
 import formatWalletAddress from "../../../utils/formatWalletAddress";
@@ -87,13 +88,13 @@ const WithdrawContainer3 = () => {
             </div>
             <div className="nk-pps-field form-action text-center">
                 <div className="nk-pps-action">
-                    <a href="#" type="button" className="btn btn-lg btn-block btn-primary" id="wd-confirm" onClick={handleSubmitPost}>
+                    <Link to="#" type="button" className="btn btn-lg btn-block btn-primary" id="wd-confirm" onClick={handleSubmitPost}>
                         <span>Confirm &amp; Withdraw</span>
                         {loading ? <span className="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span> : <span></span>}
-                    </a>
+                    </Link>
                 </div>
                 <div className="nk-pps-action pt-3">
-                    <a href="#" onClick={() => dispatch(withdrawNav2(postData))} className="btn btn-outline-danger btn-trans">Cancel Order</a>
+                    <Link to="#" onClick={() => dispatch(withdrawNav2(postData))} className="btn btn-outline-danger btn-trans">Cancel Order</Link>
                 </div>
             </div>
         </div>

@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
+import { Link } from "react-router-dom";
 import { currencyExchange } from "../../../redux/util/util.actions";
 import { withdrawNav1, withdrawNav3 } from "../../../redux/withdraw/withdraw.actions";
 
@@ -15,6 +16,7 @@ const WithdrawContainer2 = () => {
     const [selectedAccount, setSelectedAccount] = useState(null);
     const [currency, setCurrency] = useState("btc");
     const [withdrawAmount, setWithdrawAmount] = useState({USD: 0.0, exchangeValue: 0.0})
+    const [errorMessage, setErrorMessage] = useState(null)
     const [description, setDescription] = useState('')
 
     useEffect(() => {
@@ -49,6 +51,11 @@ const WithdrawContainer2 = () => {
         if(!selectedAccount){
             return window.alert('Please select account')
         }
+        if(withdrawAmount.USD <= 0){
+            return setErrorMessage('Invalid amount entered')
+        }
+
+        setErrorMessage(null)
         const obj = {
             ...withdrawAmount,
             ...selectedAccount,
@@ -77,12 +84,12 @@ const WithdrawContainer2 = () => {
                     <div className="nk-pps-field form-group">
                         <div className="form-label-group">
                             <label className="form-label">Withdraw To</label>
-                            <a href="#" className="link wd-new-account" data-modal="withdraw-account-modal">
-                                New Wallet </a>
+                            <Link to="#" className="link wd-new-account" data-modal="withdraw-account-modal">
+                                New Wallet </Link>
                         </div>
 
                         <div className="dropdown nk-pps-dropdown">
-                            <a href="#" className="dropdown-indicator" data-toggle="dropdown" id="wdm-account-name">
+                            <Link to="#" className="dropdown-indicator" data-toggle="dropdown" id="wdm-account-name">
                                 {selectedAccount
                                     ? <div className="nk-cm-item">
                                         <div className="nk-cm-text">
@@ -96,18 +103,18 @@ const WithdrawContainer2 = () => {
                                             <span className="desc">select an account</span>
                                         </div>
                                     </div>}
-                            </a>
+                            </Link>
                             <div className="dropdown-menu dropdown-menu-auto dropdown-menu-mxh">
                                 <ul className="nk-dlist">
                                     {withdrawAccounts.map((account, index) => (<li key={index} className="nk-dlist-item selected">
-                                        <a href="#" onClick={() => handleSelection(account)} className="nk-dlist-opt wdm-change" data-change="wdm-account" data-id="dlFiMEF1K1IvRDI4ZkV1aDJ0ZHAvdz09" data-currency="USDT">
+                                        <Link to="#" onClick={() => handleSelection(account)} className="nk-dlist-opt wdm-change" data-change="wdm-account" data-id="dlFiMEF1K1IvRDI4ZkV1aDJ0ZHAvdz09" data-currency="USDT">
                                             <div className="nk-cm-item">
                                                 <div className="nk-cm-text">
                                                     <span className="label fw-bold">{account.wallet_label}</span>
                                                     <span className="desc">{account.wallet_address} </span>
                                                 </div>
                                             </div>
-                                        </a>
+                                        </Link>
                                     </li>))}
                                 </ul>
                             </div>
@@ -133,6 +140,7 @@ const WithdrawContainer2 = () => {
                                             value={withdrawAmount.USD} 
                                             onChange={handleConversion}
                                         />
+                                        {errorMessage && <div>{errorMessage}</div>}
                                     </div>
                                     <div className="form-note-group">
                                         <span className="nk-pps-bal form-note-alt">Current Balance: <strong className="text-base amount">{user.trading_wallet} USD</strong></span>
@@ -155,22 +163,22 @@ const WithdrawContainer2 = () => {
                                     <div className="form-control-group">
                                         <div className="form-dropdown">
                                             <div className="dropdown">
-                                                <a href="#"
+                                                <Link to="#"
                                                     className="dropdown-indicator-caret currency"
                                                     data-toggle="dropdown" data-offset="0,2"
-                                                    id="deposit-currency-name">{currency.toUpperCase()}</a>
+                                                    id="deposit-currency-name">{currency.toUpperCase()}</Link>
                                                 <div
                                                     className="dropdown-menu dropdown-menu-right text-center dropdown-menu-xs">
                                                     <ul className="link-list-plain li-col2x" id="currency-list">
-                                                        <li onClick={() => setCurrency("btc")}><a className="switch-currency" href="#"
+                                                        <li onClick={() => setCurrency("btc")}><Link className="switch-currency" to="#"
                                                             data-switch="deposit"
-                                                            data-currency="BTC" >BTC</a></li>
-                                                        <li onClick={() => setCurrency("eth")}><a className="switch-currency" href="#"
+                                                            data-currency="BTC" >BTC</Link></li>
+                                                        <li onClick={() => setCurrency("eth")}><Link className="switch-currency" to="#"
                                                             data-switch="deposit"
-                                                            data-currency="ETH" >ETH</a></li>
-                                                        <li onClick={() => setCurrency("usdt")}><a className="switch-currency" href="#"
+                                                            data-currency="ETH" >ETH</Link></li>
+                                                        <li onClick={() => setCurrency("usdt")}><Link className="switch-currency" to="#"
                                                             data-switch="deposit"
-                                                            data-currency="USDT">USDT</a></li>
+                                                            data-currency="USDT">USDT</Link></li>
                                                     </ul>
                                                 </div>
                                             </div>
@@ -183,7 +191,7 @@ const WithdrawContainer2 = () => {
                                             placeholder="0.00"
                                             onChange={e => setWithdrawAmount(e.target.value)}
                                             value={withdrawAmount.exchangedValue}
-                                            required
+                                           readOnly
                                         />
                                         <input
                                             type="hidden"
@@ -223,7 +231,7 @@ const WithdrawContainer2 = () => {
                             </button>
                         </div>
                         <div className="nk-pps-action pt-3">
-                            <a href="@" className="btn btn-outline-secondary btn-trans pps-btn-action" onClick={() => withdrawNav1()} >Back to previous</a>
+                            <button className="btn btn-outline-secondary btn-trans pps-btn-action" type="button" onClick={() => withdrawNav1()} >Back to previous</button>
                         </div>
                     </div>
                 </form>

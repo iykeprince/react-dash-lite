@@ -18,6 +18,7 @@ const Header = () => {
         });
     }
 
+
     return  (
         <div className="nk-header nk-header-fluid nk-header-fixed is-light">
             <div className="container-fluid">
@@ -62,7 +63,7 @@ const Header = () => {
                                     <div className="dropdown-inner user-card-wrap bg-lighter d-none d-md-block">
                                         <div className="user-card">
                                             <div className="user-avatar">
-                                                <span>{user.fullname.split(' ').map(u => u[0])}</span>
+                                                <span>{user.fullname && user.fullname.split(' ').map(u => u[0])}</span>
                                             </div>
                                             <div className="user-info">
                                                 <span className="lead-text">{user.fullname}</span>
