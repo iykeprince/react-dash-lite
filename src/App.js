@@ -7,6 +7,7 @@ import Layout from './components/layout/layout/layout.component';
 import Spinner from './components/spinner/spinner.component';
 import './App.css'
 
+
 const Login = React.lazy(() => import('./pages/auth/Login'));
 const Register = React.lazy(() => import('./pages/auth/Register'));
 const ResetPassword = React.lazy(() => import('./pages/auth/ResetPassword'));
