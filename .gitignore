@@ -25,3 +25,4 @@ yarn-error.log*
 # public utils .zip
 public/*.zip
 public/html/
+vendor
