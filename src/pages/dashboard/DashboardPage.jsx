@@ -20,7 +20,7 @@ const DashboardPage = () => {
     const user = useSelector(state => state.auth.user);
 
     return  (
-            <>
+            <Layout>
                 <div className="nk-content nk-content-fluid">
                     <div className="container-xl wide-lg">
                         <div className="nk-content-body">
@@ -187,7 +187,7 @@ const DashboardPage = () => {
                     </div>
                 </div>
 
-            </>
+            </Layout>
         )
 }
 

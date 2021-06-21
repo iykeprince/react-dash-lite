@@ -1,5 +1,6 @@
 import { useEffect } from "react"
 import { useDispatch, useSelector } from "react-redux"
+import Layout from "../../components/layout/layout/layout.component"
 
 import Spinner from "../../components/spinner/spinner.component"
 import { getWithdrawAccounts } from "../../redux/withdraw/withdraw.actions"
@@ -41,7 +42,7 @@ const WithdrawPage = () => {
         return <Spinner />
     }
 
-    return (<>
+    return (<Layout>
         <div className="nk-content nk-content-fluid">
             <div className="container-xl wide-lg">
                 <div className="nk-content-body">
@@ -55,7 +56,7 @@ const WithdrawPage = () => {
                 </div>
             </div>
         </div>
-    </>
+    </Layout>
     )
 }
 

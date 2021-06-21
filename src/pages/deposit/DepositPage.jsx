@@ -1,10 +1,11 @@
+import Layout from '../../components/layout/layout/layout.component';
 import DepositWrapper from './components/DepositWrapper';
 
 
 const DepositPage = () => {
-   
 
-    return <DepositWrapper />
+
+    return <Layout><DepositWrapper /></Layout>
 }
 
 export default DepositPage

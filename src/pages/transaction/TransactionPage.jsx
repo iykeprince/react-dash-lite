@@ -1,5 +1,6 @@
 import { useEffect } from "react"
 import { useSelector } from "react-redux"
+import Layout from "../../components/layout/layout/layout.component";
 import { getTransactions } from "../../redux/transaction/transaction.actions"
 
 const TransactionPage = () => {
@@ -8,7 +9,7 @@ const TransactionPage = () => {
     useEffect(() => {
         getTransactions()
     }, [])
-    return (
+    return (<Layout>
             <div className="nk-content nk-content-fluid">
                 <div className="container-xl wide-lg">
                     <div className="nk-content-body">
@@ -375,7 +376,8 @@ const TransactionPage = () => {
                         </div>
                     </div>
                 </div>
-            </div>)
+            </div>
+            </Layout>)
 }
 
 export default TransactionPage

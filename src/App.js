@@ -33,7 +33,7 @@ const App = () => (
         <Route exact path="/forgotpassword" component={ForgotPassword} />
         <Route exact path="/resetpassword" component={ResetPassword} />
 
-        <Layout>
+   
           <PrivateRoute exact path="/" component={DashboardPage} />
           <PrivateRoute exact path="/deposit" component={DepositPage} />
           <PrivateRoute path="/deposit/success" component={DepositorSuccessPage} />
@@ -43,7 +43,7 @@ const App = () => (
           <PrivateRoute path="/transactions" component={TransactionPage} />
           <PrivateRoute path="/investment" component={InvestmentPage} />
           <PrivateRoute path="/plans" component={PlanPage} />
-        </Layout>
+        
 
       </Switch>
     </Suspense>
