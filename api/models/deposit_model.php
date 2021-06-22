@@ -23,7 +23,7 @@ class deposit_model extends model{
         //save transaction
         $transactionData = [
             'user_id' => $this->id,
-            'amount_usd' => $amountUSD,
+            'amount' => $amountUSD,
             'payment_method' => strtoupper($paymentMethod),
             'crypto_value' => $amountCrypto,
             'crypto_currency' => $currency,
