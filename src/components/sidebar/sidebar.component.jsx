@@ -1,18 +1,31 @@
 import { useEffect, useState } from "react";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { useHistory } from "react-router";
 import { Link } from "react-router-dom";
+import { toggleSidebar } from "../../redux/util/util.actions";
 
 const Sidebar = () => {
     const history = useHistory();
+    const dispatch = useDispatch()
     const user = useSelector(state => state.auth.user);
     const exchangeData = useSelector(state => state.util.exchangeData);
     const loadingExchange = useSelector(state => state.util.loading);
     const [activeLink, setActiveLink] = useState("dashboard");
 
+    const toggleState = useSelector(state => state.util.showSidebar)
+
+    useEffect(() => {
+      
+    }, [toggleState])
+
+    const navToggler = e => {
+        e.preventDefault();
+        dispatch(toggleSidebar());
+    }
+
     return (
         <>
-        <div id="sidebarContainer" className="nk-sidebar nk-sidebar-fat nk-sidebar-fixed" data-content="sidebarMenu">
+        <div id="sidebarContainer" className={`nk-sidebar nk-sidebar-fat nk-sidebar-fixed ${toggleState && 'nk-sidebar-active'}`}>
             <div className="nk-sidebar-element nk-sidebar-head">
                 <div className="nk-sidebar-brand">
                     <a href="html/crypto/index.html" className="logo-link nk-sidebar-logo">
@@ -22,7 +35,7 @@ const Sidebar = () => {
                     </a>
                 </div>
                 <div className="nk-menu-trigger mr-n2">
-                    <a href="#" className="nk-nav-toggle nk-quick-nav-icon d-xl-none" data-target="sidebarMenu"><em className="icon ni ni-arrow-left"></em></a>
+                    <a href="#" className={`nk-nav-toggle nk-quick-nav-icon d-xl-none ${toggleState && 'toggle-active'}`} onClick={navToggler}><em className="icon ni ni-arrow-left"></em></a>
                 </div>
             </div>
             <div className="nk-sidebar-element">
@@ -83,7 +96,7 @@ const Sidebar = () => {
                                     </div>
                                 </div>
                             </a>
-                            <div className="nk-profile-content toggle-expand-content" data-content="sidebarProfile">
+                            <div className="nk-profile-content toggle-expand-content" >
                                 <div className="user-account-info between-center">
                                     <div className="user-account-main">
                                         <h6 className="overline-title-alt">Available Balance</h6>
@@ -228,6 +241,7 @@ const Sidebar = () => {
                 </div>
             </div>
         </div>
+        <div onClick={navToggler} className={`${toggleState ? 'nk-sidebar-overlay' : ''}`} ></div>
     </>
 )};
 

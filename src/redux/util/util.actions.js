@@ -2,6 +2,10 @@ import axios from 'axios'
 import util from "../../services/util.service";
 import utilTypes from "./util.types";
 
+export const toggleSidebar = () => ({
+    type: utilTypes.TOGGLE_SIDEBAR
+})
+
 // GET /dashboard/transactions
 // export const getTransactions = () => async dispatch => {
 //     dispatch({

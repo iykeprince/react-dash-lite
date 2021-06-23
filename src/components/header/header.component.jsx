@@ -1,15 +1,20 @@
-import { useSelector } from 'react-redux';
+import { useEffect, useState } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 import { Link, useHistory } from 'react-router-dom'
 import useAuth from '../../hooks/auth.hook';
+import { toggleSidebar } from '../../redux/util/util.actions';
 
 const Header = () => {
     const history = useHistory();
+    const dispatch = useDispatch();
     const user = useSelector(state => state.auth.user);
     const auth = useAuth;
 
-    const navToggler = () => {
-        // document.querySelector('#sidebarContainer').className = "";
-        // document.querySelector('#sidebarContainer').className = ""
+    const toggleState = useSelector(state => state.util.showSidebar)
+
+    const navToggler = (e) =>{ 
+        e.preventDefault();
+        dispatch(toggleSidebar());
     }
 
     const handleSignOut = () => {
@@ -19,12 +24,12 @@ const Header = () => {
     }
 
 
-    return  (
+    return (
         <div className="nk-header nk-header-fluid nk-header-fixed is-light">
             <div className="container-fluid">
                 <div className="nk-header-wrap">
                     <div className="nk-menu-trigger d-xl-none ml-n1">
-                        <a href="#" onClick={navToggler} className="nk-nav-toggle nk-quick-nav-icon" data-target="sidebarMenu"><em className="icon ni ni-menu"></em></a>
+                        <a href="#" onClick={navToggler} className={`nk-nav-toggle nk-quick-nav-icon ${toggleState && 'toggle-active'}`}><em className="icon ni ni-menu"></em></a>
                     </div>
                     <div className="nk-header-brand d-xl-none">
                         <a href="html/crypto/index.html" className="logo-link">
@@ -111,7 +116,7 @@ const Header = () => {
                                                     <div className="nk-notification-time">2 hrs ago</div>
                                                 </div>
                                             </div>
-                                           
+
                                             <div className="nk-notification-item dropdown-inner">
                                                 <div className="nk-notification-icon">
                                                     <em className="icon icon-circle bg-success-dim ni ni-curve-down-left"></em>
