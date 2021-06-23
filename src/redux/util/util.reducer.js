@@ -1,6 +1,7 @@
 import utilTypes from "./util.types";
 
 const initialState = {
+    activeLink: "dashboard",
     loading: false,
     exchangeData: null,
     error: null,
@@ -9,6 +10,8 @@ const initialState = {
 //number of bitcoins = 'value in USD' / 'exchange rate'
 const utilReducer = (state = initialState, action) => {
     switch (action.type) {
+        case utilTypes.SET_ACTIVE_LINK:
+            return {...state, activeLink: action.payload}
         case utilTypes.TOGGLE_SIDEBAR:
             return {
                 ...state,

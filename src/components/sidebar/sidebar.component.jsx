@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useHistory } from "react-router";
 import { Link } from "react-router-dom";
-import { toggleSidebar } from "../../redux/util/util.actions";
+import { setActiveLink, toggleSidebar } from "../../redux/util/util.actions";
 
 const Sidebar = () => {
     const history = useHistory();
@@ -10,9 +10,10 @@ const Sidebar = () => {
     const user = useSelector(state => state.auth.user);
     const exchangeData = useSelector(state => state.util.exchangeData);
     const loadingExchange = useSelector(state => state.util.loading);
-    const [activeLink, setActiveLink] = useState("dashboard");
+    // const [activeLink, setActiveLink] = useState("dashboard");
 
     const toggleState = useSelector(state => state.util.showSidebar)
+    const activeLink = useSelector(state => state.util.activeLink);
 
     useEffect(() => {
       
@@ -23,9 +24,14 @@ const Sidebar = () => {
         dispatch(toggleSidebar());
     }
 
+    const handleNavigate = (link) => {
+        console.log('current nav link', link)
+        dispatch(setActiveLink(link))
+    }
+
     return (
         <>
-        <div id="sidebarContainer" className={`nk-sidebar nk-sidebar-fat nk-sidebar-fixed ${toggleState && 'nk-sidebar-active'}`}>
+        <div id="sidebarContainer" className={`nk-sidebar nk-sidebar-fat nk-sidebar-fixed ${toggleState ? 'nk-sidebar-active' : ''}`}>
             <div className="nk-sidebar-element nk-sidebar-head">
                 <div className="nk-sidebar-brand">
                     <a href="html/crypto/index.html" className="logo-link nk-sidebar-logo">
@@ -35,7 +41,7 @@ const Sidebar = () => {
                     </a>
                 </div>
                 <div className="nk-menu-trigger mr-n2">
-                    <a href="#" className={`nk-nav-toggle nk-quick-nav-icon d-xl-none ${toggleState && 'toggle-active'}`} onClick={navToggler}><em className="icon ni ni-arrow-left"></em></a>
+                    <a href="#" className={`nk-nav-toggle nk-quick-nav-icon d-xl-none ${toggleState ? 'toggle-active' : ''}`} onClick={navToggler}><em className="icon ni ni-arrow-left"></em></a>
                 </div>
             </div>
             <div className="nk-sidebar-element">
@@ -144,46 +150,46 @@ const Sidebar = () => {
                                 <li className="nk-menu-heading">
                                     <h6 className="overline-title">Menu</h6>
                                 </li>
-                                <li className={`nk-menu-item ${activeLink === 'dashboard' && 'active'}`} onClick={() => setActiveLink('dashboard')}>
+                                <li className={`nk-menu-item ${activeLink === 'dashboard' ? 'active' : ''}`} onClick={() => handleNavigate('dashboard')}>
                                     <Link to="/" className="nk-menu-link">
                                         <span className="nk-menu-icon"><em className="icon ni ni-dashboard"></em></span>
                                         <span className="nk-menu-text">Dashboard</span>
                                     </Link>
                                 </li>
-                                <li className={`nk-menu-item ${activeLink === 'transactions' && 'active'}`} onClick={() => setActiveLink('transactions')}>
+                                <li className={`nk-menu-item ${activeLink === 'transactions' ? 'active' : ''}`} onClick={() => handleNavigate('transactions')}>
                                     <Link to="/transactions" className="nk-menu-link">
                                         <span className="nk-menu-icon"><em className="icon ni ni-repeat"></em></span>
                                         <span className="nk-menu-text">Transaction</span>
                                     </Link>
                                 </li>
-                                <li className={`nk-menu-item ${activeLink === 'investment' && 'active'}`} onClick={() => setActiveLink('my-account')}>
+                                <li className={`nk-menu-item ${activeLink === 'investment' ? 'active' : ''}`} onClick={() => handleNavigate('investment')}>
                                     <Link to="/investment" className="nk-menu-link">
                                         <span className="nk-menu-icon"><em className="icon ni ni-user-c"></em></span>
                                         <span className="nk-menu-text">Investment</span>
                                     </Link>
                                 </li>
-                                <li className={`nk-menu-item ${activeLink === 'plans' && 'active'}`} onClick={() => setActiveLink('plans')}>
+                                <li className={`nk-menu-item ${activeLink === 'plans' ? 'active' : ''}`} onClick={() => handleNavigate('plans')}>
                                     <Link to="/plans" className="nk-menu-link">
                                         <span className="nk-menu-icon"><em className="icon ni ni-wallet-alt"></em></span>
                                         <span className="nk-menu-text">Our Plans</span>
                                     </Link>
                                 </li>
                                                               
-                                <li className={`nk-menu-item ${activeLink === 'profile' && 'active'}`} onClick={() => setActiveLink('profile')}>
+                                <li className={`nk-menu-item ${activeLink === 'profile' ? 'active' : ''}`} onClick={() => handleNavigate('profile')}>
                                     <Link to="/profile" className="nk-menu-link">
                                         <span className="nk-menu-icon"><em className="icon ni ni-account-setting"></em></span>
                                         <span className="nk-menu-text">My Profile</span>
                                     </Link>
                                 </li>
-                                <li className={`nk-menu-item ${activeLink === 'referrals' && 'active'}`} onClick={() => setActiveLink('referrals')}>
-                                    <Link to="/profile" className="nk-menu-link">
+                                <li className={`nk-menu-item ${activeLink === 'referrals' ? 'active' : ''}`} onClick={() => handleNavigate('referrals')}>
+                                    <Link to="/referrals" className="nk-menu-link">
                                         <span className="nk-menu-icon"><em className="icon ni ni-cloud"></em></span>
                                         <span className="nk-menu-text">Referrals</span>
                                     </Link>
                                 </li>
                                 
-                                <li className={`nk-menu-item ${activeLink === 'kyc-application' && 'active'}`} onClick={() => setActiveLink('kyc-application')}>
-                                    <Link to="/kyc-application" className="nk-menu-link">
+                                <li className={`nk-menu-item ${activeLink === 'kyc' ? 'active' : ''}`} onClick={() => handleNavigate('kyc')}>
+                                    <Link to="/kyc" className="nk-menu-link">
                                         <span className="nk-menu-icon"><em className="icon ni ni-file-text"></em></span>
                                         <span className="nk-menu-text">KYC Application</span>
                                     </Link>
@@ -241,7 +247,7 @@ const Sidebar = () => {
                 </div>
             </div>
         </div>
-        <div onClick={navToggler} className={`${toggleState ? 'nk-sidebar-overlay' : ''}`} ></div>
+        {/* <div onClick={navToggler} className={`${toggleState ? 'nk-sidebar-overlay' : ''}`} ></div> */}
     </>
 )};
 

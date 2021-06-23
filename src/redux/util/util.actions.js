@@ -6,24 +6,10 @@ export const toggleSidebar = () => ({
     type: utilTypes.TOGGLE_SIDEBAR
 })
 
-// GET /dashboard/transactions
-// export const getTransactions = () => async dispatch => {
-//     dispatch({
-//         type: utilTypes.LOAD_TRANSACTIONS_REQUEST
-//     })
-//     try{
-//         const res = await util.transactions();
-//         dispatch({
-//             type: utilTypes.LOAD_TRANSACTIONS_SUCCESS,
-//             payload: res.data
-//         })
-//     }catch(error){
-//         dispatch({
-//             type: utilTypes.LOAD_TRANSACTIONS_FAILURE,
-//             payload: error.response.statusText
-//         })
-//     }
-// }
+export const setActiveLink = (link) => ({
+    type: utilTypes.SET_ACTIVE_LINK,
+    payload: link
+})
 
 export const currencyExchange = (base = "btc") => async dispatch => {
     dispatch({ type: utilTypes.CURRENCY_EXCHANGE_REQUEST })

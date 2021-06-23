@@ -29,7 +29,7 @@ const Header = () => {
             <div className="container-fluid">
                 <div className="nk-header-wrap">
                     <div className="nk-menu-trigger d-xl-none ml-n1">
-                        <a href="#" onClick={navToggler} className={`nk-nav-toggle nk-quick-nav-icon ${toggleState && 'toggle-active'}`}><em className="icon ni ni-menu"></em></a>
+                        <a href="#" onClick={navToggler} className={`nk-nav-toggle nk-quick-nav-icon ${toggleState ? 'toggle-active' : ''}`}><em className="icon ni ni-menu"></em></a>
                     </div>
                     <div className="nk-header-brand d-xl-none">
                         <a href="html/crypto/index.html" className="logo-link">
