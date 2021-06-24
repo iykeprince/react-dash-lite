@@ -1,6 +1,7 @@
 import { combineReducers } from "redux";
 import authReducer from "./auth/auth.reducer";
 import depositReducer from "./deposit/deposit.reducer";
+import investmentReducer from "./investment/investment.reducer";
 import planReducer from "./plan/plan.reducer";
 import transactionReducer from "./transaction/transaction.reducer";
 import utilReducer from "./util/util.reducer";
@@ -12,7 +13,8 @@ const rootReducer = combineReducers({
     withdraw: withdrawReducer,
     util: utilReducer,
     plan: planReducer,
-    transaction: transactionReducer
+    transaction: transactionReducer,
+    investment: investmentReducer
 })
 
 export default rootReducer

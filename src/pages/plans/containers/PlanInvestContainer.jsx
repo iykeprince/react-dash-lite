@@ -103,7 +103,7 @@ const PlanInvestContainer = () => {
                                                 <em className="icon ni ni-offer-fill"></em>
                                             </div>
                                             <div className="coin-info">
-                                                <span className="coin-name">{selectedPlan.title}</span>
+                                                <span className="coin-name">{selectedPlan.title} {selectedPlan.isMax === "1" && <strong>MAX</strong>}</span>
                                                 <span className="coin-text">Invest for {selectedPlan.termDays} days and get daily profit {selectedPlan.dailyInterest}%</span>
                                             </div>
                                         </div>

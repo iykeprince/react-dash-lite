@@ -46,7 +46,6 @@ const App = () => (
         <PrivateRoute path="/transactions" component={TransactionPage} />
         <PrivateRoute path="/plans" component={PlanPage} />
         <PrivateRoute path="/investment" component={InvestmentPage} />
-        <PrivateRoute path="/investment-detail/:investmentId" component={InvestmentDetailPage} />
         <PrivateRoute path="/referrals" component={ReferralsPage} />
         <PrivateRoute path="/kyc" component={KycStarterPage} />
         <PrivateRoute path="/kyc-form" component={KycFormPage} />

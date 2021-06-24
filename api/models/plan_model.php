@@ -20,7 +20,15 @@ class plan_model extends model{
         $amountCrypto = $amount/$exchangePrice;
 
         $user = $this->db->getItem("SELECT * FROM tbl_users WHERE id={$this->id}");
-
+        //Get the user and check the trading_wallet balance
+        //return "INSUFFICIENT_FUND " response when the amount to invest is greater than the wallet balance
+        //otherwise proceed
+        if($amount > $user['trading_wallet']){
+            $response['status'] = 400;
+            $response['message'] = "Insufficient fund.";
+            return $response;
+        }
+        
         $fundData = [
             "plan_id" => $planId,
             "plan_amount" => $amount,

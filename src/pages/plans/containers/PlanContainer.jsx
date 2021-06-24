@@ -91,7 +91,7 @@ const PlanContainer = () => {
                                         <div className="plan-item-head">
                                             <div className="plan-item-heading">
                                                 <h4 className="plan-item-title card-title title">{plan.title}</h4>
-                                                <p className="sub-text">{plan.isMax ? 'MAX' : ' '}</p>
+                                                <p className="sub-text">{plan.isMax === "1" ? 'MAX' : ' '}</p>
                                             </div>
                                             <div className="plan-item-summary card-text">
                                                 <div className="row">

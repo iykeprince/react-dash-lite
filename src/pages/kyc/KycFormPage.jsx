@@ -1,6 +1,39 @@
+import { useRef } from "react";
+import { useEffect } from "react";
+import { useState } from "react";
 import Layout from "../../components/layout/layout/layout.component"
 
 const KycFormPage = () => {
+    const [kycObject, setKycObject] = useState({address2: ''});
+    const ref = useRef();
+    const [selectedFile, setSelectedFile] = useState(null);
+    const [picture, setPicture] = useState(null)
+
+    useEffect(() => {
+        if(selectedFile){
+            setPicture(URL.createObjectURL(selectedFile));
+        }
+    }, [selectedFile])
+
+    const handleChange = e => {
+        setKycObject({...kycObject, [e.target.name]: e.target.value})
+    }
+
+    const handleFileSelect = e => {
+        ref.current.click();
+    }
+
+    const handleFileChange = e => {
+        console.log(e.target.files[0])
+        const file = e.target.files[0];
+        setSelectedFile(file);
+    }
+
+    const handleSubmit = e => {
+        e.preventDefault();
+        console.log('form object', kycObject)
+    }
+
     return (<Layout>
         <div class="nk-content nk-content-fluid">
             <div class="container-xl wide-lg">
@@ -16,6 +49,7 @@ const KycFormPage = () => {
                         </div>
                         <div class="nk-block">
                             <div class="card card-bordered">
+                                <form onSubmit={handleSubmit}>
                                 <div class="nk-kycfm">
                                     <div class="nk-kycfm-head">
                                         <div class="nk-kycfm-count">01</div>
@@ -36,7 +70,7 @@ const KycFormPage = () => {
                                                         <label class="form-label">First Name <span class="text-danger">*</span></label>
                                                     </div>
                                                     <div class="form-control-group">
-                                                        <input type="text" class="form-control form-control-lg" />
+                                                        <input type="text" class="form-control form-control-lg" name="firstName" value={kycObject.firstName} onChange={handleChange} required />
                                                     </div>
                                                 </div>
                                             </div>
@@ -46,7 +80,7 @@ const KycFormPage = () => {
                                                         <label class="form-label">Last Name <span class="text-danger">*</span></label>
                                                     </div>
                                                     <div class="form-control-group">
-                                                        <input type="text" class="form-control form-control-lg" />
+                                                        <input type="text" class="form-control form-control-lg" name="lastName" value={kycObject.lastName} onChange={handleChange} required />
                                                     </div>
                                                 </div>
                                             </div>
@@ -56,7 +90,7 @@ const KycFormPage = () => {
                                                         <label class="form-label">Email Address <span class="text-danger">*</span></label>
                                                     </div>
                                                     <div class="form-control-group">
-                                                        <input type="text" class="form-control form-control-lg" />
+                                                        <input type="text" class="form-control form-control-lg" name="email" value={kycObject.email} onChange={handleChange} required />
                                                     </div>
                                                 </div>
                                             </div>
@@ -66,7 +100,7 @@ const KycFormPage = () => {
                                                         <label class="form-label">Phone Number <span class="text-danger">*</span></label>
                                                     </div>
                                                     <div class="form-control-group">
-                                                        <input type="text" class="form-control form-control-lg" />
+                                                        <input type="tel" class="form-control form-control-lg" name="phoneNumber" value={kycObject.phoneNumber} onChange={handleChange} required />
                                                     </div>
                                                 </div>
                                             </div>
@@ -76,7 +110,7 @@ const KycFormPage = () => {
                                                         <label class="form-label">Date of Birth <span class="text-danger">*</span></label>
                                                     </div>
                                                     <div class="form-control-group">
-                                                        <input type="text" class="form-control form-control-lg date-picker-alt" />
+                                                        <input type="date" class="form-control form-control-lg date-picker-alt" name="dateOfBirth" value={kycObject.dateOfBirth} onChange={handleChange} required />
                                                     </div>
                                                 </div>
                                             </div>
@@ -86,7 +120,7 @@ const KycFormPage = () => {
                                                         <label class="form-label">Telegram Username <span class="text-danger">*</span></label>
                                                     </div>
                                                     <div class="form-control-group">
-                                                        <input type="text" class="form-control form-control-lg" />
+                                                        <input type="text" class="form-control form-control-lg" name="telegramUsername" value={kycObject.telegramUsername} onChange={handleChange} required/>
                                                     </div>
                                                 </div>
                                             </div>
@@ -111,7 +145,7 @@ const KycFormPage = () => {
                                                         <label class="form-label">Address Line 1 <span class="text-danger">*</span></label>
                                                     </div>
                                                     <div class="form-control-group">
-                                                        <input type="text" class="form-control form-control-lg" />
+                                                        <input type="text" class="form-control form-control-lg" name="address1" value={kycObject.address1} onChange={handleChange} required />
                                                     </div>
                                                 </div>
                                             </div>
@@ -121,7 +155,7 @@ const KycFormPage = () => {
                                                         <label class="form-label">Address Line 2</label>
                                                     </div>
                                                     <div class="form-control-group">
-                                                        <input type="text" class="form-control form-control-lg" />
+                                                        <input type="text" class="form-control form-control-lg" name="address2" value={kycObject.address2} onChange={handleChange} />
                                                     </div>
                                                 </div>
                                             </div>
@@ -131,7 +165,7 @@ const KycFormPage = () => {
                                                         <label class="form-label">City <span class="text-danger">*</span></label>
                                                     </div>
                                                     <div class="form-control-group">
-                                                        <input type="text" class="form-control form-control-lg" />
+                                                        <input type="text" class="form-control form-control-lg" name="city" value={kycObject.city} onChange={handleChange} required />
                                                     </div>
                                                 </div>
                                             </div>
@@ -141,7 +175,7 @@ const KycFormPage = () => {
                                                         <label class="form-label">State <span class="text-danger">*</span></label>
                                                     </div>
                                                     <div class="form-control-group">
-                                                        <input type="text" class="form-control form-control-lg" />
+                                                        <input type="text" class="form-control form-control-lg" name="state" value={kycObject.state} onChange={handleChange} required />
                                                     </div>
                                                 </div>
                                             </div>
@@ -151,7 +185,7 @@ const KycFormPage = () => {
                                                         <label class="form-label">Nationality <span class="text-danger">*</span></label>
                                                     </div>
                                                     <div class="form-control-group">
-                                                        <input type="text" class="form-control form-control-lg date-picker-alt" />
+                                                        <input type="text" class="form-control form-control-lg date-picker-alt" name="nationality" value={kycObject.nationality} onChange={handleChange} required />
                                                     </div>
                                                 </div>
                                             </div>
@@ -161,7 +195,7 @@ const KycFormPage = () => {
                                                         <label class="form-label">Zip Code <span class="text-danger">*</span></label>
                                                     </div>
                                                     <div class="form-control-group">
-                                                        <input type="text" class="form-control form-control-lg" />
+                                                        <input type="text" class="form-control form-control-lg" name="zipCode" value={kycObject.zipCode} onChange={handleChange} required />
                                                     </div>
                                                 </div>
                                             </div>
@@ -181,7 +215,7 @@ const KycFormPage = () => {
                                         </div>
                                         <ul class="nk-kycfm-control-list g-3">
                                             <li class="nk-kycfm-control-item">
-                                                <input class="nk-kycfm-control" type="radio" name="id-proof" id="passport" data-title="Passport" checked />
+                                                <input class="nk-kycfm-control" type="radio" name="idProof" id="passport" value="Passport" onChange={handleChange} checked={kycObject.idProof === 'Passport' } />
                                                 <label class="nk-kycfm-label" for="passport">
                                                     <span class="nk-kycfm-label-icon">
                                                         <div class="label-icon">
@@ -193,7 +227,7 @@ const KycFormPage = () => {
                                                 </label>
                                             </li>
                                             <li class="nk-kycfm-control-item">
-                                                <input class="nk-kycfm-control" type="radio" name="id-proof" id="national-id" data-title="National ID" />
+                                                <input class="nk-kycfm-control" type="radio" name="idProof" id="national-id" value="National ID" onChange={handleChange} checked={kycObject.idProof === 'National ID'} />
                                                 <label class="nk-kycfm-label" for="national-id">
                                                     <span class="nk-kycfm-label-icon">
                                                         <div class="label-icon">
@@ -205,7 +239,7 @@ const KycFormPage = () => {
                                                 </label>
                                             </li>
                                             <li class="nk-kycfm-control-item">
-                                                <input class="nk-kycfm-control" type="radio" name="id-proof" id="driver-licence" data-title="Driving License" />
+                                                <input class="nk-kycfm-control" type="radio" name="idProof" id="driver-licence" value="Driving License" onChange={handleChange} checked={kycObject.idProof === 'Driving License'} />
                                                 <label class="nk-kycfm-label" for="driver-licence">
                                                     <span class="nk-kycfm-label-icon">
                                                         <div class="label-icon">
@@ -232,14 +266,15 @@ const KycFormPage = () => {
                                                             <div class="dz-message" data-dz-message>
                                                                 <span class="dz-message-text">Drag and drop file</span>
                                                                 <span class="dz-message-or">or</span>
-                                                                <button class="btn btn-primary">SELECT</button>
+                                                                <button class="btn btn-primary" onClick={handleFileSelect}>SELECT</button>
+                                                                <input type="file" ref={ref} onChange={handleFileChange} style={{display: "none"}} />
                                                             </div>
                                                         </div>
                                                     </div>
                                                 </div>
                                                 <div class="col-sm-4 d-none d-sm-block">
                                                     <div class="mx-md-4">
-                                                        <img src="./images/icons/id-front.svg" alt="ID Front" />
+                                                        {picture ?  <img src={picture} alt="ID Front" /> :  <img src="./images/icons/id-front.svg" alt="ID Front" />}
                                                     </div>
                                                 </div>
                                             </div>
@@ -264,6 +299,7 @@ const KycFormPage = () => {
                                         </div>
                                     </div>
                                 </div>
+                                </form>
                             </div>
                         </div>
                     </div>
