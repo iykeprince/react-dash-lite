@@ -1,0 +1,7 @@
+const kycTypes = {
+    GET_KYC_REQUEST: 'GET_KYC_REQUEST',
+    GET_KYC_SUCCESS: 'GET_KYC_SUCCESS',
+    CREATE_KYC: 'CREATE_KYC',
+    GET_KYC_FAILURE: 'GET_KYC_FAILURE'
+}
+export default kycTypes

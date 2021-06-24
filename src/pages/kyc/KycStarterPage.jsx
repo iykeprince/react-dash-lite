@@ -1,10 +1,18 @@
-import { useSelector } from "react-redux"
+import { useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux"
 import { Link } from "react-router-dom/cjs/react-router-dom.min"
 import Layout from "../../components/layout/layout/layout.component"
+import { getKyc } from "../../redux/kyc/kyc.actions";
 
 const KycStarterPage = () => {
     const user = useSelector(state => state.auth.user);
-    
+    const kycData = useSelector(state => state.kyc.data);
+    const dispatch = useDispatch();
+
+    useEffect(() => {
+        dispatch(getKyc())
+    }, []);
+
     return (<Layout>
         <div className="nk-content nk-content-fluid">
             <div className="container-xl wide-lg">
@@ -28,9 +36,13 @@ const KycStarterPage = () => {
                                         <div className="nk-kyc-app-text mx-auto">
                                             <p className="lead">You have not submitted your necessary documents to verify your identity. In order to purchase our tokens, please verify your identity.</p>
                                         </div>
-                                        <div className="nk-kyc-app-action">
-                                            <Link to="/kyc-form" className="btn btn-lg btn-primary">Click here to complete your KYC</Link>
-                                        </div>
+                                        {kycData === null
+                                            ? <div className="nk-kyc-app-action">
+                                                <Link to="/kyc-form" className="btn btn-lg btn-primary">Click here to complete your KYC</Link>
+                                            </div>
+                                            : <div className="nk-kyc-app-action">
+                                                <Link to="/kyc-form" className="btn btn-lg btn-primary">Update your KYC</Link>
+                                            </div>}
                                     </div>
                                 </div>
                             </div>

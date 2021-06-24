@@ -1,6 +1,7 @@
 <?php
 define('ENVIRONMENT', 'development');
 // define('APPROOT', dirname(dirname(__FILE__)).'/' );
+define ('SITE_ROOT', realpath(dirname(__DIR__)));
 define('URL_PUBLIC_FOLDER', 'public');
 define('URL_PROTOCOL', '//');
 define('URL_DOMAIN', $_SERVER['HTTP_HOST']);
