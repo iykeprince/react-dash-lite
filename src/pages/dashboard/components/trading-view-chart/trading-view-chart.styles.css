@@ -1,0 +1,26 @@
+.btn-flat{
+    border-radius: 0px;
+    border: none;
+    background-color: #000;
+    color: #ffffff;
+}
+.btn-flat:hover{
+    background-color: rgb(235, 211, 211);
+    transition: none;
+}
+
+.root{
+ position: relative;
+    border: 1px solid black;
+
+}
+
+article > *, article > * > *{
+  display: block;
+width: 100% !important;
+height: 430px !important;
+/* border: 2px white solid; */
+}
+.pure-black{
+    background-color: #131722;
+}

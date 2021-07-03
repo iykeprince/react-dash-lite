@@ -41,8 +41,22 @@ const KycFormPage = () => {
         if (kycData) {
             setKycObject({
                 ...kycObject,
-
+                firstName: kycData.firstname,
+                lastName: kycData.lastname,
+                email: kycData.email,
+                phoneNumber: kycData.phone,
+                dateOfBirth: kycData.dob,
+                telegramUsername: kycData.telegram,
+                address1: kycData.address1,
+                address2: kycData.address2,
+                city: kycData.city,
+                state: kycData.state,
+                nationality: kycData.nationality,
+                zipCode: kycData.zipcode,
+                idProof: kycData.idproof,
+                tos: true
             })
+            setPicture(`${kycData.idfile}`)
             console.log('kyc object is not null', kycData)
         }
         if (message !== null) {

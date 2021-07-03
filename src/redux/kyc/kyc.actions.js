@@ -32,7 +32,7 @@ export const createKyc = data => async dispatch => {
         const res = await kyc.createKyc(data);
 
         return dispatch({
-            type: kycTypes.GET_KYC_SUCCESS,
+            type: kycTypes.CREATE_KYC,
             payload: res.data
         })
     } catch (e) {

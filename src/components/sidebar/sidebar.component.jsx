@@ -35,8 +35,8 @@ const Sidebar = () => {
             <div className="nk-sidebar-element nk-sidebar-head">
                 <div className="nk-sidebar-brand">
                     <a href="html/crypto/index.html" className="logo-link nk-sidebar-logo">
-                        <img className="logo-light logo-img" src="./assets/logos/brandmark_blue@4x.png" srcSet="./images/logo2x.png 2x" alt="logo" />
-                        <img className="logo-dark logo-img" src="./assets/logos/brandmark_blue@4x.png" srcSet="./images/logo-dark2x.png 2x" alt="logo-dark" />
+                        <img className="logo-light logo-img" src="./assets/logos/brandmark_blue.png" srcSet="./assets/logos/brandmark_blue.png" alt="logo" />
+                        <img className="logo-dark logo-img" src="./assets/logos/brandmark_blue.png" srcSet="./assets/logos/brandmark_blue.png" alt="logo-dark" />
                         {/* <span className="nio-version">Crypto</span> */}
                     </a>
                 </div>
@@ -52,7 +52,7 @@ const Sidebar = () => {
                                 <div className="user-account-main">
                                     <h6 className="overline-title-alt">Available Balance</h6>
                                     <div className="user-balance">${new Intl.NumberFormat().format(user.amount_in_stock)} <small className="currency currency-btc">USD</small></div>
-                                    <div className="user-balance-alt">{loadingExchange ? 'loading exchange' : exchangeData === null ? "--" : `${(user.amount_in_stock / exchangeData.price).toFixed(4)}`} 
+                                    <div className="user-balance-alt">{loadingExchange ? '...' : exchangeData === null ? "--" : `${(user.amount_in_stock / exchangeData.price).toFixed(4)}`} 
                                         <span className="currency currency-btc"> BTC</span>
                                         <span className="text-info ml-2">{exchangeData && parseFloat(exchangeData.change).toFixed(1)}% <em className="icon ni ni-arrow-long-up"></em></span>    
                                     </div>
@@ -62,20 +62,20 @@ const Sidebar = () => {
                             <ul className="user-account-data gy-1">
                                 <li>
                                     <div className="user-account-label">
-                                        <span className="sub-text">Profits (7d)</span>
+                                        <span className="sub-text">Profits</span>
                                     </div>
                                     <div className="user-account-value">
-                                        <span className="lead-text">+ $5,052 <span className="currency currency-btc">USD</span></span>
-                                        <span className="text-success ml-2">3.1% <em className="icon ni ni-arrow-long-up"></em></span>
+                                        <span className="lead-text">{new Intl.NumberFormat().format(user.available_profit)} <span className="currency currency-btc">USD</span></span>
+                                        {/* <span className="text-success ml-2">3.1% <em className="icon ni ni-arrow-long-up"></em></span> */}
                                     </div>
                                 </li>
                                 <li>
-                                    <div className="user-account-label">
+                                    {/* <div className="user-account-label">
                                         <span className="sub-text">Last Deposit</span>
                                     </div>
                                     <div className="user-account-value">
                                         <span className="sub-text">$73,004 <span className="currency currency-btc">USD</span></span>
-                                    </div>
+                                    </div> */}
                                 </li>
                             </ul>
                             <div className="user-account-actions">

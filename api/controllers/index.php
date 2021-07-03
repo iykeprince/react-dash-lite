@@ -6,26 +6,10 @@ class index extends controller{
         
     }
     public function index(){
-       $this->view->render('index/index');
+       $api = "API IS LIVE";
+	   echo json_encode($api);
     }
-    
-    public function about(){
-       $this->view->render('index/about');
-    }
-    
-    public function contact(){
-       $this->view->render('index/contact');
-    }
-    
-    public function faq(){
-       $this->view->render('index/faq');
-    }
-    
-    
-    public function details(){
-    	$this->view->render('login/forgot_password');
-    }
-    
+        
     public function handleMail1() {
         $data = array();
     	$data['name'] = $this->escape_value($_POST['name']);

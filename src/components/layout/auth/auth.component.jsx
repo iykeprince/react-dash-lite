@@ -29,10 +29,10 @@ const AuthLayout = ({children}) => {
                         <div className="nk-block-between">
                             <ul className="nav nav-sm">
                                 <li className="nav-item">
-                                    <a className="nav-link" href="#">Terms & Condition</a>
+                                    <a className="nav-link" href="https://bitfetter.com/terms-use.html">Terms of use</a>
                                 </li>
                                 <li className="nav-item">
-                                    <a className="nav-link" href="#">Privacy Policy</a>
+                                    <a className="nav-link" href="https://bitfetter.com/privacy.html">Privacy Policy</a>
                                 </li>
                                 <li className="nav-item">
                                     <a className="nav-link" href="#">Help</a>

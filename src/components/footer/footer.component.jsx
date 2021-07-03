@@ -6,9 +6,9 @@ const Footer = () => (
                 </div>
                 <div className="nk-footer-links">
                     <ul className="nav nav-sm">
-                        <li className="nav-item"><a className="nav-link" href="#">Terms</a></li>
-                        <li className="nav-item"><a className="nav-link" href="#">Privacy</a></li>
-                        <li className="nav-item"><a className="nav-link" href="#">Help</a></li>
+                        <li className="nav-item"><a className="nav-link" href="https://bitfetter.com/terms-use.html">Term of use</a></li>
+                        <li className="nav-item"><a className="nav-link" href="https://bitfetter.com/privacy.html">Privacy</a></li>
+                        {/* <li className="nav-item"><a className="nav-link" href="#">Help</a></li> */}
                     </ul>
                 </div>
             </div>

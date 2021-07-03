@@ -54,21 +54,8 @@ class dashboard extends controller{
 		echo Utility::convertToJSON($response);
 	}
 
-	public function plans(){
-		$plans = $this->model->getAllPlans();
-		echo Utility::convertToJSON($plans);
-	}
-
-	public function withdrawAccount(){
-		$object = json_decode(file_get_contents('php://input'));
-        $data['address'] = $this->escape_value($object->walletAddress);
-        $data['type'] = $this->escape_value($object->withdrawMethod);
-        $data['amount'] = $this->escape_value($object->amount);
-        
-        $response = $this->model->withdrawAccount($data);
-		echo Utility::convertToJSON($response);
-	}
 	
+
 	public function updateUserInstance(){
 		$obj = json_decode(file_get_contents('php://input'));
 		
@@ -90,6 +77,21 @@ class dashboard extends controller{
 		$data['dob'] = $this->escape_value($obj->dob);
 		
     	$response = $this->model->updateUserInstance($data);
+		echo Utility::convertToJSON($response);
+	}
+
+	public function plans(){
+		$plans = $this->model->getAllPlans();
+		echo Utility::convertToJSON($plans);
+	}
+
+	public function withdrawAccount(){
+		$object = json_decode(file_get_contents('php://input'));
+        $data['address'] = $this->escape_value($object->walletAddress);
+        $data['type'] = $this->escape_value($object->withdrawMethod);
+        $data['amount'] = $this->escape_value($object->amount);
+        
+        $response = $this->model->withdrawAccount($data);
 		echo Utility::convertToJSON($response);
 	}
 

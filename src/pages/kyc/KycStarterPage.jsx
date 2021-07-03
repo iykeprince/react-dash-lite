@@ -42,6 +42,9 @@ const KycStarterPage = () => {
                                             </div>
                                             : <div className="nk-kyc-app-action">
                                                 <Link to="/kyc-form" className="btn btn-lg btn-primary">Update your KYC</Link>
+                                                {kycData.verified === "0" 
+                                                    ? <p className="text-info">KYC not verified yet</p> 
+                                                    : <p className="text-success">KYC is verified</p>}
                                             </div>}
                                     </div>
                                 </div>

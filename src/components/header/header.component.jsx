@@ -33,8 +33,8 @@ const Header = () => {
                     </div>
                     <div className="nk-header-brand d-xl-none">
                         <a href="html/crypto/index.html" className="logo-link">
-                            <img className="logo-light logo-img" src="./assets/logos/brandmark_black@4x.png" srcSet="./images/logo2x.png 2x" alt="logo" />
-                            <img className="logo-dark logo-img" src="./assets/logos/brandmark_blue@4x.png" srcSet="./images/logo-dark2x.png 2x" alt="logo-dark" />
+                            <img className="logo-light logo-img" src="./assets/logos/brandmark_black.png" srcSet="./assets/logos/brandmark_black.png" alt="logo" />
+                            <img className="logo-dark logo-img" src="./assets/logos/brandmark_blue.png" srcSet="./assets/logos/brandmark_blue.png" alt="logo-dark" />
                             {/* <span className="nio-version">Crypto</span> */}
                         </a>
                     </div>

@@ -4,6 +4,7 @@ import depositReducer from "./deposit/deposit.reducer";
 import investmentReducer from "./investment/investment.reducer";
 import kycReducer from "./kyc/kyc.reducer";
 import planReducer from "./plan/plan.reducer";
+import profileReducer from "./profile/profile.reducer";
 import transactionReducer from "./transaction/transaction.reducer";
 import utilReducer from "./util/util.reducer";
 import withdrawReducer from "./withdraw/withdraw.reducer";
@@ -16,7 +17,8 @@ const rootReducer = combineReducers({
     plan: planReducer,
     transaction: transactionReducer,
     investment: investmentReducer,
-    kyc: kycReducer
+    kyc: kycReducer,
+    profile: profileReducer
 })
 
 export default rootReducer

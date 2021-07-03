@@ -24,6 +24,8 @@ const Register = () => {
     const error = useSelector(state => state.auth.error)
     const loading = useSelector(state => state.auth.loading)
 
+    const [visible, setVisible ] = useState(false)
+
 
     useEffect(() => {
         if(message){
@@ -47,8 +49,8 @@ const Register = () => {
     return (<AuthLayout>
         <div className="brand-logo pb-5">
             <a href="index.html" className="logo-link">
-                <img className="logo-light logo-img logo-img-lg" src="./assets/logos/brandmark_blue@4x.png" srcSet="./images/logo2x.png 2x" alt="logo" />
-                <img className="logo-dark logo-img logo-img-lg" src="./assets/logos/brandmark_blue@4x.png" srcSet="./images/logo-dark2x.png 2x" alt="logo-dark" />
+                <img className="logo-light logo-img logo-img-lg" src="./assets/logos/brandmark_blue.png" srcSet="./assets/logos/brandmark_blue.png" alt="logo" />
+                <img className="logo-dark logo-img logo-img-lg" src="./assets/logos/brandmark_blue.png" srcSet="./assets/logos/brandmark_blue.png" alt="logo-dark" />
             </a>
         </div>
         <div className="nk-block-head">
@@ -71,11 +73,11 @@ const Register = () => {
             <div className="form-group">
                 <label className="form-label" htmlFor="password">Passcode</label>
                 <div className="form-control-wrap">
-                    <a tabIndex="-1" href="#" className="form-icon form-icon-right passcode-switch" data-target="password">
+                    <a tabIndex="-1" onClick={() => setVisible(!visible)} className="form-icon form-icon-right passcode-switch" data-target="password">
                         <em className="passcode-icon icon-show icon ni ni-eye"></em>
                         <em className="passcode-icon icon-hide icon ni ni-eye-off"></em>
                     </a>
-                    <input type="password" className="form-control form-control-lg" id="password" placeholder="Enter your passcode" value={data.password} onChange={e => setData({...data, password: e.target.value})} required />
+                    <input type={visible ? "text" : "password"} className="form-control form-control-lg" id="password" placeholder="Enter your passcode" value={data.password} onChange={e => setData({...data, password: e.target.value})} required />
                 </div>
             </div>
             <div className="form-group">

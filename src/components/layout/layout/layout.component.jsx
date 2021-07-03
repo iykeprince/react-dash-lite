@@ -3,7 +3,8 @@ import { useEffect } from "react"
 import { useDispatch, useSelector } from "react-redux";
 import { Redirect } from "react-router";
 import { getUser } from "../../../redux/auth/auth.actions";
-import { currencyExchange, toggleSidebar } from "../../../redux/util/util.actions";
+import { currencyExchange } from "../../../redux/util/util.actions";
+
 import Footer from "../../footer/footer.component";
 import Header from "../../header/header.component";
 import Sidebar from "../../sidebar/sidebar.component";
@@ -19,10 +20,8 @@ const Layout = ({ children }) => {
         document.body.className = '';
         document.body.className = 'nk-body npc-crypto has-sidebar has-sidebar-fat ui-clean ';
 
-
         dispatch(getUser())
         dispatch(currencyExchange())
-
     }, []);
 
     useEffect(() => {

@@ -74,7 +74,7 @@ const ReferalBox = () =>{
                     <div className="form-icon">
                         <em className="icon ni ni-link-alt"></em>
                     </div>
-                    <input type="text" className="form-control copy-text" id="refUrl" value={`https://bitfetter.io/${user.referal_link}`} readOnly />
+                    <input type="text" className="form-control copy-text" id="refUrl" value={`https://app.bitfetter.io/${user.referal_link}`} readOnly />
                 </div>
             </div>
         </div>
@@ -89,7 +89,7 @@ const ReferalBox = () =>{
                         <div className="sub-text">Total Joined</div>
                     </div>
                     <div className="nk-refwg-sub">
-                        <div className="title">{new Intl.NumberFormat().format(user.referal_bonus)}</div>
+                        <div className="title">${new Intl.NumberFormat({style: 'currency', currency: 'USD'}).format(user.referal_bonus)}</div>
                         <div className="sub-text">Referral Earn</div>
                     </div>
                 </div>

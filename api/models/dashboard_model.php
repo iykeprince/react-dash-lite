@@ -801,6 +801,7 @@ class dashboard_model extends model{
 		}
 	}
 
+
 	public function updateUserInstance($data){
 
 		$id = $this->id;

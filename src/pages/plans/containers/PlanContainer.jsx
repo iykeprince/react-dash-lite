@@ -20,11 +20,9 @@ const PlanContainer = () => {
             console.log(plans)
             setPlans(allPlans)
         }
-        if(selectedPlan){
-            console.log('selected plan', selectedPlan)
-        }
+   
 
-    }, [selectedPlan, allPlans])
+    }, [ allPlans])
 
     const settings = {
         "slidesToShow": 3,
@@ -81,9 +79,9 @@ const PlanContainer = () => {
                     </div> */}
                     
                     <div className="plan-iv-list nk-slider nk-slider-s2">
-                        <ul className="plan-list slider-init">
-                            <Slider {...settings}>
-                                {plans.map(plan => (<li key={plan.plan_id} className="plan-item">
+                        <ul className="plan-list slider-init row">
+                            {/* <Slider {...settings}> */}
+                                {plans.map(plan => (<li key={plan.plan_id} className="plan-item col-md-4" >
                                  
                                   <input type="radio" id="plan-iv-1" name="plan-iv" className="plan-control" checked={JSON.stringify(plan) === JSON.stringify(selectedPlan)} />
                                       
@@ -123,7 +121,7 @@ const PlanContainer = () => {
                                         </div>
                                     </div>
                                 </li>))}
-                            </Slider>
+                            {/* </Slider> */}
                         </ul>
                     </div>
                     <div className="plan-iv-actions text-center">

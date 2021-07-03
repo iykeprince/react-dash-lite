@@ -33,8 +33,8 @@ const ForgotPassword = () => {
         <AuthLayout>
             <div className="brand-logo pb-5">
                 <a href="index.html" className="logo-link">
-                    <img className="logo-light logo-img logo-img-lg" src="./assets/logos/brandmark_blue@4x.png" srcSet="./images/logo2x.png 2x" alt="logo" />
-                    <img className="logo-dark logo-img logo-img-lg" src="./assets/logos/brandmark_blue@4x.png" srcSet="./images/logo-dark2x.png 2x" alt="logo-dark" />
+                    <img className="logo-light logo-img logo-img-lg" src="./assets/logos/brandmark_blue.png" srcSet="./assets/logos/brandmark_blue.png" alt="logo" />
+                    <img className="logo-dark logo-img logo-img-lg" src="./assets/logos/brandmark_blue.png" srcSet="./assets/logos/brandmark_blue.png" alt="logo-dark" />
                 </a>
             </div>
             <div className="nk-block-head">

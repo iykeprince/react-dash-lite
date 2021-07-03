@@ -16,7 +16,7 @@ const InvestmentMain = () => {
         dispatch(getInvestments())
     }, [])
 
-    console.log('investments', investments)
+    // console.log('investments', investments)
 
     return <div className="nk-content nk-content-fluid">
         <div className="container-xl wide-lg">
