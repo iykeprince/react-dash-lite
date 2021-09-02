@@ -77,7 +77,7 @@ const AddWithdrawAccountModal = () => {
                     <ul className="align-center flex-wrap flex-sm-nowrap gx-4 gy-2">
                         <li>
                             <button type="submit" className="btn btn-primary" id="save-user-wd-account" >
-                                <span className={`spinner-border spinner-border-sm ${!loading ? 'hide' : ''}`} role="status" aria-hidden="true"></span>
+                                <span className={loading ? `spinner-border spinner-border-sm` : ''} role="status" aria-hidden="true"></span>
                                 <span>Add Account</span>
                             </button>
                         </li>

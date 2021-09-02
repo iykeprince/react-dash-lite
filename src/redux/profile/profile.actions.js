@@ -71,3 +71,32 @@ export const updateAddressProfile = (data) => async dispatch => {
     }
 }
 
+
+export const getReferalCount = () => async dispatch => {
+    dispatch({
+        type: profileTypes.UPDATE_PROFILE_REQUEST
+    })
+    try{
+        const res = await profile.getReferalCount();
+        dispatch({
+            type: profileTypes.GET_REFERAL_COUNT,
+            payload: res.data
+        })
+    }catch(error){
+        dispatch({
+            type: profileTypes.UPDATE_PROFILE_FAILURE,
+            payload: error.response.statusText
+        })
+    }
+}
+
+export const getPreference = () => async dispatch => {
+  
+    const res = await profile.getPreference();
+    dispatch({
+        type: profileTypes.GET_PREFERENCE,
+        payload: res.data
+    })
+
+}
+

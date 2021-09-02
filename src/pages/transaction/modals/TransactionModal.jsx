@@ -76,10 +76,10 @@ const TransactionModal = ({ transaction }) => {
                             1 {exchangeData.base} = {parseFloat(exchangeData.price).toFixed(2)} USD
                         </span>}
                     </div>
-                    <div class="col-lg-6">
+                    {/* <div class="col-lg-6">
                         <span class="sub-text">Details</span>
                         <span class="caption-text">Withdraw via Tether Wallet</span>
-                    </div>
+                    </div> */}
                 </div></>}
             {transaction.transaction_id && <>
                 <h5 class="overline-title">Transaction Details</h5>
@@ -114,17 +114,17 @@ const TransactionModal = ({ transaction }) => {
                     <span class="caption-text">{'CRYPTO WALLET'}</span>
                 </div>
 
-                <div class="col-lg-6">
+                {/* <div class="col-lg-6">
                     <span class="sub-text">
                         Account To
                     </span>
                     <span class="caption-text text-break"><span class="small">567yhgft7tg6878h9</span></span>
-                </div>
+                </div> */}
 
-                <div class="col-lg-6">
+                {/* <div class="col-lg-6">
                     <span class="sub-text">Updated Balance</span>
                     <span class="caption-text">{new Intl.NumberFormat('en-US').format(user.trading_wallet)} USD</span>
-                </div>
+                </div> */}
 
 
                 {transaction.transaction_id && <div class="col-lg-12">

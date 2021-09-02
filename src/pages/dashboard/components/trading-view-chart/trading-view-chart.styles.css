@@ -1,17 +1,18 @@
 .btn-flat{
     border-radius: 0px;
-    border: none;
-    background-color: #000;
-    color: #ffffff;
+    border: 1px solid #eee;
+    background-color: #FFF;
+    color: #000;
 }
 .btn-flat:hover{
     background-color: rgb(235, 211, 211);
     transition: none;
+    
 }
 
 .root{
  position: relative;
-    border: 1px solid black;
+    border: 1px solid white;
 
 }
 
@@ -22,5 +23,7 @@ height: 430px !important;
 /* border: 2px white solid; */
 }
 .pure-black{
-    background-color: #131722;
+    background-color: #fff;
+    border: 1px solid #eee;
+    /* background-color: #131722; */
 }

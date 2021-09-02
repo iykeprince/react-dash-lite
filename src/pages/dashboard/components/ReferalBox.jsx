@@ -37,6 +37,7 @@ const barOptions = {
 
 const ReferalBox = () =>{ 
     const user = useSelector(state => state.auth.user);
+    const referalCount = useSelector(state => state.profile.referalCount)
 
     var chart_data = [];
     useEffect(() => {
@@ -74,7 +75,7 @@ const ReferalBox = () =>{
                     <div className="form-icon">
                         <em className="icon ni ni-link-alt"></em>
                     </div>
-                    <input type="text" className="form-control copy-text" id="refUrl" value={`https://app.bitfetter.io/${user.referal_link}`} readOnly />
+                    <input type="text" className="form-control copy-text" id="refUrl" value={`https://app.bitfetter.com/${user.referal_link}`} readOnly />
                 </div>
             </div>
         </div>
@@ -85,7 +86,7 @@ const ReferalBox = () =>{
                 </div>
                 <div className="nk-refwg-info g-3">
                     <div className="nk-refwg-sub">
-                        <div className="title">394</div>
+                        <div className="title">{referalCount  && referalCount.count}</div>
                         <div className="sub-text">Total Joined</div>
                     </div>
                     <div className="nk-refwg-sub">

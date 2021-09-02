@@ -109,7 +109,7 @@ const PlanContainer = () => {
                                                 <ul className="plan-item-desc-list">
                                                     <li><span className="desc-label">Min Deposit</span> - <span className="desc-data">{new Intl.NumberFormat('en-US', { style: 'currency', currency: 'USD' }).format(plan.minDeposit)}</span></li>
                                                     <li><span className="desc-label">Max Deposit</span> - <span className="desc-data">{new Intl.NumberFormat('en-US', { style: 'currency', currency: 'USD' }).format(plan.maxDeposit)}</span></li>
-                                                    <li><span className="desc-label">Total Return</span> - <span className="desc-data">{plan.totalReturn}%</span></li>
+                                                    <li><span className="desc-label">Total Return</span> - <span className="desc-data">{plan.totalReturns}%</span></li>
                                                 </ul>
                                                 <div className="plan-item-action">
                                                     <label htmlFor="plan-iv-1" className="plan-label" onClick={() => setSelectedPlan(plan)}>

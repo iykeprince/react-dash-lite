@@ -28,12 +28,10 @@ class register extends controller{
     }
 
     public function activate($code){
-        $response = $this->model->activate($code);
-        if($response == "ok"){
-            header('location: '.URL.'login/?register=a');
-        }else{
-            header('location: '.URL.'register?register=f');
-        }
+        $data['code'] = $code;
+        $data['email'] = $this->escape_value($_GET['email']);
+        $response = $this->model->activate($data);
+        echo Utility::convertToJSON($response);
     }
 }
 

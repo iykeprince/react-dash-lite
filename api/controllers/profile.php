@@ -6,6 +6,11 @@ class profile extends controller{
 		parent::__construct();
     }
 
+	public function getPreference(){
+		$response = $this->model->getPreference();
+		echo Utility::convertToJSON($response);
+	}
+
     public function updatePersonalProfile() {
 		$obj = json_decode(file_get_contents('php://input'));
 		

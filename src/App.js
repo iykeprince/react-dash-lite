@@ -8,6 +8,9 @@ import Spinner from './components/spinner/spinner.component';
 import './App.css'
 import { useDispatch } from 'react-redux';
 import { getUser } from './redux/auth/auth.actions';
+import VerifyAccount from './pages/auth/VerifyAccount';
+import AdminRoute from './utils/admin.route';
+
 const KycStarterPage = React.lazy(() => import('./pages/kyc/KycStarterPage'));
 const KycFormPage = React.lazy(() => import('./pages/kyc/KycFormPage'));
 
@@ -26,7 +29,12 @@ const InvestmentPage = React.lazy(() => import('./pages/investment/InvestmentPag
 const PlanPage = React.lazy(() => import('./pages/plans/PlanPage'))
 const InvestmentDetailPage = React.lazy(() => import('./pages/investment/InvestmentDetailPage'))
 const ReferralsPage = React.lazy(() => import('./pages/referrals/Referrals'))
+const SyncPage = React.lazy(() => import('./pages/sync/Sync'))
 
+const AdminUsers = React.lazy(() => import('./pages/admin/users/AdminUsers'))
+const AdminWithdrawals = React.lazy(() => import('./pages/admin/withrawals/AdminWithdrawals'));
+const AdminTopUp = React.lazy(() => import('./pages/admin/topup/AdminTopUp'))
+const AdminPayment = React.lazy(() => import('./pages/admin/payments/AdminPayment'))
 
 const token = localStorage.getItem('BITFETTER_AUTH_TOKEN');
 const App = () => {
@@ -39,6 +47,7 @@ const App = () => {
         <Route exact path="/login" render={(props) => token ? <Redirect to={`/`} /> : (<Login {...props} />)} />
         <Route exact path="/forgotpassword" component={ForgotPassword} />
         <Route exact path="/resetpassword" component={ResetPassword} />
+        <Route exact path="/verifyAccount" component={VerifyAccount} />
 
         <PrivateRoute exact path="/" component={DashboardPage} />
         <PrivateRoute exact path="/deposit" component={DepositPage} />
@@ -53,6 +62,12 @@ const App = () => {
         <PrivateRoute path="/referrals" component={ReferralsPage} />
         <PrivateRoute path="/kyc" component={KycStarterPage} />
         <PrivateRoute path="/kyc-form" component={KycFormPage} />
+        <PrivateRoute path="/sync" component={SyncPage} />
+
+        <AdminRoute path="/admin-users" component={AdminUsers} />
+        <AdminRoute path="/admin-withdrawals" component={AdminWithdrawals} />
+        <AdminRoute path="/admin-topup" component={AdminTopUp} />
+        <AdminRoute path="/admin-payments" component={AdminPayment} />
       </Switch>
     </Suspense>
   </>);

@@ -96,6 +96,31 @@ export const resetChangePassword = (password, code) => async (dispatch) => {
         });
     }
 }
+export const verifyAccount = (token, code) => async (dispatch) => {
+    localStorage.clear();
+    dispatch({
+        type: authTypes.VERIFY_ACCOUNT_REQUEST
+    })
+    try {
+        const res = await auth.verifyAccount(token, code);
+        if(res.data.status === 404){
+            return dispatch({
+                type: authTypes.VERIFY_ACCOUNT_FAILURE,
+                payload: res.data.message
+            })
+        }
+        dispatch({
+            type: authTypes.VERIFY_ACCOUNT_SUCCESS,
+            payload: res.data
+        })
+
+    } catch (error) {
+        dispatch({
+            type: authTypes.VERIFY_ACCOUNT_FAILURE,
+            payload: error.response.statusText
+        });
+    }
+}
 
 // GET /user/profile
 export const getUser = () => async dispatch => {

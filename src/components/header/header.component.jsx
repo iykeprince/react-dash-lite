@@ -8,6 +8,7 @@ const Header = () => {
     const history = useHistory();
     const dispatch = useDispatch();
     const user = useSelector(state => state.auth.user);
+    const exchangeData = useSelector(state => state.util.exchangeData);
     const auth = useAuth;
 
     const toggleState = useSelector(state => state.util.showSidebar)
@@ -78,8 +79,8 @@ const Header = () => {
                                     </div>
                                     <div className="dropdown-inner user-account-info">
                                         <h6 className="overline-title-alt">BitFetter Account</h6>
-                                        <div className="user-balance">${new Intl.NumberFormat().format(user.amount_in_stock)} <small className="currency currency-btc">USD</small></div>
-                                        <div className="user-balance-sub"><span>34.4939 <span className="currency currency-btc">BTC</span></span></div>
+                                        <div className="user-balance">${new Intl.NumberFormat().format(user.trading_wallet)} <small className="currency currency-btc">USD</small></div>
+                                        <div className="user-balance-sub"><span>{exchangeData === null ? "--" : `${(user.trading_wallet / exchangeData.price).toFixed(4)}`} <span className="currency currency-btc">BTC</span></span></div>
                                         <Link to="/withdraw" className="link"><span>Withdraw Funds</span> <em className="icon ni ni-wallet-out"></em></Link>
                                     </div>
                                     <div className="dropdown-inner">
@@ -103,9 +104,9 @@ const Header = () => {
                                 <div className="dropdown-menu dropdown-menu-xl dropdown-menu-right dropdown-menu-s1">
                                     <div className="dropdown-head">
                                         <span className="sub-title nk-dropdown-title">Notifications</span>
-                                        <a href="#">Mark All as Read</a>
+                                        {/* <a href="#">Mark All as Read</a> */}
                                     </div>
-                                    <div className="dropdown-body">
+                                    {/* <div className="dropdown-body">
                                         <div className="nk-notification">
                                             <div className="nk-notification-item dropdown-inner">
                                                 <div className="nk-notification-icon">
@@ -130,7 +131,7 @@ const Header = () => {
                                     </div>
                                     <div className="dropdown-foot center">
                                         <a href="#">View All</a>
-                                    </div>
+                                    </div> */}
                                 </div>
                             </li>
                         </ul>

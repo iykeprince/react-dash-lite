@@ -26,3 +26,4 @@ yarn-error.log*
 public/*.zip
 html/
 vendor
+bitfetter.md

@@ -3,6 +3,7 @@ import { useEffect } from "react"
 import { useDispatch, useSelector } from "react-redux";
 import { Redirect } from "react-router";
 import { getUser } from "../../../redux/auth/auth.actions";
+import { getPreference, getReferalCount } from "../../../redux/profile/profile.actions";
 import { currencyExchange } from "../../../redux/util/util.actions";
 
 import Footer from "../../footer/footer.component";
@@ -22,6 +23,8 @@ const Layout = ({ children }) => {
 
         dispatch(getUser())
         dispatch(currencyExchange())
+        dispatch(getReferalCount())
+        dispatch(getPreference())
     }, []);
 
     useEffect(() => {

@@ -4,7 +4,10 @@ const initialState = {
     message: null,
     updatingProfile: false,
     changePasswordMessage: null,
-    changePasswordStatus: null
+    changePasswordStatus: null,
+    
+    referalCount: 0,
+    preferenceData: null
 }
 
 
@@ -30,11 +33,21 @@ const profileReducer = (state = initialState, action) => {
                 changePasswordMessage: action.payload.message,
                 changePasswordStatus: action.payload.status
             }
+        case profileTypes.GET_REFERAL_COUNT:
+            return {
+                ...state,
+                referalCount: action.payload
+            }
         case profileTypes.UPDATE_PROFILE_FAILURE:
             return {
                 ...state,
                 updatingProfile: false,
                 message: null,
+            }
+        case profileTypes.GET_PREFERENCE:
+            return {
+                ...state,
+                preferenceData: action.payload
             }
         default:
             return state;

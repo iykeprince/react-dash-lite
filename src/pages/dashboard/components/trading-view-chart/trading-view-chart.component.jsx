@@ -74,7 +74,7 @@ const TradingViewChart = ({...otherProps}) => {
       <TradingViewWidget
         className="trading-view-widget"
         symbol={marketType}
-        theme={Themes.DARK}
+        theme={Themes.LIGHT}
         locale="fr"
         interval="D"
         details

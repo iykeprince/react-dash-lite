@@ -79,7 +79,7 @@ const SecurityContainer = () => {
                                     </div>
                                 </div>
                             </div> */}
-                            <div className="card-inner">
+                            {/* <div className="card-inner">
                                 <div className="between-center flex-wrap flex-md-nowrap g-3">
                                     <div className="nk-block-text">
                                         <h6>Email me if encounter unusual activity</h6>
@@ -96,7 +96,7 @@ const SecurityContainer = () => {
                                         </ul>
                                     </div>
                                 </div>
-                            </div>
+                            </div> */}
 
                             <div className="card-inner">
                                 <div className="between-center flex-wrap flex-md-nowrap g-3">

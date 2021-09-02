@@ -12,12 +12,12 @@ const RecentActivity = () => {
         dispatch(getTransactions())
     }, [])
 
-    if(!transactions.length){
+    if(transactions === null ){
         return <Spinner />
     }
 
-    const firstFiveTransaction = transactions.slice(0, 5);
-    console.log(firstFiveTransaction)
+    const firstFiveTransaction = transactions.length ? transactions.slice(0, 5) : [];
+    console.log('first five transaction',firstFiveTransaction)
 
     return (
     <>
@@ -33,7 +33,8 @@ const RecentActivity = () => {
             </div>
         </div>
         <div className="tranx-list card card-bordered">
-            {firstFiveTransaction.map((transaction, index) => <div key={index} className="tranx-item">
+            {!firstFiveTransaction?.length && <div className="alert alert-info">No transaction available yet!</div> }
+            { firstFiveTransaction?.length && firstFiveTransaction?.map((transaction, index) => <div key={index} className="tranx-item">
                 <div className="tranx-col">
                     <div className="tranx-info">
                         <div className="tranx-data">

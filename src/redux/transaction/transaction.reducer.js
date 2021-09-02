@@ -22,7 +22,7 @@ const transactionReducer = (state = initialState, action) => {
                 ...state,
                 loading: true,
                 errorMessage: null,
-                transactions: []
+                transactions: null
             }
         case transactionTypes.TRANSACTION_SUCCESS:
             return {

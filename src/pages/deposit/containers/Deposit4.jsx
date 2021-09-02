@@ -5,6 +5,8 @@ import { confirmTransaction, nav1, nav3, nav5, resetConfirmTransaction, updateWa
 import uuid from 'react-uuid'
 import { toast, ToastContainer } from "react-toastify";
 import { Modal } from "react-bootstrap";
+import Spinner from "../../../components/spinner/spinner.component";
+import CopyToClipboard from "react-copy-to-clipboard";
 
 const DepositContainer4 = () => {
     const dispatch = useDispatch();
@@ -16,14 +18,17 @@ const DepositContainer4 = () => {
     const [transactionId, setTransactionId] = useState(hashValue);
     const confirm = useSelector(state => state.deposit.confirmTransaction);
     const loading = useSelector(state => state.deposit.loading)
+    const [copied, setCopied] = useState(false)
     const confirmingTransaction = useSelector(state => state.deposit.confirmingTransaction)
+    const preferenceData = useSelector(state => state.profile.preferenceData)
+    const exchangeData = useSelector(state => state.util.exchangeData);
 
     useEffect(() => {
         if (message) {
             toast.success(message)
             setShow(true);
         }
-        if(confirm){
+        if (confirm) {
             // history.push(`/deposit/success?hash=${hashValue}`);
             dispatch(nav5())
             // dispatch(resetConfirmTransaction())
@@ -48,7 +53,10 @@ const DepositContainer4 = () => {
         dispatch(confirmTransaction(transactionId))
     }
 
-    const imgURL = `https://chart.googleapis.com/chart?chs=200x200&cht=qr&chl=bitcoin:3283923728737973947?amount=${postData.amountUSD}&choe=UTF-8`;
+    if (preferenceData === null)
+        return <Spinner />
+
+    const imgURL = `https://chart.googleapis.com/chart?chs=200x200&cht=qr&chl=bitcoin:${preferenceData.bitcoin_address}&choe=UTF-8`;
 
     return (<>
 
@@ -73,7 +81,7 @@ const DepositContainer4 = () => {
                             </div>
                         </div>
                         <div className="card-inner">
-                            <div className="qr-media mx-auto mb-3 w-max-100px">
+                            <div className="qr-media mx-auto mb-3 w-max-300px">
                                 {/* <svg xmlns="http://www.w3.org/2000/svg" version="1.1" width="100" height="100" viewBox="0 0 100 100">
                                     <rect x="0" y="0" width="100" height="100" fill="#ffffff"></rect>
                                     <g transform="scale(3.03)">
@@ -86,31 +94,39 @@ const DepositContainer4 = () => {
                                     src={`https://api.qrserver.com/v1/create-qr-code/?size=250x250&data=bitcoin:ksldfiosueorijepf?amount=${postData.amountBTC}`}
 
                                 /> */}
-                                <img src={imgURL} />
+                                <img src={imgURL} style={{ width: '300px' }} />
                             </div>
                             <div className="pay-info text-center">
-                                <h5 className="title text-dark mb-0 clipboard-init" data-clipboard-text="0.109">
-                                    {postData.amountBTC} {postData.currency.toUpperCase()} <em className="click-to-copy icon ni ni-copy-fill nk-tooltip" title="" data-original-title="Click to Copy"></em>
+                                <h5 className="title text-dark mb-0 clipboard-init" data-clipboard-text={preferenceData.bitcoin_address}>
+                                    {postData.amountBTC} {postData.currency.toUpperCase()}{" "}
+                                    <CopyToClipboard text={preferenceData.bitcoin_address}
+                                        onCopy={() => {
+                                            setCopied(true);
+                                            setTimeout(() => {setCopied(false)}, 3000)
+                                            }}>
+                                        <button className="btn btn-primary"><i className="ni ni-copy"></i></button>
+                                    </CopyToClipboard>
                                 </h5>
-                                <p className="text-soft">{postData.amountUSD} USD</p>
+                                {copied && <p>Copied!</p>}
+                                <p className="text-soft">{postData.amountUSD} USD ~ {(postData.amountUSD / exchangeData.price).toFixed(6)} BTC</p>
                             </div>
 
                             {/* <div className="form-group">
                                 <div className="form-label overline-title-alt lg text-center">Bitcoin Address</div>
-                                <div className="form-control-wrap">
+                                <div className="form-control-wrap">3Gnn9hHHKSdcazcFTEM13MvLCZz6BgRKC6
                                     <div className="form-clip clipboard-init nk-tooltip" data-clipboard-target="#wallet-address" title="" data-original-title="Copy" aria-describedby="tooltip50457">
                                         <em className="click-to-copy icon ni ni-copy"></em>
                                     </div>
                                     <div className="form-icon"><em className="icon ni ni-sign-btc-alt"></em></div>
-                                    <input onChange={handleChange} type="text" className="form-control form-control-lg" id="wallet-address" value="bc1qxy2kgdygjrsqtzq2n0yrf2493p83kkfjhx0wlh" />
-                                </div>
-                            </div> */}
+                                    </div>3Gnn9hHHKSdcazcFTEM13MvLCZz6BgRKC6
+                            <input readOnly type="hidden" className="form-control form-control-lg" id="wallet-address" value={preferenceData.bitcoin_address} />
+                                </div> */}
 
                             <div className="nk-pps-action">
                                 <button onClick={handleClick} className="btn btn-block btn-primary popup-open"><span>Paid Bitcoin</span></button>
                             </div>
-                            {/* <div className="nk-pps-action pt-2 text-center">
-                                <a href="#" className="link link-btn link-primary">Pay Later</a>
+                            {/* <div className="nk-pps-action pt-2 text-center">0.109
+                                <a href="#" className="link link-btn link-primary">Pay Later</0.109a>0.1090.109
                             </div> */}
 
                             <Modal
@@ -118,7 +134,7 @@ const DepositContainer4 = () => {
                                 show={show}
                                 onHide={() => setShow(false)}
                                 aria-labelledby="example-modal-sizes-title-lg"
-                             
+
                             >
                                 <Modal.Header closeButton>
                                     <Modal.Title id="example-modal-sizes-title-lg">
@@ -128,8 +144,8 @@ const DepositContainer4 = () => {
                                     <div >
                                         <div className="content">
                                             {/* <h6 className="mb-2">Confirm your payment</h6> */}
-                                        <h6 className="mb-2">Confirm your payment</h6>
-                                        <p>If you already paid, please provide us your payment reference to speed up verification procces.</p>
+                                            <h6 className="mb-2">Confirm your payment</h6>
+                                            <p>If you already paid, please provide us your payment reference to speed up verification procces.</p>
                                             <form className="form" id="crypto-pay-reference" onSubmit={handleConfirmTransaction}>
                                                 <div className="form-group">
                                                     <div className="form-label">Payment Reference <span className="text-danger">*</span></div>
@@ -144,7 +160,7 @@ const DepositContainer4 = () => {
                                             </form>
                                             <div className="alert-note is-plain mt-4">
                                                 <em className="icon ni ni-alert-circle"></em>
-                                                <p>Account will credited once we confirm that payment has been received.</p>
+                                                <p>Your account will be credited once we confirm your payment.</p>
                                             </div>
                                         </div>
                                         {/* <div className="popup-overlay"></div> */}
@@ -158,7 +174,7 @@ const DepositContainer4 = () => {
                             <ul>
                                 <li className="alert-note is-plain text-danger">
                                     <em className="icon ni ni-alert-circle"></em>
-                                    <p>Be aware of that this order will be cancelled, if you send any other BTC amount.</p>
+                                    <p>Be aware that this order might be cancelled if you send any BTC amount lesser than the amount above.</p>
                                 </li>
                                 <li className="alert-note is-plain">
                                     <em className="icon ni ni-info"></em>

@@ -240,6 +240,16 @@ class dashboard_model extends model{
 		$result = $this->db->getAssoc("SELECT * FROM tbl_logs");
 		return $result;
 	}
+	public function referal_count(){
+		try{
+			$referal_count_sth = $this->db->prepare("SELECT COUNT(*) FROM tbl_users WHERE referal_user_id={$this->id}");
+			$referal_count_sth->execute();
+			$referal_count_fetch = $referal_count_sth->fetch();
+			return array_shift($referal_count_fetch);
+		}catch(PDOException $ex){
+			return $ex->getMessage();
+		}
+	}
 	
 	public function referal($user_id){
 		$user = $this->userInfo($user_id);
@@ -2103,16 +2113,16 @@ class dashboard_model extends model{
 		}
 	}
 
-    public function referal_count($user_id){
-		try{
-			$referal_count_sth = $this->db->prepare("SELECT COUNT(*) FROM tbl_users WHERE referal_user_id='$user_id'");
-			$referal_count_sth->execute();
-			$referal_count_fetch = $referal_count_sth->fetch();
-			return array_shift($referal_count_fetch);
-		}catch(PDOException $ex){
-			return $ex->getMessage();
-		}
-	}
+    // public function referal_count($user_id){
+	// 	try{
+	// 		$referal_count_sth = $this->db->prepare("SELECT COUNT(*) FROM tbl_users WHERE referal_user_id='$user_id'");
+	// 		$referal_count_sth->execute();
+	// 		$referal_count_fetch = $referal_count_sth->fetch();
+	// 		return array_shift($referal_count_fetch);
+	// 	}catch(PDOException $ex){
+	// 		return $ex->getMessage();
+	// 	}
+	// }
 	
 	public function news_update(){
 		try{

@@ -1,4 +1,5 @@
 import { combineReducers } from "redux";
+import adminReducer from "./admin/admin.reducer";
 import authReducer from "./auth/auth.reducer";
 import depositReducer from "./deposit/deposit.reducer";
 import investmentReducer from "./investment/investment.reducer";
@@ -18,7 +19,8 @@ const rootReducer = combineReducers({
     transaction: transactionReducer,
     investment: investmentReducer,
     kyc: kycReducer,
-    profile: profileReducer
+    profile: profileReducer,
+    admin: adminReducer
 })
 
 export default rootReducer

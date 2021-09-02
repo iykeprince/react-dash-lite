@@ -29,7 +29,7 @@ const PlanListBox = () => {
                         <em className="icon ni ni-update"></em>
                     </div>
                     <div className="nk-iv-scheme-info">
-                        <div className="nk-iv-scheme-name">{investments.length} ongoing investments </div>
+                        <div className="nk-iv-scheme-name">{investments.length} Ongoing investment(s) </div>
                         <div className="nk-iv-scheme-desc">Invested Amount - <span className="amount">{new Intl.NumberFormat('en-US', { style: 'currency', currency: 'USD' }).format(amountInvested)}</span></div>
                     </div>
 
@@ -40,7 +40,7 @@ const PlanListBox = () => {
                         </div> */}
                         <div className="nk-iv-scheme-amount-b nk-iv-scheme-order">
                             <span className="nk-iv-scheme-label text-soft">Net Profit Earn</span>
-                            <span className="nk-iv-scheme-value amount">{new Intl.NumberFormat('en-US', { style: 'currency', currency: 'USD' }).format(calculatedProfit)} <span className="amount-ex"></span></span>
+                            <span className="nk-iv-scheme-value amount">{new Intl.NumberFormat('en-US', { style: 'currency', currency: 'USD' }).format(user.available_profit)} <span className="amount-ex"></span></span>
                         </div>
                     </div>
                     <div className="nk-iv-scheme-more">

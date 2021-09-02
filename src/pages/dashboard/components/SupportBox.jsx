@@ -30,7 +30,7 @@ const SupportBox = () => (<div className="card card-bordered">
             </div>
         </div>
         <div className="nk-block-content flex-shrink-0">
-            <a href="#" className="btn btn-lg btn-outline-primary">Get Support Now</a>
+            <a href="mailto:support@bitfetter.com" className="btn btn-lg btn-outline-primary">Get Support Now</a>
         </div>
     </div>
 </div>

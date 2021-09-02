@@ -17,7 +17,7 @@ const ReferralsPage = () => {
                                     <p>See who you've referred and statistic of your referrals.</p>
                                 </div>
                             </div>
-
+                            <span className="btn btn-primary">Referal Bonus ${user.referal_bonus}</span>
                         </div>
                     </div>
 
@@ -63,7 +63,7 @@ const ReferralsPage = () => {
                                                 <div class="form-icon">
                                                     <em class="icon ni ni-link-alt"></em>
                                                 </div>
-                                                <input type="text" class="form-control copy-text" id="ref-url" value={`https://bitfetter.com/${user && user.referal_link}`} readOnly />
+                                                <input type="text" class="form-control copy-text" id="ref-url" value={`https://app.bitfetter.com/${user && user.referal_link}`} readOnly />
                                             </div>
                                         </div>
                                     </div>

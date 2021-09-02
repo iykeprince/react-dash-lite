@@ -50,7 +50,7 @@ const KycStarterPage = () => {
                                 </div>
                             </div>
                             <div className="text-center pt-4">
-                                <p>If you have any question, please contact our support team <a href="mailto:info@bitfetter.com">info@bitfetter.com</a></p>
+                                <p>If you have any question, please contact our support team <a href="mailto:support@bitfetter.com">support@bitfetter.com</a></p>
                             </div>
                         </div>
                     </div>

@@ -37,7 +37,7 @@ const TransactionTab = () => {
                 setActiveLink('pending')
                 dispatch(selectedTab(3))
             }}>
-                Scheduled <span className="badge badge-primary">3</span>
+                Pending 
             </Link>
         </li>
     </ul>)

@@ -1,9 +1,14 @@
+import userEvent from '@testing-library/user-event';
 import moment from 'moment';
+import { useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
 
 const InvestmentItem = ({investment}) => {
+    const user = useSelector(state => state.auth.user);
     let percentageProfit = parseFloat((investment.totalReturns/100) * investment.amount);
     percentageProfit += parseFloat(investment.amount);
+
+    const totalReturns = parseFloat(investment.amount) + parseFloat(user.available_profit);
 
     return (<div className="nk-plan-item">
         <div className="nk-plan-icon is-running">
@@ -20,19 +25,19 @@ const InvestmentItem = ({investment}) => {
             </div>
             <div className="nk-plan-end nk-plan-order">
                 <span className="nk-plan-label text-soft">End Date</span>
-                <span className="nk-plan-value date">{moment(investment.fund_created_at).add(30, 'days').format('ll')}</span>
+                <span className="nk-plan-value date">{moment(investment.fund_created_at).add(investment.termDays, 'days').format('ll')}</span>
             </div>
         </div>
         <div className="nk-plan-amount">
             <div className="nk-plan-amount-a nk-plan-order">
                 <span className="nk-plan-label text-soft">Total Return</span>
-                <span className="nk-plan-value amount">{new Intl.NumberFormat('en-US', {style: 'currency', currency: 'USD'}).format(percentageProfit)} USD</span>
+                <span className="nk-plan-value amount">{new Intl.NumberFormat('en-US', {style: 'currency', currency: 'USD'}).format(totalReturns)} USD</span>
             </div>
             <div className="nk-plan-amount-b nk-plan-order">
                 <span className="nk-plan-label text-soft">
                     Net Profit
                 </span>
-                <span className="nk-plan-value amount">{new Intl.NumberFormat('en-US', {style: 'currency', currency: 'USD'}).format((investment.totalReturns/100) * investment.amount)} USD</span>
+                <span className="nk-plan-value amount">{new Intl.NumberFormat('en-US', {style: 'currency', currency: 'USD'}).format(user.available_profit)} USD</span>
             </div>
         </div>
         <div className="nk-plan-more">

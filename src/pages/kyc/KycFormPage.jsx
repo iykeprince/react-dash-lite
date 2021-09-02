@@ -351,7 +351,7 @@ const KycFormPage = () => {
                                             <div className="form-group">
                                                 <div className="custom-control custom-control-xs custom-checkbox">
                                                     <input type="checkbox" className="custom-control-input" id="tc-agree" name="tos" onChange={handleChange} value={kycObject.tos} required />
-                                                    <label className="custom-control-label" htmlFor="tc-agree">I Have Read The <a href="#">Terms Of Condition</a> And <a href="#">Privacy Policy</a></label>
+                                                    <label className="custom-control-label" htmlFor="tc-agree">I Have Read The <a href="https://bitfetter.com/terms-use.html">Term of use</a> And <a href="https://bitfetter.com/privacy.html">Privacy Policy</a></label>
                                                 </div>
                                             </div>
                                             <div className="form-group">

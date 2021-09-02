@@ -30,6 +30,7 @@ const TransactionPage = () => {
         }
     }, [selected]);
 
+
     return (<Layout>
             <div className="nk-content nk-content-fluid">
                 <div className="container-xl wide-lg">

@@ -86,17 +86,17 @@ const DashboardPage = () => {
                                                     <div className="card-inner">
                                                         <div className="nk-wg7">
                                                             <div className="nk-wg7-stats">
-                                                                <div className="nk-wg7-title">Available balance in USD</div>
-                                                                <div className="number-lg amount">${user && new Intl.NumberFormat().format(user.amount_in_stock)}</div>
+                                                                <div className="nk-wg7-title">Available Balance in USD</div>
+                                                                <div className="number-lg amount">${user && new Intl.NumberFormat().format(user.trading_wallet)}</div>
                                                             </div>
                                                             <div className="nk-wg7-stats-group">
                                                                 <div className="nk-wg7-stats w-50">
-                                                                    <div className="nk-wg7-title">Wallets</div>
-                                                                    <div className="number-lg">3</div>
+                                                                    <div className="nk-wg7-title">Available Profit</div>
+                                                                    <div className="number" style={{fontSize: '25px'}}>${user && new Intl.NumberFormat().format(user.available_profit) }</div>
                                                                 </div>
                                                                 <div className="nk-wg7-stats w-50">
-                                                                    {/* <div className="nk-wg7-title">Transactions</div>
-                                                                        <div className="number">34,405</div> */}
+                                                                    <div className="nk-wg7-title">Trade Bonus</div>
+                                                                        <div className="number" style={{fontSize: '25px'}}>${user && new Intl.NumberFormat().format(user.trade_bonus) }</div>
                                                                 </div>
                                                             </div>
                                                             <div className="nk-wg7-foot">
@@ -144,7 +144,7 @@ const DashboardPage = () => {
                                                             <div className="nk-wgw-inner" >
                                                                 <div className="nk-wgw-name">
                                                                     <div className="nk-wgw-icon">
-                                                                        <em className="icon ni ni-sign-btc"></em>
+                                                                        <em className="icon ni ni-sign-eth"></em>
                                                                     </div>
                                                                     <h5 className="nk-wgw-title title">Etheterum</h5>
                                                                 </div>
@@ -161,7 +161,7 @@ const DashboardPage = () => {
                                                             <div className="nk-wgw-inner" >
                                                                 <div className="nk-wgw-name">
                                                                     <div className="nk-wgw-icon">
-                                                                        <em className="icon ni ni-sign-eth"></em>
+                                                                        <em className="icon ni ni-sign-d">D</em>
                                                                     </div>
                                                                     <h5 className="nk-wgw-title title">Doge</h5>
                                                                 </div>

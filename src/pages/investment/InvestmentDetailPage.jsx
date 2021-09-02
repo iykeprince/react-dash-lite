@@ -12,6 +12,7 @@ const InvestmentDetailPage = () => {
     const id = match.params.detailId;
 
     const investmentData = useSelector(state => state.investment.investmentData)
+    const user = useSelector(state => state.auth.user);
 
     useEffect(() => {
         dispatch(getInvestmentInfo(id))
@@ -23,7 +24,7 @@ const InvestmentDetailPage = () => {
     const amount = parseFloat(investmentData.amount);
     const profit = (parseInt(investmentData.totalReturns) / 100) * amount;
     const dailyProfit = (parseFloat(investmentData.dailyInterest)/100) * profit;
-    const totalReturnedAmount = amount + profit;
+    const totalReturnedAmount = parseFloat(amount) + parseFloat(user.available_profit);
 
     return (<div className="nk-content nk-content-fluid">
         <div className="container-xl wide-lg">
@@ -34,9 +35,9 @@ const InvestmentDetailPage = () => {
                     <div className="nk-block-head-sub"><Link to="/investment" className="text-soft back-to"><em className="icon ni ni-arrow-left"> </em><span>Investment</span></Link></div>
                     <div className="nk-block-between-md g-4">
                         <div className="nk-block-head-content">
-                            <h3 className="nk-block-title fw-normal">{investmentData.title} Plan</h3>
+                            <h3 className="nk-block-title fw-normal">{investmentData.title} {investmentData.isMax === 1 && 'Max' } Plan</h3>
                             <div className="nk-block-des">
-                                <p>INV-50050225 {investmentData.payment_confirmation === "0"
+                                <p>INV-50{Math.random()} {investmentData.payment_confirmation === "0"
                                     ? <span className="badge badge-primary ml-1">Active</span>
                                     : <span className="badge badge-danger ml-1">INACTIVE</span>}</p>
                             </div>
@@ -64,7 +65,7 @@ const InvestmentDetailPage = () => {
                                             <div className="nk-wgacc-sub">
                                                 <span className="nk-wgacc-sign text-soft"><em className="icon ni ni-plus"></em></span>
                                                 <div className="nk-wgacc-amount">
-                                                    <div className="number">{new Intl.NumberFormat('en-US', { style: 'currency', currency: 'USD' }).format(profit)}</div>
+                                                    <div className="number">{new Intl.NumberFormat('en-US', { style: 'currency', currency: 'USD' }).format(user.available_profit)}</div>
                                                 </div>
                                                 <div className="nk-wgacc-subtitle">Profit</div>
                                             </div>
@@ -81,8 +82,8 @@ const InvestmentDetailPage = () => {
                                                     </div>
                                                 </div>
                                                 <div className="nk-wgacc-subtitle">
-                                                    Total Returned (inc. cap)
-                                                    <em className="icon ni ni-info nk-tooltip text-soft" title="" data-original-title="The amount (58.00 USD) may locked or pending to adjust into your investment account."></em>
+                                                    Total Returns (inc. cap)
+                                                    <em className="icon ni ni-info nk-tooltip text-soft" title="" data-original-title=""></em>
                                                 </div>
                                             </div>
                                         </div>
@@ -95,15 +96,15 @@ const InvestmentDetailPage = () => {
                             <ul className="nk-wgacc-list">
                                 <li>
                                     <div className="sub-text">Term duration</div>
-                                    <div className="lead-text">{investmentData.termDays} Months</div>
+                                    <div className="lead-text">{investmentData.termDays} Days</div>
                                 </li>
                                 <li>
                                     <div className="sub-text">Term start at</div>
-                                    <div className="lead-text">{moment(investmentData.fund_created_at).format('MMMM D YYYY, h:mm a')}</div>
+                                    <div className="lead-text">{moment(investmentData.fund_created_at).format('MMMM D, YYYY')}</div>
                                 </li>
                                 <li>
                                     <div className="sub-text">Term end at</div>
-                                    <div className="lead-text">{moment(investmentData.fund_created_at).add(30, 'days').format('MMMM D, YYYY h:mm a')}</div>
+                                    <div className="lead-text">{moment(investmentData.fund_created_at).add(investmentData.termDays, 'days').format('MMMM D, YYYY')}</div>
                                 </li>
                             </ul>
                             <ul className="nk-wgacc-list">
@@ -116,7 +117,7 @@ const InvestmentDetailPage = () => {
                                 </li>
                                 <li>
                                     <div className="sub-text">Total net profit</div>
-                                    <div className="lead-text"><span className="currency">USD</span> {new Intl.NumberFormat('en-US', { style: 'currency', currency: 'USD' }).format(profit)}</div>
+                                    <div className="lead-text"><span className="currency">USD</span> {new Intl.NumberFormat('en-US', { style: 'currency', currency: 'USD' }).format(user.available_profit)}</div>
                                 </li>
                                 <li>
                                     <div className="sub-text">Daily profit (inc. cap)</div>

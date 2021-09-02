@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from "react-redux"
 import { useHistory } from "react-router-dom"
 import { toast, ToastContainer } from "react-toastify"
 import DashModal from "../../../components/modal/modal.component"
-import { createInvestmentPlan, navigateToPlanContainer } from "../../../redux/plan/plan.actions"
+import { createInvestmentPlan, navigateToPlanContainer, sendIdCodeMail } from "../../../redux/plan/plan.actions"
 
 const PlanInvestContainer = () => {
     const dispatch = useDispatch();
@@ -11,6 +11,7 @@ const PlanInvestContainer = () => {
     const loading = useSelector(state => state.plan.loading)
     const selectedPlan = useSelector(state => state.plan.selectedPlan)
     const message = useSelector(state => state.plan.message)
+    const errorMessage = useSelector(state => state.plan.errorMessage)
     const exchangeData = useSelector(state => state.util.exchangeData);
     const user = useSelector(state => state.auth.user)
 
@@ -22,15 +23,26 @@ const PlanInvestContainer = () => {
     const [showConfirmModal, setShowConfirmModal] = useState(false)
 
     useEffect(() => {
+        if(errorMessage){
+            setShowConfirmModal(false)
+            toast.error(errorMessage)
+        }
         if(message){
             setShowPinModal(false);
             setShowConfirmModal(true)
             toast.success(message)
         }
-    }, [message])
+    }, [message, errorMessage])
 
-    const handleUseMaxBalance = () => {
-        setAmount(parseFloat(user.amount_in_stock))
+    const handleUseMaxBalance = (e) => {
+        e.preventDefault();
+        if(parseFloat(user.trading_wallet) > selectedPlan.maxDeposit){
+            setAmount(selectedPlan.maxDeposit);
+            setFormValid(true)
+        }else{
+            setAmount(parseFloat(user.trading_wallet))
+            setFormValid(true)
+        }
     }
 
     const handleAmountChange = (e) => {
@@ -42,9 +54,8 @@ const PlanInvestContainer = () => {
             return setAmount(0);
         }
 
-        if (selectedPlan.minDeposit < enteredAmount ) {
-            console.log(e.target.value, 'values', selectedPlan.minDeposit, selectedPlan.maxDeposit)
-            setError("Amount entered is not valid. It's less than the expected minimum plan amount.")
+        if (selectedPlan.minDeposit > enteredAmount || selectedPlan.maxDeposit < enteredAmount) {
+            setError("Amount entered is not in range with the selected plan.")
             setFormValid(false)
         } else {
             setError('');
@@ -61,6 +72,7 @@ const PlanInvestContainer = () => {
     const handleSubmit = e => {
         e.preventDefault();
         if (formValid) {
+            dispatch(sendIdCodeMail(selectedPlan))
             setShowPinModal(true)
         }
     }
@@ -71,7 +83,7 @@ const PlanInvestContainer = () => {
         
 
         //create investment
-        const dataToPost = {...selectedPlan, ...exchangeData, amount}
+        const dataToPost = {...selectedPlan, ...exchangeData, amount, idCode: pin}
         dispatch(createInvestmentPlan(dataToPost))
     }
 
@@ -97,7 +109,7 @@ const PlanInvestContainer = () => {
                             <div className="invest-field form-group">
                                 <input type="hidden" value="silver" name="iv-plan" id="invest-choose-plan" />
                                 <div className="dropdown invest-cc-dropdown">
-                                    <a href="#" className="invest-cc-choosen">
+                                    <div className="invest-cc-choosen">
                                         <div className="coin-item">
                                             <div className="coin-icon">
                                                 <em className="icon ni ni-offer-fill"></em>
@@ -107,7 +119,7 @@ const PlanInvestContainer = () => {
                                                 <span className="coin-text">Invest for {selectedPlan.termDays} days and get daily profit {selectedPlan.dailyInterest}%</span>
                                             </div>
                                         </div>
-                                    </a>
+                                    </div>
 
                                 </div>
                             </div>
@@ -125,7 +137,7 @@ const PlanInvestContainer = () => {
                                     <input type="text" className="form-control form-control-amount form-control-lg" placeholder="100000 (without spaces or commas)" value={amount} onChange={handleAmountChange} />
 
                                 </div>
-                                <div className="form-note pt-2">Note: Minimum invest 250 USD and up to 500,000 USD depending on the investment plan.</div>
+                                <div className="form-note pt-2">Note: Minimum invest {selectedPlan.minDeposit} USD and up to {selectedPlan.maxDeposit} USD depending on the investment plan.</div>
                                 {error && <div className="form-note pt-2 text-danger">{error}</div>}
                             </div>
                             <div className="invest-field form-group">
@@ -141,7 +153,7 @@ const PlanInvestContainer = () => {
                                             </div>
                                             <div className="coin-info">
                                                 <span className="coin-name">BTC Wallet</span>
-                                                <span className="coin-text">Current balance: {new Intl.NumberFormat('en-US', { style: 'currency', currency: 'USD' }).format(user.amount_in_stock)} </span>
+                                                <span className="coin-text">Current balance: {new Intl.NumberFormat('en-US', { style: 'currency', currency: 'USD' }).format(user.trading_wallet)} </span>
                                             </div>
                                         </div>
                                     </a>
@@ -151,7 +163,7 @@ const PlanInvestContainer = () => {
                             <div className="invest-field form-group">
                                 <div className="custom-control custom-control-xs custom-checkbox">
                                     <input type="checkbox" className="custom-control-input" id="checkbox" required />
-                                    <label className="custom-control-label" htmlFor="checkbox">I agree to the <a href="#">terms and &amp; conditions.</a></label>
+                                    <label className="custom-control-label" htmlFor="checkbox">I agree to the <a href="https://bitfetter.com/terms-use.html">terms of use.</a></label>
                                 </div>
                             </div>
                         </div>
@@ -171,7 +183,7 @@ const PlanInvestContainer = () => {
                                             </li>
                                             <li>
                                                 <div className="sub-text">Daily profit</div>
-                                                <div className="lead-text">$ 11.99</div>
+                                                <div className="lead-text">$ {new Intl.NumberFormat({style: 'currency', currency: 'USD'}).format((selectedPlan.dailyInterest/100) * amount)}</div>
                                             </li>
                                             <li>
                                                 <div className="sub-text">Daily profit %</div>
@@ -179,11 +191,11 @@ const PlanInvestContainer = () => {
                                             </li>
                                             <li>
                                                 <div className="sub-text">Total net profit</div>
-                                                <div className="lead-text">$ 249.99</div>
+                                                <div className="lead-text">$ {new Intl.NumberFormat({style: 'currency', currency: 'USD'}).format(((selectedPlan.dailyInterest/100) * amount) * 30)}</div>
                                             </li>
                                             <li>
                                                 <div className="sub-text">Total Return</div>
-                                                <div className="lead-text">$ 499.99</div>
+                                                <div className="lead-text">$ {new Intl.NumberFormat({style: 'currency', currency: 'USD'}).format((((selectedPlan.dailyInterest/100) * amount) * 30) + amount)}</div>
                                             </li>
 
                                         </ul>
@@ -193,11 +205,11 @@ const PlanInvestContainer = () => {
                                         <ul className="nk-iv-wg4-list">
                                             <li>
                                                 <div className="sub-text">Amount to invest</div>
-                                                <div className="lead-text">$ 250.00</div>
+                                                <div className="lead-text">$ {new Intl.NumberFormat({style: 'currency', currency: 'USD'}).format(amount)}</div>
                                             </li>
                                             <li>
-                                                <div className="sub-text">Conversion Fee <span>(0.5%)</span></div>
-                                                <div className="lead-text">$ 1.25</div>
+                                                <div className="sub-text">Conversion Fee <span>(0.1%)</span></div>
+                                                <div className="lead-text">$ {new Intl.NumberFormat({style: 'currency', currency: 'USD'}).format(0.001 * amount)}</div>
                                             </li>
                                         </ul>
                                     </div>
@@ -205,7 +217,7 @@ const PlanInvestContainer = () => {
                                         <ul className="nk-iv-wg4-list">
                                             <li>
                                                 <div className="lead-text">Total Charge</div>
-                                                <div className="caption-text text-primary">$ 251.25</div>
+                                                <div className="caption-text text-primary">$ {new Intl.NumberFormat({style: 'currency', currency: 'USD'}).format(amount + (0.001 * amount))}</div>
                                             </li>
                                         </ul>
                                     </div>
@@ -224,19 +236,19 @@ const PlanInvestContainer = () => {
                         </div>
                         <div className="nk-modal-form">
                             <div className="form-group">
-                                <input type="password" className="form-control form-control-password-big text-center" onChange={e => setPin(e.target.value)} value={pin} />
+                                <input type="text" className="form-control form-control-password-big text-center" onChange={e => setPin(e.target.value)} value={pin} />
                             </div>
                         </div>
                         <div className="nk-modal-action">
                             <button className="btn btn-lg btn-mw btn-primary" disabled={loading}>{loading ? `Please wait...` : `Confirm Payment`}</button>
-                            <div className="sub-text sub-text-alt mt-3 mb-4">This transaction will appear on your wallet statement as Invest * SILVER.</div>
+                            <div className="sub-text sub-text-alt mt-3 mb-4">This transaction will appear on your wallet statement as Invest * {selectedPlan.title.toUpperCase()}.</div>
                             <a href="#" className="link link-soft" data-dismiss="modal">Cancel and return</a>
                         </div>
                     </form>
                 </DashModal>
                 <DashModal show={showConfirmModal} onHide={hideConfirmation} title="Investment Payment Successful!">
                     <div className="nk-modal-text">
-                        <p className="sub-text">You have successfully order the Investment Plan of ‘Silver’ with amount of <strong>$250.00</strong> from your <strong>Main Account</strong>.</p>
+                        <p className="sub-text">You have successfully order the Investment Plan of ‘{selectedPlan.title}’ with amount of <strong>${amount}</strong> from your <strong>Main Account</strong>.</p>
                     </div>
                     <div className="nk-modal-action-lg">
                         <ul className="btn-group flex-wrap justify-center g-4">

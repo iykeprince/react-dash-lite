@@ -90,9 +90,9 @@ const InvestmentMain = () => {
                                                                 <div className="nk-wgacc-sub">
                                                                     <span className="nk-wgacc-sign text-soft"><em className="icon ni ni-plus"></em></span>
                                                                     <div className="nk-wgacc-amount">
-                                                                        <div className="number number-sm">{new Intl.NumberFormat('en-US', {style: 'currency', currency: 'USD'}).format(calculatedProfit)}</div>
+                                                                        <div className="number number-sm">{new Intl.NumberFormat('en-US', {style: 'currency', currency: 'USD'}).format(user.available_profit)}</div>
                                                                     </div>
-                                                                    <div className="nk-wgacc-subtitle">Approx Profit</div>
+                                                                    <div className="nk-wgacc-subtitle">Available Profit</div>
                                                                 </div>
                                                             </div>
                                                         </div>
@@ -121,7 +121,7 @@ const InvestmentMain = () => {
                 <div className="nk-block nk-block-lg">
                     <div className="nk-block-head-sm">
                         <div className="nk-block-head-content">
-                            <h5 className="nk-block-title">Active Plan <span className="count text-base">(2)</span></h5>
+                            <h5 className="nk-block-title">Active Plan <span className="count text-base">({investments && investments.length})</span></h5>
                         </div>
                     </div>
 

@@ -15,7 +15,11 @@ class dashboard extends controller{
 
 		echo Utility::convertToJSON($data);
 	}
-
+	public function getReferalCount(){
+		$response = $this->model->referal_count();
+		$result ['count'] = $response;
+		echo Utility::convertToJSON($result);
+	}
 	public function getUser(){
 		$userInfo = $this->model->userInfo();
 		echo Utility::convertToJSON($userInfo);

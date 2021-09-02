@@ -45,12 +45,12 @@ const TransactionList = () => {
 
     return (<div className="nk-odr-list is-stretch card card-bordered ">
         {loading && <Spinner />}
-        {!transactions.length && <div className="card p-4">
+        {(transactions && !transactions.length) && <div className="card p-4">
                 <div className="nk-card-body">
                 <p className="nk-card-title">No transaction available yet!</p>
                 </div>
             </div>}
-        {transactions.map((transaction, index) =>
+        {transactions && transactions.map((transaction, index) =>
             <TransactionItem
                 key={index} 
                 type={type}

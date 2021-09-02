@@ -16,6 +16,7 @@ const authReducer = (state = initialState, action) => {
         case authTypes.SIGNUP_REQUEST:
         case authTypes.RESET_PASSWORD_REQUEST:
         case authTypes.CHANGE_PASSWORD_REQUEST:
+        case authTypes.VERIFY_ACCOUNT_REQUEST:
         case authTypes.GET_USER_REQUEST:
             return {
                 ...state,
@@ -27,6 +28,7 @@ const authReducer = (state = initialState, action) => {
         case authTypes.SIGNUP_SUCCESS:
         case authTypes.RESET_PASSWORD_SUCCESS:
         case authTypes.CHANGE_PASSWORD_SUCCESS:
+        case authTypes.VERIFY_ACCOUNT_SUCCESS:
             return {
                 ...state,
                 loading: false,
@@ -39,6 +41,7 @@ const authReducer = (state = initialState, action) => {
         case authTypes.SIGNUP_FAIL:
         case authTypes.RESET_PASSWORD_FAIL:
         case authTypes.CHANGE_PASSWORD_FAIL:
+        case authTypes.VERIFY_ACCOUNT_FAILURE:
             return {
                 ...state,
                 loading: false,

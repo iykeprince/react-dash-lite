@@ -178,18 +178,24 @@ class register_model extends model{
 			return $response;
 		}
 	}
-	public function activate($code){
-		$sth = $this->db->prepare("SELECT * FROM tbl_users WHERE id_code='$code'");
-		$sth->execute();
-		if($sth->rowCount() > 0){
-			$result = $sth->fetch();
-			$user_id = $result['id'];
-			$activate_sth = $this->db->prepare("UPDATE tbl_users SET status='active' WHERE id='$user_id'");
-			$activate_sth->execute();
-			return "ok";
+	public function activate($data){
+		$code = $data['code'];
+		
+		$result = $this->db->getItem("SELECT * FROM tbl_users WHERE id_code='$code'");
+		if(!$result){
+			$response['status'] = 404;
+			$response['message'] = "Verification was not successful, Invalid CODE";
 		}else{
-			return "failed";
+			$update_data = [
+				'status' => 'active'
+			];
+			$id = $result['id'];
+			$where = "id=$id";
+			$this->db->update('tbl_users', $update_data, $where);
+			$response['status'] = 200;
+			$response['message'] = "Account has been verified";
 		}
+		return $response;
 	}
 
 }

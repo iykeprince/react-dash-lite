@@ -25,12 +25,14 @@ export const getPlans = () => async dispatch => {
     }
 }
 
-export const createInvestmentPlan = (data) => async dispatch => { 
+export const createInvestmentPlan = (data) => async dispatch => {
     dispatch({ type: planTypes.PLAN_REQUEST })
     try {
         const res = await plan.createInvestmentPlan(data);
-
+        if(res.data.status === 200)
         return dispatch({ type: planTypes.CREATE_INVESTMENT_PLAN, payload: res.data })
+        else
+        return dispatch({type: planTypes.CREATE_INVESTMENT_PLAN_ERROR, payload: res.data.message})
 
     } catch (e) {
         console.log(e)
@@ -39,4 +41,9 @@ export const createInvestmentPlan = (data) => async dispatch => {
             payload: 'Error creating investment plan'
         })
     }
+}
+export const sendIdCodeMail = (selectedPlan) => async dispatch => {
+    await plan.sendIdCodeEmail(selectedPlan);
+    return dispatch({ type: planTypes.SEND_ID_CODE_MAIL })
+
 }

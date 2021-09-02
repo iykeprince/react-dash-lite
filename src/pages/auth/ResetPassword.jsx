@@ -44,7 +44,7 @@ const ResetPassword = () => {
     return (
         <AuthLayout>
             <div className="brand-logo pb-5">
-                <a href="index.html" className="logo-link">
+                <a href="/" className="logo-link">
                     <img className="logo-light logo-img logo-img-lg" src="./assets/logos/brandmark_blue@4x.png" srcSet="./assets/logos/brandmark_blue@4x.png" alt="logo" />
                     <img className="logo-dark logo-img logo-img-lg" src="./assets/logos/brandmark_blue@4x.png" srcSet="./assets/logos/brandmark_blue@4x.png" alt="logo-dark" />
                 </a>

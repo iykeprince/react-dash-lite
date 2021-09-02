@@ -42,7 +42,7 @@ const TransactionItem = ({ transaction, type }) => {
                         </div>
                     </div>}
                     {transaction.transaction_type === "INVEST" && <div className="nk-odr-data">
-                        <div className="nk-odr-label ellipsis">Invested on {transaction.plan_name}</div>
+                        <div className="nk-odr-label ellipsis">Investment {transaction.plan_name}</div>
                         <div className="nk-odr-meta">
                             <span className="date">{moment(transaction.transaction_created_at).format('LL')}</span>
                             <span className="status dot-join">
@@ -92,14 +92,14 @@ const TransactionItem = ({ transaction, type }) => {
             <div className="nk-odr-amount">
 
                 {type === 'all' ?
-                    <div className="number-md text-s text-danger">
-                        {transaction.transaction_type === "DEPOSIT" && `- ${transaction.amount}`}
+                    <div className={`number-md text-s ${transaction.transaction_type === "DEPOSIT" || transaction.transaction_type === 'REFERAL_BONUS' ? 'text-success' : 'text-danger'}`}>
+                        {transaction.transaction_type === "DEPOSIT" && `+ ${transaction.amount}`}
                         {transaction.transaction_type === 'INVEST' && `- ${transaction.amount}`}
-                        {transaction.transaction_type === 'WITHDRAW_FUND' && `+ ${transaction.amount}`}
+                        {transaction.transaction_type === 'WITHDRAW_FUND' && `- ${transaction.amount}`}
                         {transaction.transaction_type === 'REFERAL_BONUS' && `+ ${transaction.amount}`}
                         <span className="currency">{' '}USD</span>
                     </div>
-                    : <div className={`number-md text-s ${transaction.withdraw_id ? 'text-danger' : 'text-success'}`}>
+                    : <div className={`number-md text-s ${transaction.depositor_id ? 'text-success' : 'text-danger'}`}>
                         {transaction.withdraw_id ? `+ ${transaction.amount}` : `- ${transaction.amount}`}
                         <span className="currency">{' '}USD</span>
                     </div>

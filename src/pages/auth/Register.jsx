@@ -5,10 +5,11 @@ import { Link, useHistory } from "react-router-dom";
 import { toast, ToastContainer } from "react-toastify";
 import AuthLayout from "../../components/layout/auth/auth.component";
 import { createAccount } from "../../redux/auth/auth.actions";
-
+import useQuery from "../../hooks/useQuery";
 import 'react-toastify/dist/ReactToastify.css';
 
 const Register = () => {
+    const query = useQuery();
     const location = useHistory();
     const dispatch = useDispatch();
     const [data, setData] = useState({
@@ -16,7 +17,7 @@ const Register = () => {
         email: '',
         password: '',
         tos: '',
-        referal_code: ''
+        referal_code: query.get('referal') || ''
     });
 
     const isAuthenticated = useSelector(state => state.auth.isAuthenticated)
@@ -48,7 +49,7 @@ const Register = () => {
 
     return (<AuthLayout>
         <div className="brand-logo pb-5">
-            <a href="index.html" className="logo-link">
+            <a href="/" className="logo-link">
                 <img className="logo-light logo-img logo-img-lg" src="./assets/logos/brandmark_blue.png" srcSet="./assets/logos/brandmark_blue.png" alt="logo" />
                 <img className="logo-dark logo-img logo-img-lg" src="./assets/logos/brandmark_blue.png" srcSet="./assets/logos/brandmark_blue.png" alt="logo-dark" />
             </a>

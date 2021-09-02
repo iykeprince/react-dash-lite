@@ -14,7 +14,7 @@ class plan extends controller{
     public function createInvestmentPlan(){
         $input = json_decode(file_get_contents('php://input'));
         
-  
+        $data['idCode'] = $this->escape_value($input->idCode);
         $data['amount'] = $this->escape_value($input->amount);
         $data['plan_id'] = $this->escape_value($input->plan_id);
         $data['exchangePrice'] = $this->escape_value($input->price);
@@ -24,5 +24,10 @@ class plan extends controller{
         $response = $this->model->createInvestmentPlan($data);
         echo Utility::convertToJSON($response);
     }
+    public function sendIdCodeEmail(){
+        $input = json_decode(file_get_contents('php://input'));
 
+        $response = $this->model->sendIdCodeEmail($input);
+        echo Utility::convertToJSON($response);
+    }
 }

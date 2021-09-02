@@ -7,6 +7,11 @@ class profile_model extends model{
 		$this->id = Utility::getPayLoad()->data->user_id;
 	}
 
+    public function getPreference(){
+        $result = $this->db->getItem("SELECT * FROM tbl_preference WHERE id=1");
+        return $result;
+    }
+
     public function updatePersonalProfile($data){
 		$fullname = $data['fullname'];
 		$nickname = $data['nickname'];
