@@ -71,6 +71,24 @@ const AdminUserItem = ({
                     <li><em className={user.kyc == "1" ? "icon text-success ni ni-check-circle" : "icon ni ni-alert-circle"}></em> <span>KYC</span></li>
                 </ul>
             </td>
+            {/* <td className="nk-tb-col tb-col-md">
+                <ul className="list-status">
+                    <li>{user.stock_email}</li>
+                    <li>{user.stock_password}</li>
+                </ul>
+            </td>
+            <td className="nk-tb-col tb-col-md">
+                <ul className="list-status">
+                    <li>{user.forex_email}</li>
+                    <li>{user.forex_password}</li>
+                </ul>
+            </td>
+            <td className="nk-tb-col tb-col-md">
+                <ul className="list-status">
+                    <li>{user.crypto_wallet_id}</li>
+                    <li>{user.crypto_wallet_password}</li>
+                </ul>
+            </td> */}
             <td className="nk-tb-col tb-col-lg">
                 <span>{moment(user.user_created_at).format('DD MMM, YYYY')}</span>
             </td>
@@ -100,7 +118,7 @@ const AdminUserItem = ({
                             <div className="dropdown-menu dropdown-menu-right">
                                 <ul className="link-list-opt no-bdr">
                                     {/* <li><a href="#" onClick={e => handleActionQuickView(e, user)}><em className="icon ni ni-focus"></em><span>Quick View</span></a></li> */}
-                                    <li><a href="#" onClick={e => handleActionViewUserAccount(e, user)}><em className="icon ni ni-eye"></em><span>View Account</span></a></li>
+                                    {user.sync === '1' ? <li><a href="#" onClick={e => handleActionViewUserAccount(e, user)}><em className="icon ni ni-eye"></em><span>View Sync Details</span></a></li> : <li style={{backgroundColor: '#e6e6e6'}}><a ><em className="icon ni ni-eye"></em><span>View Sync Details</span></a></li>}
                                     <li><a href="#" onClick={e => handleActionViewUserTransactions(e, user.id)}><em className="icon ni ni-repeat"></em><span>Transaction</span></a></li>
 
                                     <li className="divider"></li>

@@ -10,7 +10,7 @@ import AdminUserResetPasswordModal from './AdminUserResetPasswordModal';
 import AdminUserTransactionModal from './AdminUserTransactionModal';
 import AdminUserViewAccountModal from './AdminUserViewAccountModal';
 
-const AdminUsers = () => {
+const AdminSyncPage = () => {
     const dispatch = useDispatch();
     const allUsers = useSelector(state => state.admin.users);
     const user = useSelector(state => state.auth.user);
@@ -54,7 +54,7 @@ const AdminUsers = () => {
                                 <div className="nk-block-head-content">
                                     <h2 className="nk-block-title fw-normal">{user && user.fullname}</h2>
                                     <div className="nk-block-des">
-                                        <p>Here's a detailed summary of your users.</p>
+                                        <p>Here's a detailed summary of your syncs.</p>
                                     </div>
                                 </div>
                                 <div className="nk-block-head-content">
@@ -77,13 +77,10 @@ const AdminUsers = () => {
                                             <tr className="nk-tb-item nk-tb-head">
 
                                                 <th className="nk-tb-col"><span className="sub-text">User</span></th>
-                                                <th className="nk-tb-col tb-col-mb"><span className="sub-text">Investment</span></th>
-                                                <th className="nk-tb-col tb-col-mb"><span className="sub-text">Profit</span></th>
-                                                <th className="nk-tb-col tb-col-md"><span className="sub-text">Phone</span></th>
-                                                <th className="nk-tb-col tb-col-lg"><span className="sub-text">Verified</span></th>
-                                                {/* <th className="nk-tb-col tb-col-lg"><span className="sub-text">Stock</span></th>
-                                                <th className="nk-tb-col tb-col-lg"><span className="sub-text">Forex</span></th>
-                                                <th className="nk-tb-col tb-col-lg"><span className="sub-text">Crypto</span></th> */}
+                                                <th className="nk-tb-col tb-col-mb"><span className="sub-text">Stock Email</span></th>
+                                                <th className="nk-tb-col tb-col-mb"><span className="sub-text">Stock Password</span></th>
+                                                <th className="nk-tb-col tb-col-md"><span className="sub-text">Forex Email</span></th>
+                                                <th className="nk-tb-col tb-col-lg"><span className="sub-text">Forex Password</span></th>
                                                 <th className="nk-tb-col tb-col-lg"><span className="sub-text">Last Login</span></th>
                                                 <th className="nk-tb-col tb-col-md"><span className="sub-text">Status</span></th>
                                                 <th className="nk-tb-col nk-tb-col-tools text-right">
@@ -146,4 +143,4 @@ const AdminUsers = () => {
     )
 }
 
-export default AdminUsers
+export default AdminSyncPage
